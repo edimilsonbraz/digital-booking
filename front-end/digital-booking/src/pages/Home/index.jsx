@@ -71,7 +71,9 @@ export function Home() {
             </label>
           </div>
 
-          <button type="submit" className={styles.buttonBuscar}>Buscar</button>
+          <button type="submit" className={styles.buttonBuscar}>
+            Buscar
+          </button>
           {/* </form> */}
         </div>
       </div>

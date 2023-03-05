@@ -31,7 +31,8 @@ export function Login() {
     {
       if (passwRef.current.type === 'password') {
         passwRef.current.type = 'text'
-        iconRef.current.className = ''
+        iconRef.current.className= `${styles.hide}`
+
       } else {
         passwRef.current.type = 'password'
         iconRef.current.className = ''
@@ -63,7 +64,8 @@ export function Login() {
             name=""
             id="password"
           />
-          <div ref={iconRef} id="icon" onClick={showHide}></div>
+          <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
+          
         </div>
 
         <div>

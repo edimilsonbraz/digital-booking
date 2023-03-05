@@ -35,14 +35,14 @@ export function Register ()
 
   const showHide = () => //Função para visualização de senha do campo input
   {
-    if(passwRef.current.type === 'password')
+    if (passwRef.current.type === 'password')
     {
-      passwRef.current.type = "text";
-      iconRef.current.className = "hide";
-    }else
-    {
-      passwRef.current.type = "password";
-      iconRef.current.className = "";
+      passwRef.current.type = "text"
+      iconRef.current.className = `${styles.hide}`
+
+    } else {
+      passwRef.current.type = "password"
+      iconRef.current.className = ""
     }
   }
 
@@ -68,7 +68,9 @@ export function Register ()
           <label htmlFor="password">Senha</label>
           <div className={styles.containerPassword}>
             <input className={password ? 'border-error' : ''} ref={passwRef} type="password" name="" id="password"/>
-            <div ref={iconRef} id="icon" onClick={showHide}></div>
+
+            <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
+
           </div>
         </div>
         <div>
