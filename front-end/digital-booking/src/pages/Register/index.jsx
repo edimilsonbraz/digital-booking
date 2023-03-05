@@ -1,7 +1,8 @@
 import { useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import { checkName, checkConfirmPassword, checkEmail, checkPassword } from "../../Scripts/validateForm";
-import './style.css';
+
+import styles from './styles.module.css';
 
 export function Register ()
 {
@@ -34,19 +35,19 @@ export function Register ()
 
   const showHide = () => //Função para visualização de senha do campo input
   {
-    if(passwRef.current.type === 'password')
+    if (passwRef.current.type === 'password')
     {
-      passwRef.current.type = "text";
-      iconRef.current.className = "hide";
-    }else
-    {
-      passwRef.current.type = "password";
-      iconRef.current.className = "";
+      passwRef.current.type = "text"
+      iconRef.current.className = `${styles.hide}`
+
+    } else {
+      passwRef.current.type = "password"
+      iconRef.current.className = ""
     }
   }
 
   return (
-    <div className="register">
+    <div className={styles.register}>
       <h1>Criar conta</h1>
       <form action="">
         <div>
@@ -65,9 +66,11 @@ export function Register ()
         </div>
         <div>
           <label htmlFor="password">Senha</label>
-          <div className="container-password">
+          <div className={styles.containerPassword}>
             <input className={password ? 'border-error' : ''} ref={passwRef} type="password" name="" id="password"/>
-            <div ref={iconRef} id="icon" onClick={showHide}></div>
+
+            <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
+
           </div>
         </div>
         <div>
@@ -79,13 +82,13 @@ export function Register ()
           <span>Já tem uma conta? <Link to="/login">Iniciar sessão</Link></span>
         </div>
       </form>
-        {nome || sobrenome || password || confirmPassword || emailError ? <div className="container-error">
+        {nome || sobrenome || password || confirmPassword || emailError ? <div className={styles.containerError}>
           <ul>
-            {nome ? <li>O nome digitado não é válido</li> : ''}
-            {sobrenome ? <li>O sobrenome digitado não é válido</li> : ''}
-            {emailError ? <li>E-mail digitado não é válido</li> : ''}
-            {password ? <li>A senha deve ter mais de seis caracteres.</li> : ''}
-            {confirmPassword ? <li>As senhas devem ser idênticas</li> : ''}
+            {nome ? <li> * O nome digitado não é válido</li> : ''}
+            {sobrenome ? <li> * O sobrenome digitado não é válido</li> : ''}
+            {emailError ? <li> * E-mail digitado não é válido</li> : ''}
+            {password ? <li> * A senha deve ter mais de seis caracteres.</li> : ''}
+            {confirmPassword ? <li> * As senhas devem ser idênticas</li> : ''}
           </ul>
         </div> : ''}  
     </div>
