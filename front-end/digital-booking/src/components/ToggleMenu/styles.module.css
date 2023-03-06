@@ -1,4 +1,4 @@
-.button-hamburguer
+.buttonHamburguer
 {
   width: 50px;
   height: 50px;
@@ -9,26 +9,32 @@
 }
 
 
-.button-hamburguer
+.buttonHamburguer
 {
     width: 50px;
     height: 50px;
-    /* background: var(--primary);
-    border: 1px solid var(--primary); */
+    border: 1px solid var(--primary);
     border-radius: 6px;
     font-size: 1.5rem;
-    color: white;
+    color: var(--primary);
+    background-color: white;
     position: absolute;
     right: 20px;
 }
 
-.button-hamburguer-fixed
+.buttonHamburguer:hover
+{
+    background-color: white;
+    color: var(--primary);
+}
+
+.buttonHamburguerFixed
 {
   position: fixed;
   right: 20px;
 }
 
-.menu-mobile
+.menuMobile
 {
   width: 50vw;
   height: 100vh;
@@ -37,40 +43,42 @@
   padding-top: 100px;
   display: none;
   flex-direction: column;
+  align-items: center;
   position: fixed;
   background-color: rgba(255, 255, 255, 0.822);
   backdrop-filter: blur(20px);
   z-index: 1;
 }
 
-.button-hamburguer:hover
+.menuMobile div
 {
-    background-color: white;
-    color: var(--primary);
-}
-
-.menu-mobile a
-{
-  text-decoration: none;
-  color: inherit;
-}
-
-.menu-mobile div
-{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  align-items: flex-end;
+  align-items: center;
+  padding: 0px 10px;
 }
 
-.menu-mobile div, button
-{
-    margin: 10px 0;
+.menuMobile button
+{ 
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  color: var(--white);
+  background-color: var(--primary);  
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 5px 0;
 }
 
-.menu-mobile button
+.menuMobile a
 {
-  width: 80%;
+  width: 100%;
+  height: 20px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .icons-menu-mobile
@@ -92,13 +100,13 @@
     display:none;
   }
 
-  .button-hamburguer
+  .buttonHamburguer
   {
     display: block;
     z-index: 2;
   }
 
-  .menu-mobile
+  .menuMobile
   {
     display: flex;
   }
