@@ -15,9 +15,9 @@ export function ToggleMenu() {
     <>
       <button
         onClick={toggleMenu}
-        className={`styles.button-hamburguer ${
-          openMenu ? 'styles.button-hamburguer-fixed' : ''
-        }`}
+        className={`${styles.buttonHamburguer} 
+        ${openMenu} ? ${styles.buttonHamburguerFixed} : ${''}
+        `}
       >
         {openMenu ? (
           <FontAwesomeIcon icon={faXmark} />
@@ -26,7 +26,7 @@ export function ToggleMenu() {
         )}
       </button>
       {openMenu ? (
-        <div className={styles.menu-mobile}>
+        <div className={`${styles.menuMobile}`}>
           <div>
             <h1>MENU</h1>
             <button>
