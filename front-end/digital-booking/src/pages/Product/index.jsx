@@ -1,16 +1,36 @@
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faLocationDot, faChevronRight, faXmark } from '@fortawesome/free-solid-svg-icons';
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
+//Importes do slide
+import './style.css';
+import { useKeenSlider } from "keen-slider/react";
+import 'keen-slider/keen-slider.min.css';
+
 export function Product() {
     const { id } = useParams();
 
-    const [categoria, setCategoria] = useState('');
-    const [titulo, setTitulo] = useState('');
-    const [localizacao, setLocalizacao] = useState('');
+    const [product, setProduct] = useState({ categoria: '', titulo: '', localizacao: '' });
+
+    const [slideOpen, setSlideOpen] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const [sliderRef, slider] = useKeenSlider(
+        {
+            loop:true,
+            dragSpeed:2,
+            slideChanged() {
+                
+            },
+        }
+    )
+
+    const setSlide = () => {
+        setSlideOpen(prevSet => !prevSet);
+    }
 
     useEffect(() => {
     }, [id])
@@ -19,8 +39,8 @@ export function Product() {
         <section className="ContainerProduct">
             <div className={style.headerdetails}>
                 <div className={style.title}>
-                    <span>{categoria}</span>
-                    <h1>{titulo}</h1>
+                    <span>{product.categoria}</span>
+                    <h1>{product.titulo}</h1>
                 </div>
                 <div className={style.backpage}>
                     <Link to='/'>
@@ -32,8 +52,39 @@ export function Product() {
             </div>
 
             <div className={style.locationdetails}>
-                <p><FontAwesomeIcon icon={faLocationDot} /> {localizacao}</p>
+                <p><FontAwesomeIcon icon={faLocationDot} />
+                    {product.localizacao}</p>
             </div>
+
+            {!slideOpen ? (
+                <div className="containerSlide">
+                    <div id="first"><img src="https://picsum.photos/id/12/000"/></div>
+                    <div id="second"><img src="https://picsum.photos/id/13/0"/></div>
+                    <div id="third"><img src="https://picsum.photos/id/37/0"/></div>
+                    <div id="fourth"><img src="https://picsum.photos/id/49/0"/></div>
+                    <div id="fifth"><img src="https://picsum.photos/id/57/0"/></div>
+                    <button className="buttonSlideOpen" onClick={setSlide}>Ver mais</button>
+                </div>
+            ) : (
+                <div className='containerSlideOpen'>
+                    <div ref={sliderRef} className="keen-slider sizeSlide">
+                        <div className="keen-slider__slide number-slide1"><img src="https://picsum.photos/id/12/3000/" /></div>
+                        <div className="keen-slider__slide number-slide2"><img src="https://picsum.photos/id/13/3000" /></div>
+                        <div className="keen-slider__slide number-slide3"><img src="https://picsum.photos/id/37/3000" /></div>
+                        <div className="keen-slider__slide number-slide4"><img src="https://picsum.photos/id/49/3000" /></div>
+                        <div className="keen-slider__slide number-slide5"><img src="https://picsum.photos/id/57/3000" /></div>
+                        <div className="keen-slider__slide number-slide6"><img src="https://picsum.photos/id/58/3000" /></div>
+                        <button id="prev" onClick={e => e.stopPropagation() || slider.current.prev()}>
+                            <FontAwesomeIcon icon={faChevronLeft} size="4x" />
+                        </button>
+                        <button id="next" onClick={e => e.stopPropagation() || slider.current.next()}>
+                            <FontAwesomeIcon icon={faChevronRight} size="4x" />
+                        </button>
+                        <button className="buttonSlideClose" onClick={setSlide}><FontAwesomeIcon icon={faXmark} size="3x"/></button>
+                    </div>
+                </div>
+            )}
+
         </section>
     )
 }
