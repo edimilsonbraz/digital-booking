@@ -1,3 +1,5 @@
+/* @import '../../../node_modules/react-datepicker/dist/react-datepicker.css'; */
+
 .headerdetails
 {
     width: 100%;
@@ -38,4 +40,61 @@
     display: flex;
     align-items: center;
     padding: 0 25px;
+}
+
+
+/* ====RESERVATION ===== */
+.containerReservation {
+  background-color: #f2f2f2;
+}
+
+.contentReservation {
+  padding: 2rem 2rem 4rem;
+}
+
+.contentReservation h2 {
+  margin-bottom: 1.5rem;
+}
+
+
+.contentCalender {
+  display: flex;
+  gap: 4rem;
+  align-items: center;  
+}
+
+
+/* Calender Text */
+.calenderText {
+  background: var(--white);
+  height: 180px;
+  width: 25%;
+  padding: 2rem 1rem 1rem;
+  border-radius: 6px;
+  box-shadow: 5px 10px 5px #50505034;
+}
+
+.calenderText p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.calenderText button {
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid transparent;
+  background: var(--primary);
+  transition: 0.2s;
+}
+
+.calenderText button:hover {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  background-color: var(--white);
 }
