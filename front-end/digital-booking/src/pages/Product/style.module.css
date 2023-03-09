@@ -89,18 +89,23 @@
 }
 
 
-.contentCalender {
+/* .contentCalender {
   display: flex;
   gap: 4rem;
   align-items: center;  
-}
+} */
 
+.contentCalender {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
 
 /* Calender Text */
 .calenderText {
   background: var(--white);
   height: 180px;
-  width: 25%;
+  width: 80%;
   padding: 2rem 1rem 1rem;
   border-radius: 6px;
   box-shadow: 5px 10px 5px #50505034;
@@ -130,3 +135,20 @@
   border: 1px solid var(--primary);
   background-color: var(--white);
 }
+
+/* Responsividade Calendario Desktop*/
+
+
+@media screen and (max-width:1206px) {
+  .contentCalender {
+    grid-template-columns: 2fr;
+    justify-content: center;
+  }
+
+  .calenderText {
+    width: 68%;
+  }
+ 
+  
+}
+

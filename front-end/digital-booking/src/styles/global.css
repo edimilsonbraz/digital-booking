@@ -75,7 +75,7 @@ label
 }
 
 .react-datepicker__month-container {
-	width: 400px;
+	max-width: 500px;
 	height: 400px;
 }
 
@@ -95,4 +95,19 @@ label
 
 .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
 	background-color: var(--primary);
+}
+
+/* Responsividade Calendario Desktop*/
+@media screen and (max-width:1566px) {
+  .react-datepicker__month-container {
+		max-width: 400px;
+
+	}
+}
+
+@media screen and (max-width:1266px) {
+  .react-datepicker__month-container {
+		max-width: 380px;
+
+	}
 }
