@@ -57,7 +57,9 @@ export function Product() {
         categoria: '',
         titulo: '',
         localizacao: '',
-        caracteristica: ''
+        descricao: '',
+        caracteristica: '',
+        politicas: ''
       })
     
 
@@ -145,21 +147,51 @@ export function Product() {
                 )}
             </section>
 
+            <section className={style.details}>
+                <div className={style.descricao}>
+                    
+                <p>Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada</p>
+                </div>
+            </section>
+
             <section className={style.features}>
-
+                                
                 <span>{product.caracteristica}</span>
-                <h1>O que esse lugar oferece?</h1>
-
+                <h2>O que esse lugar oferece?</h2>
+                                
                 <div className={style.featuresIcons}>
 
-                    <p><FontAwesomeIcon icon={faWifi} /> Wifi</p>
-                    <p><FontAwesomeIcon icon={faHome} /> Cozinha</p>
-                    <p><FontAwesomeIcon icon={faTelevision} /> Televisão</p>
-                    <p><FontAwesomeIcon icon={faSnowflake} /> Ar Condicionado</p>
-                    <p><FontAwesomeIcon icon={faPaw} /> Aceita Pets</p>
-                    <p><FontAwesomeIcon icon={faCar} /> Estacionamento</p>
-                    <p><FontAwesomeIcon icon={faSwimmer} /> Piscina</p>
+                    <p><FontAwesomeIcon icon={faWifi} /> - Wifi</p>                    
+                    <p><FontAwesomeIcon icon={faHome} /> - Cozinha</p>                        
+                    <p><FontAwesomeIcon icon={faTelevision} /> - Televisão</p>                        
+                    <p><FontAwesomeIcon icon={faSnowflake} /> - Ar Condicionado</p>                        
+                    <p><FontAwesomeIcon icon={faPaw} /> - Aceita Pets</p>                        
+                    <p><FontAwesomeIcon icon={faCar} /> - Estacionamento</p>
+                    <p><FontAwesomeIcon icon={faSwimmer} /> - Piscina</p>                       
+                                    
+                </div>
+            </section>
 
+            <section className={style.policy}>
+
+                <h2>O que você precisa saber:</h2>
+                <div className={style.politicas}>
+                    
+                    <span className='Regras'>
+                        <h3>Regras da casa</h3>
+                        <ul>Check-out 10:00</ul>
+                        <ul>Não é permitido festas</ul>
+                        <ul>Não fumar</ul>
+                    </span>
+                    <span className='Saude'>
+                    <h3>Saúde e segurança</h3>
+                    <ul>Diretrizes de distanciamento social e outras regulamentações relacionadas ao coronavírus se aplicam</ul>
+                    </span>
+                    <span className='Cancelamento'>
+                        <h3>Politica de cancelamento</h3>
+                        <ul>Adicione as datas da viagem para obter detalhes de cancelamento para esta estadia</ul>
+                        <ul>Outras</ul>
+                    </span>
                 </div>
             </section>
 
