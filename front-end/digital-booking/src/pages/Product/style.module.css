@@ -54,8 +54,30 @@
     border: 1px solid yellow;
 }
 
+/*Style Descrição*/
 
-/* Sytle Features/Caracteristicas */
+
+.descricao
+{
+  width: 100%;
+  min-height: 60px;
+  background-color: white;
+  display: block;
+  
+  padding: 0 25px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+}
+
+
+.descricao p
+{
+  padding: 2rem;
+  font-size: 1.1rem;
+  
+}
+/* Sytle Caracteristicas */
 
 .features
 {
@@ -84,6 +106,51 @@
   padding: 20px;
   
 }
+
+/*Style Politicas*/
+
+.policy
+{
+  width: 100%;
+    min-height: 60px;
+    background-color: white;
+    display: block;
+    
+    padding: 0 25px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+
+}
+
+
+.policy div 
+{
+  margin: 50px;  
+  display: grid;
+  grid-template-columns: 33% 33% 33% ; 
+  grid-template-rows: 5rem 5rem;
+}
+
+.policy div span
+{ 
+  text-align: start;
+  margin: 2rem;
+
+}
+
+.policy div span h3
+{
+  color: #333;
+  
+}
+
+.policy div span ul
+{
+  margin-top: 1.8rem;
+  font-size: 1rem;
+  
+}
+
 #first
 {
     grid-area: first;
@@ -401,6 +468,28 @@
     grid-template-rows: 30%;
       
   }
+
+  .policy div 
+  {
+  margin: 30px;  
+  display: grid;
+  grid-template-columns: 50% 50% ; 
+  grid-template-rows: 50%;
+  }
+  .policy div span ul
+  {
+  margin-top: 1.8rem;
+  font-size: 1.5rem;
+  
+  }
+
+  .policy div span h3
+{
+  color: #333;
+  font-size: 1.8rem;
+}
+
+
 }
 
 .featuresIcons p {
@@ -417,4 +506,26 @@
   grid-template-columns: 100%; 
   grid-template-rows: 15%;
   }
+
+  .policy div 
+  {
+  margin: 10px;  
+  display: grid;
+  grid-template-columns: 100%; 
+  grid-template-rows: 33%;
+  }
+
+  .policy div span ul
+  {
+  margin-top: 1.8rem;
+  font-size: 1.8rem;
+  
+  }
+
+  .policy div span h3
+{
+  color: #333;
+  font-size: 2.1rem;
+}
+
 }
