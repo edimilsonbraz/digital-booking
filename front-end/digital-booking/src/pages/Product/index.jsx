@@ -10,192 +10,187 @@ import br from 'date-fns/locale/pt-BR'
 registerLocale('br', br)
 
 //Importes do slide
-import './style.css'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
 //imports icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faChevronLeft,
-  faLocationDot,
-  faChevronRight,
-  faXmark,
-  faWifi, 
-  faSwimmer, 
-  faHome, 
-  faTelevision, 
-  faSnowflake, 
-  faPaw, 
-  faCar
+    faChevronLeft,
+    faLocationDot,
+    faChevronRight,
+    faXmark,
+    faWifi,
+    faSwimmer,
+    faHome,
+    faTelevision,
+    faSnowflake,
+    faPaw,
+    faCar
 } from '@fortawesome/free-solid-svg-icons'
 
 export function Product() {
-  const { id } = useParams()
+    const { id } = useParams()
 
-  const [product, setProduct] = useState({
-    categoria: '',
-    titulo: '',
-    localizacao: '',
-    caracteristica: ''
-  })
+    const [data, setData] = useState({
+        categoria: "Hotel", titulo: "Hermitage Hotel", localizacao: "Buenos Aires, Argentina - 900m da praia",
+        fotos: ["https://picsum.photos/id/12/3000", "https://picsum.photos/id/13/3000", "https://picsum.photos/id/37/3000",
+            "https://picsum.photos/id/49/3000", "https://picsum.photos/id/57/3000", "https://picsum.photos/id/58/3000"]
+    });
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [slides, setSlides] = useState(false);
+    const [loaded, setLoaded] = useState(false)
+    const [sliderRef, instanceRef] = useKeenSlider(
+        {
+            loop: true,
+            dragSpeed: 2,
+            slideChanged(slider) {
+                setCurrentSlide(slider.track.details.rel)
+            },
+            created() {
+                setLoaded(true)
+            },
+        }
+    )
 
-  const [slideOpen, setSlideOpen] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
+    const [product, setProduct] = useState({
+        categoria: '',
+        titulo: '',
+        localizacao: '',
+        caracteristica: ''
+      })
+    
 
-  const [sliderRef, slider] = useKeenSlider({
-    loop: true,
-    dragSpeed: 2,
-    slideChanged() {}
-  })
+    useEffect(() => {
+    }, [id])
 
-  const setSlide = () => {
-    setSlideOpen((prevSet) => !prevSet)
-  }
-  const [categoria, setCategoria] = useState('')
-  const [titulo, setTitulo] = useState('')
-  const [localizacao, setLocalizacao] = useState('')
+    const slide = () => setSlides(!slides);
 
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const onChange = (dates) => {
-    const [start, end] = dates
-    setStartDate(start)
-    setEndDate(end)
-  }
+    const [categoria, setCategoria] = useState('')
+    const [titulo, setTitulo] = useState('')
+    const [localizacao, setLocalizacao] = useState('')
 
-  return (
-    <>
-      <section className="ContainerProduct">
-        <div className={style.headerdetails}>
-          <div className={style.title}>
-            <span>{product.categoria}</span>
-            <h1>{product.titulo}</h1>
-          </div>
-          <div className={style.backpage}>
-            <Link to="/">
-              <section>
-                <FontAwesomeIcon icon={faChevronLeft} size="3x" />
-              </section>
-            </Link>
-          </div>
-        </div>
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
+    const onChange = (dates) => {
+        const [start, end] = dates
+        setStartDate(start)
+        setEndDate(end)
+    }
 
-        <div className={style.locationdetails}>
-          <p>
-            <FontAwesomeIcon icon={faLocationDot} />
-            {product.localizacao}
-          </p>
-        </div>
+    return (
+        <>
+            <section className="ContainerProduct">
+                <div className={style.headerdetails}>
+                    <div className={style.title}>
+                        <span>{data.categoria}</span>
+                        <h1>{data.titulo}</h1>
+                    </div>
+                    <div className={style.backpage}>
+                        <Link to='/'>
+                            <section>
+                                <FontAwesomeIcon icon={faChevronLeft} size='3x' />
+                            </section>
+                        </Link>
+                    </div>
+                </div>
 
-        {!slideOpen ? (
-          <div className="containerSlide">
-            <div id="first">
-              <img src="https://picsum.photos/id/12/000" />
-            </div>
-            <div id="second">
-              <img src="https://picsum.photos/id/13/0" />
-            </div>
-            <div id="third">
-              <img src="https://picsum.photos/id/37/0" />
-            </div>
-            <div id="fourth">
-              <img src="https://picsum.photos/id/49/0" />
-            </div>
-            <div id="fifth">
-              <img src="https://picsum.photos/id/57/0" />
-            </div>
-            <button className="buttonSlideOpen" onClick={setSlide}>
-              Ver mais
-            </button>
-          </div>
-        ) : (
-          <div className="containerSlideOpen">
-            <div ref={sliderRef} className="keen-slider sizeSlide">
-              <div className="keen-slider__slide number-slide1">
-                <img src="https://picsum.photos/id/12/3000/" />
-              </div>
-              <div className="keen-slider__slide number-slide2">
-                <img src="https://picsum.photos/id/13/3000" />
-              </div>
-              <div className="keen-slider__slide number-slide3">
-                <img src="https://picsum.photos/id/37/3000" />
-              </div>
-              <div className="keen-slider__slide number-slide4">
-                <img src="https://picsum.photos/id/49/3000" />
-              </div>
-              <div className="keen-slider__slide number-slide5">
-                <img src="https://picsum.photos/id/57/3000" />
-              </div>
-              <div className="keen-slider__slide number-slide6">
-                <img src="https://picsum.photos/id/58/3000" />
-              </div>
-              <button
-                id="prev"
-                onClick={(e) => e.stopPropagation() || slider.current.prev()}
-              >
-                <FontAwesomeIcon icon={faChevronLeft} size="4x" />
-              </button>
-              <button
-                id="next"
-                onClick={(e) => e.stopPropagation() || slider.current.next()}
-              >
-                <FontAwesomeIcon icon={faChevronRight} size="4x" />
-              </button>
-              <button className="buttonSlideClose" onClick={setSlide}>
-                <FontAwesomeIcon icon={faXmark} size="3x" />
-              </button>
-            </div>
-          </div>
-        )}
-      </section>
+                <div className={style.locationdetails}>
+                    <FontAwesomeIcon icon={faLocationDot} />
+                    <p>{data.localizacao}</p>
+                </div>
 
-      <section className={style.features}>
-                    
-        <span>{product.caracteristica}</span>
-        <h1>O que esse lugar oferece?</h1>
-                    
-        <div className={style.featuresIcons}>
-                        
-          <p><FontAwesomeIcon icon={faWifi} /> Wifi</p>                    
-          <p><FontAwesomeIcon icon={faHome} /> Cozinha</p>                        
-          <p><FontAwesomeIcon icon={faTelevision} /> Televisão</p>                        
-          <p><FontAwesomeIcon icon={faSnowflake} /> Ar Condicionado</p>                        
-          <p><FontAwesomeIcon icon={faPaw} /> Aceita Pets</p>                        
-          <p><FontAwesomeIcon icon={faCar} /> Estacionamento</p>
-          <p><FontAwesomeIcon icon={faSwimmer} /> Piscina</p>
-                        
-          </div>
-      </section>
+                {/* Grid de 5 primeiras imagens*/}
+
+                <div className={style.containerGridImages}>
+                    {data.fotos.slice(0, 5).map((urlImg, index) => <div className={`${style.responsiveImages} ${style.gridAreas}`} style={{ backgroundImage: `url(${urlImg})` }}></div>)}
+                    <button onClick={slide} id={style.buttonOpenSlideDesktop}>Ver mais</button>
+                </div>
+
+                {/* Slide versão desktop */}
+                {slides ? (
+                    <div className={style.containerSlideDesktop}>
+                        <div ref={sliderRef} className={`keen-slider ${style.imagesDesktop}`}>
+                            {data.fotos.map(urlImg => <div style={{ backgroundImage: `url(${urlImg})` }} className={`keen-slider__slide ${style.responsiveImages}`}></div>)}
+                            <button id={style.buttonNextSlide} onClick={e => e.stopPropagation() || instanceRef.current.next()}><FontAwesomeIcon icon={faChevronRight} size="4x" /></button>
+                            <button id={style.buttonPrevSlide} onClick={e => e.stopPropagation() || instanceRef.current.prev()}><FontAwesomeIcon icon={faChevronLeft} size="4x" /></button>
+                            <button id={style.buttonCloseSlide} onClick={slide}><FontAwesomeIcon icon={faXmark} size="3x" /></button>
+                        </div>
+                    </div>
+                ) : ""}
+
+                {/* Slide vesão tablet e mobile */}
+                <div className={style.containerSlideMobile}>
+                    <div ref={sliderRef} className="keen-slider">
+                        {data.fotos.map(urlImg => <div style={{ backgroundImage: `url(${urlImg})` }} className={`keen-slider__slide ${style.responsiveImages}`}></div>)}
+                    </div>
+                </div>
+
+                {loaded && instanceRef.current && (
+                    <div className={style.dots}>
+                        {[
+                            ...Array(instanceRef.current.track.details.slides.length).keys(),
+                        ].map((idx) => {
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={() => {
+                                        instanceRef.current?.moveToIdx(idx)
+                                    }}
+                                    className={`${style.dot} ${(currentSlide === idx ? style.active : "")}`}
+                                ></button>
+                            )
+                        })}
+                    </div>
+                )}
+            </section>
+
+            <section className={style.features}>
+
+                <span>{product.caracteristica}</span>
+                <h1>O que esse lugar oferece?</h1>
+
+                <div className={style.featuresIcons}>
+
+                    <p><FontAwesomeIcon icon={faWifi} /> Wifi</p>
+                    <p><FontAwesomeIcon icon={faHome} /> Cozinha</p>
+                    <p><FontAwesomeIcon icon={faTelevision} /> Televisão</p>
+                    <p><FontAwesomeIcon icon={faSnowflake} /> Ar Condicionado</p>
+                    <p><FontAwesomeIcon icon={faPaw} /> Aceita Pets</p>
+                    <p><FontAwesomeIcon icon={faCar} /> Estacionamento</p>
+                    <p><FontAwesomeIcon icon={faSwimmer} /> Piscina</p>
+
+                </div>
+            </section>
 
 
-      <section className={style.containerReservation}>
-        <div className={style.contentReservation}>
-          <h2>Datas disponíveis</h2>
+            <section className={style.containerReservation}>
+                <div className={style.contentReservation}>
+                    <h2>Datas disponíveis</h2>
 
-          <div className={style.contentCalender}>
-            <DatePicker
-              className={style.reactDatepicker__monthContainer}
-              selected={startDate}
-              onChange={onChange}
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              monthsShown={2}
-              inline
-              locale="br"
-              dateFormat="dd/MM/yyyy"
-              minDate={new Date()}
-            />
+                    <div className={style.contentCalender}>
+                        <DatePicker
+                            className={style.reactDatepicker__monthContainer}
+                            selected={startDate}
+                            onChange={onChange}
+                            startDate={startDate}
+                            endDate={endDate}
+                            selectsRange
+                            monthsShown={2}
+                            inline
+                            locale="br"
+                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()}
+                        />
 
-            <div className={style.calenderText}>
-              <p>Adicione as datas da sua viagem para obter preços exatos</p>
-              <button>Iniciar reserva</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
+                        <div className={style.calenderText}>
+                            <p>Adicione as datas da sua viagem para obter preços exatos</p>
+                            <button>Iniciar reserva</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    )
 }
 // useEffect(() => {}, [id])
