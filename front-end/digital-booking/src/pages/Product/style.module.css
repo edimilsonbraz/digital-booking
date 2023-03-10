@@ -1,5 +1,4 @@
-.headerdetails
-{
+.headerdetails {
     width: 100%;
     min-height: 80px;
     padding: 5px 25px;
@@ -11,26 +10,22 @@
     align-items: center;
 }
 
-.title span
-{
+.title span {
     color: white;
     font-size: 1rem;
 }
 
-.title h1
-{
+.title h1 {
     font-size: 2rem;
 }
 
-.backpage section
-{
+.backpage section {
     cursor: pointer;
     color: var(--primary);
     margin-left: 90px;
 }
 
-.locationdetails
-{
+.locationdetails {
     width: 100%;
     min-height: 60px;
     background-color: #f2f2f2;
@@ -40,37 +35,214 @@
     padding: 0 25px;
 }
 
-.containerSlide
-{
-    width: 100%;
-    height: 300px;
-    border: 1px solid red;
+.locationdetails p {
+    margin-left: 10px;
+}
+
+
+/* Estilização do GRID de cinco Imagens */
+
+.containerGridImages {
+    width: 80vw;
+    height: 400px;
+    margin: 30px auto;
     display: grid;
+    grid-template-areas:
+        "first first second third"
+        "first first fourth fifth";
+    grid-template-rows: 200px 200px;
+    grid-template-columns: 25% 25% 25% 25%;
+    gap: 10px;
+    position: relative;
 }
 
-.containerSlide div
-{
-    background-color: #333;
-    border: 1px solid yellow;
+.containerGridImages div {
+    width: 100%;
+    min-height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-#first
+/*Ajusta as imagens do GRID, Slide desktop e Slide Mobile*/
+.responsiveImages
 {
+    background-size: cover;
+}
+
+.containerGridImages img {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 10px;
+}
+
+
+.containerGridImages div:nth-child(1) {
     grid-area: first;
+    max-width: 100%;
+    min-height: 200px;
 }
-#second
-{
+
+.containerGridImages div:nth-child(2) {
     grid-area: second;
 }
-#third
-{
+
+.containerGridImages div:nth-child(3){
     grid-area: third;
 }
-#fourth
-{
+
+.containerGridImages div:nth-child(4) {
     grid-area: fourth;
 }
-#fifth
-{
+
+.containerGridImages div:nth-child(5) {
     grid-area: fifth;
+}
+
+/*Estiliza o botão ver mais localizado no grid*/
+#buttonOpenSlideDesktop {
+    bottom: 10px;
+    right: 0;
+    position: absolute;
+    padding: 10px;
+    border: 1px solid orangered;
+    background-color: orangered;
+    color: white;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+#buttonOpenSlideDesktop:hover {
+    background-color: white;
+    color: orangered;
+    border: 1px solid orangered;
+}
+
+/*Estilização do Carrosel modelo Desktop*/
+.containerSlideDesktop {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.979);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+}
+
+.imagesDesktop {
+    max-width: 70vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    position: block;
+    border-radius: 10px;
+
+}
+
+.containerSlideDesktop div {
+    margin: 0 auto;
+}
+
+.containerSlideDesktop img {
+    width: 100%;
+    height: auto;
+}
+
+
+.containerSlideDesktop button {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    color: white;
+    border: none;
+    background-color: transparent;
+    transition: .3s;
+}
+
+.containerSlideDesktop button:hover {
+    color: orangered;
+}
+
+#buttonNextSlide {
+    right: 0;
+}
+
+#buttonPrevSlide {
+    left: 0;
+}
+
+#buttonCloseSlide {
+    right: 0;
+    top: 0;
+}
+
+/* Estilização do carrosel mobile */
+.containerSlideMobile {
+    display: none;
+}
+
+
+@media screen and (max-width:900px) {
+
+    .containerSlideDesktop {
+        display: none;
+    }
+
+    .containerGridImages {
+        display: none;
+    }
+
+    .containerSlideMobile {
+        display: block;
+    }
+
+    .containerSlideMobile div:nth-child(1) {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .containerSlideMobile button {
+
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        color: white;
+        border: none;
+        background-color: transparent;
+        transition: .3s;
+    }
+
+    .containerSlideMobile button:hover {
+        color: orangered;
+    }
+
+    .dots {
+        display: flex;
+        padding: 10px 0;
+        justify-content: center;
+      }
+      
+      .dot {
+        border: none;
+        width: 10px;
+        height: 10px;
+        background: #c5c5c5;
+        border-radius: 50%;
+        margin: 0 5px;
+        padding: 5px;
+        cursor: pointer;
+      }
+      
+      .dot:focus {
+        outline: none;
+      }
+      
+      .dot.active {
+        background: orangered;
+      }
 }

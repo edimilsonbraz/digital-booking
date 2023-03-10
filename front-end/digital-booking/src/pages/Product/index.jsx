@@ -6,41 +6,43 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
 //Importes do slide
-import './style.css';
 import { useKeenSlider } from "keen-slider/react";
 import 'keen-slider/keen-slider.min.css';
 
 export function Product() {
     const { id } = useParams();
-
-    const [product, setProduct] = useState({ categoria: '', titulo: '', localizacao: '' });
-
-    const [slideOpen, setSlideOpen] = useState(false);
+    const [data, setData] = useState({
+        categoria: "Hotel", titulo: "Hermitage Hotel", localizacao: "Buenos Aires, Argentina - 900m da praia",
+        fotos: ["https://picsum.photos/id/12/3000", "https://picsum.photos/id/13/3000", "https://picsum.photos/id/37/3000",
+            "https://picsum.photos/id/49/3000", "https://picsum.photos/id/57/3000", "https://picsum.photos/id/58/3000"]
+    });
     const [currentSlide, setCurrentSlide] = useState(0);
-
-    const [sliderRef, slider] = useKeenSlider(
+    const [slides, setSlides] = useState(false);
+    const [loaded, setLoaded] = useState(false)
+    const [sliderRef, instanceRef] = useKeenSlider(
         {
-            loop:true,
-            dragSpeed:2,
-            slideChanged() {
-                
+            loop: true,
+            dragSpeed: 2,
+            slideChanged(slider) {
+                setCurrentSlide(slider.track.details.rel)
+            },
+            created() {
+                setLoaded(true)
             },
         }
     )
 
-    const setSlide = () => {
-        setSlideOpen(prevSet => !prevSet);
-    }
-
     useEffect(() => {
     }, [id])
+
+    const slide = () => setSlides(!slides);
 
     return (
         <section className="ContainerProduct">
             <div className={style.headerdetails}>
                 <div className={style.title}>
-                    <span>{product.categoria}</span>
-                    <h1>{product.titulo}</h1>
+                    <span>{data.categoria}</span>
+                    <h1>{data.titulo}</h1>
                 </div>
                 <div className={style.backpage}>
                     <Link to='/'>
@@ -52,39 +54,53 @@ export function Product() {
             </div>
 
             <div className={style.locationdetails}>
-                <p><FontAwesomeIcon icon={faLocationDot} />
-                    {product.localizacao}</p>
+                <FontAwesomeIcon icon={faLocationDot} />
+                <p>{data.localizacao}</p>
             </div>
 
-            {!slideOpen ? (
-                <div className="containerSlide">
-                    <div id="first"><img src="https://picsum.photos/id/12/000"/></div>
-                    <div id="second"><img src="https://picsum.photos/id/13/0"/></div>
-                    <div id="third"><img src="https://picsum.photos/id/37/0"/></div>
-                    <div id="fourth"><img src="https://picsum.photos/id/49/0"/></div>
-                    <div id="fifth"><img src="https://picsum.photos/id/57/0"/></div>
-                    <button className="buttonSlideOpen" onClick={setSlide}>Ver mais</button>
-                </div>
-            ) : (
-                <div className='containerSlideOpen'>
-                    <div ref={sliderRef} className="keen-slider sizeSlide">
-                        <div className="keen-slider__slide number-slide1"><img src="https://picsum.photos/id/12/3000/" /></div>
-                        <div className="keen-slider__slide number-slide2"><img src="https://picsum.photos/id/13/3000" /></div>
-                        <div className="keen-slider__slide number-slide3"><img src="https://picsum.photos/id/37/3000" /></div>
-                        <div className="keen-slider__slide number-slide4"><img src="https://picsum.photos/id/49/3000" /></div>
-                        <div className="keen-slider__slide number-slide5"><img src="https://picsum.photos/id/57/3000" /></div>
-                        <div className="keen-slider__slide number-slide6"><img src="https://picsum.photos/id/58/3000" /></div>
-                        <button id="prev" onClick={e => e.stopPropagation() || slider.current.prev()}>
-                            <FontAwesomeIcon icon={faChevronLeft} size="4x" />
-                        </button>
-                        <button id="next" onClick={e => e.stopPropagation() || slider.current.next()}>
-                            <FontAwesomeIcon icon={faChevronRight} size="4x" />
-                        </button>
-                        <button className="buttonSlideClose" onClick={setSlide}><FontAwesomeIcon icon={faXmark} size="3x"/></button>
+            {/* Grid de 5 primeiras imagens*/}
+
+            <div className={style.containerGridImages}>
+                {data.fotos.slice(0, 5).map((urlImg, index) => <div className={`${style.responsiveImages} ${style.gridAreas}`} style={{backgroundImage: `url(${urlImg})`}}></div>)}
+                <button onClick={slide} id={style.buttonOpenSlideDesktop}>Ver mais</button>
+            </div>
+
+            {/* Slide versão desktop */}
+            {slides ? (
+                <div className={style.containerSlideDesktop}>
+                    <div ref={sliderRef} className={`keen-slider ${style.imagesDesktop}`}>
+                        {data.fotos.map(urlImg => <div style={{backgroundImage: `url(${urlImg})`}} className={`keen-slider__slide ${style.responsiveImages}`}></div>)}
+                        <button id={style.buttonNextSlide} onClick={e => e.stopPropagation() || instanceRef.current.next()}><FontAwesomeIcon icon={faChevronRight} size="4x" /></button>
+                        <button id={style.buttonPrevSlide} onClick={e => e.stopPropagation() || instanceRef.current.prev()}><FontAwesomeIcon icon={faChevronLeft} size="4x" /></button>
+                        <button id={style.buttonCloseSlide} onClick={slide}><FontAwesomeIcon icon={faXmark} size="3x" /></button>
                     </div>
                 </div>
-            )}
+            ) : ""}
 
+            {/* Slide vesão tablet e mobile */}
+            <div className={style.containerSlideMobile}>
+                <div ref={sliderRef} className="keen-slider">
+                    {data.fotos.map(urlImg => <div style={{backgroundImage: `url(${urlImg})`}} className={`keen-slider__slide ${style.responsiveImages}`}></div>)}
+                </div>
+            </div>
+
+            {loaded && instanceRef.current && (
+                    <div className={style.dots}>
+                        {[
+                            ...Array(instanceRef.current.track.details.slides.length).keys(),
+                        ].map((idx) => {
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={() => {
+                                        instanceRef.current?.moveToIdx(idx)
+                                    }}
+                                    className={`${style.dot} ${(currentSlide === idx ? style.active : "")}`}
+                                ></button>
+                            )
+                        })}
+                    </div>
+                )}
         </section>
     )
 }
