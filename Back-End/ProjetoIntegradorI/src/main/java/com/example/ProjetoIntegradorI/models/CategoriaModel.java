@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,9 +18,7 @@ import lombok.Setter;
 public class CategoriaModel {
 
     @Id
-    @SequenceGenerator(name = "Categoria_sequence", sequenceName = "categoria_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String qualificacaoCategoria;
     private String descricaoCategoria;

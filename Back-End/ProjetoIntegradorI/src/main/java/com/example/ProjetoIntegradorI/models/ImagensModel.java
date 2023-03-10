@@ -15,10 +15,14 @@ import lombok.Setter;
 public class ImagensModel {
 
     @Id
-    @SequenceGenerator(name = "Imagens_sequence", sequenceName = "imagens_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    /// Relacionamento ManyToOne com Produtos
+    @ManyToOne
+    @JoinColumn(name="produtos_id", nullable = false)
+    private ProdutosModel produtos;
+
     private String tituloImagem;
     private String urlImagem;
 

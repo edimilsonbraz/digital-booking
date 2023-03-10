@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-
-public class CategoriaDto {
-
-    private String qualificacaoCategoria;
-    private String descricaoCategoria;
+public class ProdutosDto {
+    private String nomeProduto;
+    private String descricaoProduto;
 
 }

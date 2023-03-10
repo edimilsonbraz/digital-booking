@@ -1,5 +1,9 @@
 package com.example.ProjetoIntegradorI.services;
 
+import com.example.ProjetoIntegradorI.models.CategoriaModel;
+import com.example.ProjetoIntegradorI.models.CidadesModel;
+import com.example.ProjetoIntegradorI.models.ProdutosModel;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;

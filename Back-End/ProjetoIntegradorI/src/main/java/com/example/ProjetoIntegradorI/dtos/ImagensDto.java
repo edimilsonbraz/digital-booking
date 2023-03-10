@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 
-public class CategoriaDto {
-
-    private String qualificacaoCategoria;
-    private String descricaoCategoria;
+public class ImagensDto {
+    private String tituloImagem;
+    private String urlImagem;
 
 }
