@@ -54,6 +54,36 @@
     border: 1px solid yellow;
 }
 
+
+/* Sytle Features/Caracteristicas */
+
+.features
+{
+    width: 100%;
+    min-height: 60px;
+    background-color: white;
+    display: block;
+    
+    padding: 0 25px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.featuresIcons 
+{
+  margin: 50px;  
+  font-size: 1.5rem; 
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25% ; 
+  grid-template-rows: 5rem 5rem;
+    
+}
+
+.featuresIcons p
+{
+  padding: 20px;
+  
+}
 #first
 {
     grid-area: first;
@@ -87,13 +117,6 @@
 .contentReservation h2 {
   margin-bottom: 1.5rem;
 }
-
-
-/* .contentCalender {
-  display: flex;
-  gap: 4rem;
-  align-items: center;  
-} */
 
 .contentCalender {
   display: grid;
@@ -137,8 +160,6 @@
 }
 
 /* Responsividade Calendario Desktop*/
-
-
 @media screen and (max-width:1206px) {
   .contentCalender {
     grid-template-columns: 2fr;
@@ -146,9 +167,47 @@
   }
 
   .calenderText {
-    width: 68%;
+    width: 100%;
+    padding: 4rem;
+    margin-top: 2rem;
   }
- 
-  
 }
 
+/* Responsividade Calendario Tablet */
+
+
+/*Tablet*/
+@media screen and (max-width: 900px) {
+  .features {
+    width: 100%;
+    background-color: white;
+    display: block;
+            
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+
+  .featuresIcons {
+    font-size: 1.5rem; 
+    display: grid;
+    grid-template-columns: 50% 50%; 
+    grid-template-rows: 30%;
+      
+  }
+}
+
+.featuresIcons p {
+  padding: 1.1rem;
+  align-items: baseline;
+}
+
+/*Mobile*/
+@media screen and (max-width: 400px) {
+.featuresIcons {
+  width: 100%;  
+  font-size: 1rem; 
+  display: grid;
+  grid-template-columns: 100%; 
+  grid-template-rows: 15%;
+  }
+}

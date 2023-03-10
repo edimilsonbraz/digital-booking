@@ -111,3 +111,14 @@ label
 
 	}
 }
+
+/* Responsividade Calendario Tablet */
+@media screen and (max-width: 826px) {
+	/* .react-datepicker {
+		border: none;
+	} */
+	.react-datepicker__month-container {
+		float: none;
+	}
+} 
+

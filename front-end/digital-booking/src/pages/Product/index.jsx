@@ -20,7 +20,14 @@ import {
   faChevronLeft,
   faLocationDot,
   faChevronRight,
-  faXmark
+  faXmark,
+  faWifi, 
+  faSwimmer, 
+  faHome, 
+  faTelevision, 
+  faSnowflake, 
+  faPaw, 
+  faCar
 } from '@fortawesome/free-solid-svg-icons'
 
 export function Product() {
@@ -29,7 +36,8 @@ export function Product() {
   const [product, setProduct] = useState({
     categoria: '',
     titulo: '',
-    localizacao: ''
+    localizacao: '',
+    caracteristica: ''
   })
 
   const [slideOpen, setSlideOpen] = useState(false)
@@ -141,6 +149,25 @@ export function Product() {
           </div>
         )}
       </section>
+
+      <section className={style.features}>
+                    
+        <span>{product.caracteristica}</span>
+        <h1>O que esse lugar oferece?</h1>
+                    
+        <div className={style.featuresIcons}>
+                        
+          <p><FontAwesomeIcon icon={faWifi} /> Wifi</p>                    
+          <p><FontAwesomeIcon icon={faHome} /> Cozinha</p>                        
+          <p><FontAwesomeIcon icon={faTelevision} /> Televisão</p>                        
+          <p><FontAwesomeIcon icon={faSnowflake} /> Ar Condicionado</p>                        
+          <p><FontAwesomeIcon icon={faPaw} /> Aceita Pets</p>                        
+          <p><FontAwesomeIcon icon={faCar} /> Estacionamento</p>
+          <p><FontAwesomeIcon icon={faSwimmer} /> Piscina</p>
+                        
+          </div>
+      </section>
+
 
       <section className={style.containerReservation}>
         <div className={style.contentReservation}>
