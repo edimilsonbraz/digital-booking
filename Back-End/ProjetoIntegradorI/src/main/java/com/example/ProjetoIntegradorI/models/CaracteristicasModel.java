@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,10 +17,14 @@ import lombok.Setter;
 
 public class CaracteristicasModel {
     @Id
-    @SequenceGenerator(name = "Caracteristicas_sequence", sequenceName = "caracteristicas_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    /// Relacionamento Many to Many com Produtos;
+    @ManyToMany(mappedBy = "produtosCaracteristica", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<ProdutosModel> caracteristicasCaracteristica = new HashSet<>();
+
+
     private String nomeCaracteristica;
     private String iconeCaracteristica;
 

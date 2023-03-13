@@ -18,26 +18,43 @@ import java.util.Set;
 
 public class ProdutosModel {
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    /// Relacionamento ManyToMany de Produto com Caracteristicas
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "Produtos_Categoria",
+            name = "Produtos_Caracteristicas",
             joinColumns = { @JoinColumn(name = "produtos_id") },
-            inverseJoinColumns = { @JoinColumn(name = "categoria_id") }
+            inverseJoinColumns = { @JoinColumn(name = "caracteristicas_id") }
     )
-    Set<CategoriaModel> categoriaModelSet = new HashSet<>();
+    private Set<CaracteristicasModel> produtosCaracteristica = new HashSet<>();
+
+    /// Relacionamento OneToMany com Imagens
+    @OneToMany(mappedBy = "produtos")
+    private Set<ImagensModel> imagens = new HashSet<>();
+
+    /// Relacionamento ManyToOne com Categoria
+
+    @ManyToOne
+    private CategoriaModel categoria;
+
+
+    /// Relacionamento ManyToOne produto x cidade
+    @ManyToOne
+    private CidadesModel cidades;
 
     @Id
-    @SequenceGenerator(name = "Produtos_sequence", sequenceName = "produtos_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String nomeProduto;
     private String descricaoProduto;
-    private List categorias;
 
-    public ProdutosModel(String nomeProduto, String descricaoProduto) {
+
+    public ProdutosModel(Set<CaracteristicasModel> produtosCaracteristica, Set<ImagensModel> imagens, CategoriaModel categoria, CidadesModel cidades, String nomeProduto, String descricaoProduto) {
+        this.produtosCaracteristica = produtosCaracteristica;
+        this.imagens = imagens;
+        this.categoria = categoria;
+        this.cidades = cidades;
         this.nomeProduto = nomeProduto;
         this.descricaoProduto = descricaoProduto;
     }
-
 }
