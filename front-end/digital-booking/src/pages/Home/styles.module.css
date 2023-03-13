@@ -78,7 +78,9 @@
 
 /* =============== */
 .category {
+  max-width: 1250px;
   margin-bottom: 2rem;
+  margin: 0 auto;
 }
 
 .category h2 {
@@ -119,7 +121,7 @@
 }
 
 /* REPONSIVIDADE TABLET */
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 850px) {
   .containerBuscador {
     width: 100%;
   }
@@ -168,7 +170,7 @@
 
 }
 
-/* RESPONSIVIDADE MOBIEL */
+/* RESPONSIVIDADE MOBILE */
 @media screen and (max-width:450px) {
   .containerBuscador {
     padding: 1rem;

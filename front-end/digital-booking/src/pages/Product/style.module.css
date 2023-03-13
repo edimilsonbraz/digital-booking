@@ -291,7 +291,7 @@
 }
 
 
-@media screen and (max-width:900px) {
+@media screen and (max-width:850px) {
 
   .containerSlideDesktop {
     display: none;
@@ -373,7 +373,7 @@
 
 
 /*Tablet*/
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 850px) {
   .features {
     width: 100%;
     background-color: white;
@@ -398,7 +398,7 @@
 }
 
 /*Mobile*/
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .featuresIcons {
     width: 100%;
     font-size: 1rem;

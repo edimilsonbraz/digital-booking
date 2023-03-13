@@ -8,7 +8,6 @@
 .containerCard {
     display: flex;
     gap: 1rem
-        /* justify-content: space-between; */
 }
 
 @media screen and (max-width: 1080px) {

@@ -78,9 +78,8 @@ export function Home() {
         </div>
       </div>
 
-      <section className={`containerGlobal ${styles.category}`}>
+      <section className={styles.category}>
         <h2>Buscar por tipo de acomodação</h2>
-
         <ContainerCategory />
       </section>
 
