@@ -27,17 +27,17 @@ export function Login() {
   }
 
   const showHide = () =>
-    //Função para visualização de senha do campo input
-    {
-      if (passwRef.current.type === 'password') {
-        passwRef.current.type = 'text'
-        iconRef.current.className= `${styles.hide}`
+  //Função para visualização de senha do campo input
+  {
+    if (passwRef.current.type === 'password') {
+      passwRef.current.type = 'text'
+      iconRef.current.className = `${styles.hide}`
 
-      } else {
-        passwRef.current.type = 'password'
-        iconRef.current.className = ''
-      }
+    } else {
+      passwRef.current.type = 'password'
+      iconRef.current.className = ''
     }
+  }
 
   return (
     <div className={styles.login}>
@@ -65,7 +65,7 @@ export function Login() {
             id="password"
           />
           <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
-          
+
         </div>
 
         <div>

@@ -1,22 +1,25 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
 }
 
 :root {
-	--white:#fff;
+	--white: #fff;
 	--primary: #F0572D;
 	--light: #DFE4EA;
 	--title: #31363F;
 	--text: #191B1D;
-	
+
 }
 
-body, input, textarea, button {
+body,
+input,
+textarea,
+button {
 	font-family: 'Roboto';
-  font-weight: 400;
+	font-weight: 400;
 }
 
 a {
@@ -53,8 +56,7 @@ h3 {
 	margin-left: auto;
 }
 
-label
-{
+label {
 	font-weight: bold;
 	font-size: 0.75rem;
 	position: absolute;
@@ -67,9 +69,10 @@ label
 }
 
 .react-datepicker__header {
-  text-transform: uppercase ;
+	text-transform: uppercase;
 	background-color: var(--light);
 }
+
 .react-datepicker__navigation-icon::before {
 	border-color: var(--primary);
 }
@@ -82,6 +85,7 @@ label
 .react-datepicker__day-name {
 	width: 3rem;
 }
+
 .react-datepicker__day {
 	width: 3rem;
 	line-height: 3rem;
@@ -99,14 +103,14 @@ label
 
 /* Responsividade Calendario Desktop*/
 @media screen and (max-width:1566px) {
-  .react-datepicker__month-container {
+	.react-datepicker__month-container {
 		max-width: 400px;
 
 	}
 }
 
 @media screen and (max-width:1266px) {
-  .react-datepicker__month-container {
+	.react-datepicker__month-container {
 		max-width: 380px;
 
 	}
@@ -114,11 +118,11 @@ label
 
 /* Responsividade Calendario Tablet */
 @media screen and (max-width: 826px) {
+
 	/* .react-datepicker {
 		border: none;
 	} */
 	.react-datepicker__month-container {
 		float: none;
 	}
-} 
-
+}

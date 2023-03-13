@@ -33,7 +33,7 @@
 }
 
 .contentCard .contentDescription .stars h3 {
- margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .contentCard .contentDescription .stars p {
@@ -53,7 +53,7 @@
   align-items: end;
 }
 
-.contentAvaliation .avaliation > div {
+.contentAvaliation .avaliation>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +79,7 @@
   margin-bottom: 0.8rem;
 }
 
-.contentIcons > div {
+.contentIcons>div {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -104,7 +104,7 @@ button.button {
   border-radius: 6px;
   color: var(--white);
   font-weight: bold;
-  background-color: var(--primary) ;
+  background-color: var(--primary);
   border: 1px solid transparent;
   transition: all ease-in-out .2s;
 }
@@ -122,7 +122,7 @@ button.button:hover {
     margin-left: 1rem;
   }
 
-  
+
 }
 
 /* RESPONSIVIDADE TABLET */
@@ -158,13 +158,11 @@ button.button:hover {
   .contentImage {
     width: 100%;
   }
-  
+
   .contentCard .contentDescription {
     width: 100%;
   }
 }
 
 /* RESPONSIVIDADE MOBILE */
-@media screen and (max-width:414px) {
-  
-}
+@media screen and (max-width:414px) {}

@@ -58,8 +58,8 @@ export function Product() {
         titulo: '',
         localizacao: '',
         caracteristica: ''
-      })
-    
+    })
+
 
     useEffect(() => {
     }, [id])
