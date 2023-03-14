@@ -148,6 +148,7 @@ export function Product() {
             </section>
 
             <section className={style.details}>
+                <h2>Descrição</h2>
                 <div className={style.descricao}>
                     
                 <p>Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada</p>
