@@ -97,11 +97,9 @@
 
 }
 
-<<<<<<< HEAD
 #first {
   grid-area: first;
-=======
-/*Style Politicas*/
+/*Style Politicas*/}
 
 .policy
 {
@@ -148,7 +146,6 @@
 #first
 {
     grid-area: first;
->>>>>>> af12af32361e79799c920c960dc893062071857a
 }
 
 #second {
@@ -500,9 +497,7 @@
     grid-template-columns: 100%;
     grid-template-rows: 15%;
   }
-<<<<<<< HEAD
 }
-=======
 
   .policy div 
   {
@@ -525,5 +520,3 @@
   font-size: 2.1rem;
 }
 
-}
->>>>>>> af12af32361e79799c920c960dc893062071857a

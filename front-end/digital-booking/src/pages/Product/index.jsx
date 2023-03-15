@@ -45,7 +45,7 @@ export function Product() {
             loop: true,
             dragSpeed: 2,
             slideChanged(slider) {
-                setCurrentSlide(slider.track.details.rel)
+                setCurrentSlide(slider.track.details.rel);
             },
             created() {
                 setLoaded(true)
