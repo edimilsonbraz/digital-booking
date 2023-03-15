@@ -57,17 +57,9 @@ export function Product() {
         categoria: '',
         titulo: '',
         localizacao: '',
-<<<<<<< HEAD
         caracteristica: ''
     })
 
-=======
-        descricao: '',
-        caracteristica: '',
-        politicas: ''
-      })
-    
->>>>>>> af12af32361e79799c920c960dc893062071857a
 
     useEffect(() => {
     }, [id])
