@@ -1,5 +1,4 @@
-.login
-{
+.login {
 	width: 500px;
 	height: 500px;
 	margin: 0 auto;
@@ -9,8 +8,7 @@
 	align-items: center;
 }
 
-.login form
-{
+.login form {
 	width: 100%;
 	height: 300px;
 	display: flex;
@@ -18,26 +16,31 @@
 	justify-content: space-around;
 }
 
-.login div:nth-child(1) 
-{
+.login div:nth-child(1) {
 	display: flex;
 	justify-content: space-between;
 }
 
-.login div:nth-child(2) input:nth-child(n + 3) /*Define o width dos inputs */
-{
+.login div:nth-child(2) input:nth-child(n + 3)
+
+/*Define o width dos inputs */
+	{
 	width: 240px;
 }
 
-.login div:nth-child(3) /*Define a organização de display da div com botao submit*/
-{
+.login div:nth-child(3)
+
+/*Define a organização de display da div com botao submit*/
+	{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.login div:nth-child(3) button /*Estilização do botao submit*/ 
-{
+.login div:nth-child(3) button
+
+/*Estilização do botao submit*/
+	{
 	width: 50%;
 	height: 40px;
 	margin: 20px 0 10px 0;
@@ -48,8 +51,10 @@
 	font-size: 1rem;
 }
 
-.login div:nth-child(3) button:hover /*Estilização do botao submit*/ 
-{
+.login div:nth-child(3) button:hover
+
+/*Estilização do botao submit*/
+	{
 	background-color: var(--white);
 	border: var(--primary) 1px solid;
 	border-radius: 6px;
@@ -57,8 +62,10 @@
 }
 
 
-.login input /*Estilização dos inputs*/
-{
+.login input
+
+/*Estilização dos inputs*/
+	{
 	width: 100%;
 	height: 40px;
 	border-radius: 6px;
@@ -68,43 +75,40 @@
 	font-size: 1rem;
 }
 
-.login a
-{
+.login a {
 	color: var(--primary);
 }
 
-.loginpassword
-{
+.loginpassword {
 	position: relative;
 }
 
-.loginpassword div:nth-child(3)
-{
+.loginpassword div:nth-child(3) {
 	position: absolute;
 }
 
-#icon /*Estilização do icone de mostrar senha*/
-{
+#icon
+
+/*Estilização do icone de mostrar senha*/
+	{
 	width: 20px;
 	height: 18px;
 	cursor: pointer;
-	margin: -20px 0 0 470px ;
+	margin: -20px 0 0 470px;
 	position: absolute;
 	transform: translateY(-50%);
 	background: url('../../assets/visibility.svg');
 	background-size: cover;
 }
 
-#icon.hide
-{
+#icon.hide {
 	background: url('../../assets/visibility-off.svg');
 	background-size: cover;
 }
 
 
 
-.containerError
-{
+.containerError {
 	width: 100%;
 	height: auto;
 	background-color: var(--white);
@@ -116,44 +120,37 @@
 	border-radius: 5px;
 }
 
-.containerError li
-{
+.containerError li {
 	margin: 5px;
 	list-style: none;
 }
 
-.border-error
-{
+.border-error {
 	border: 12px;
 	background-color: rgba(255, 109, 109, 0.589);
 }
 
 /*Responsividade*/
-@media screen and (max-width: 528px)
-{
+@media screen and (max-width: 528px) {
 
-	.login 
-	{
+	.login {
 		width: 90%
 	}
 
-	.login div:nth-child(1) 
-	{
-		
+	.login div:nth-child(1) {
+
 		height: 2rem;
-	
+
 	}
 
-	.login div:nth-child(1) input:nth-child(n + 2)
-	{
-		
+	.login div:nth-child(1) input:nth-child(n + 2) {
+
 		width: 100%;
-		
+
 	}
 
-	#icon
-	{
-		margin: -20px 0 0 350px ;
+	#icon {
+		margin: -20px 0 0 350px;
 	}
-	
+
 }

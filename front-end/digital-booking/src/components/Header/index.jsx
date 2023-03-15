@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import {ToggleMenu} from '../ToggleMenu';
+import { ToggleMenu } from '../ToggleMenu';
 
 import styles from './styles.module.css'
 import logo1 from '../../assets/logo1.svg'
@@ -15,9 +15,7 @@ export function Header() {
           </NavLink>
           <p>Sinta-se em casa</p>
         </div>
-
         <ToggleMenu />
-
         <div className={styles.headerButtons}>
           <NavLink to="/register" end title="Criar conta">
             <button>Criar conta</button>

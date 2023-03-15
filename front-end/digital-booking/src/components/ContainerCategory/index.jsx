@@ -8,7 +8,7 @@ export function ContainerCategory() {
 
   return (
     <div className={styles.containerCategory}>
-      
+
       <div className={styles.containerCard}>
         {category.map((current) => {
           return (

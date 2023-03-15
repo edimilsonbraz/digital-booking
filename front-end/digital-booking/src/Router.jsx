@@ -8,10 +8,10 @@ import { Register } from "./pages/Register/";
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Register/>}/>
-      <Route path="/product/:id" element={<Product/>}/>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/product/:id" element={<Product />} />
     </Routes>
   )
 }

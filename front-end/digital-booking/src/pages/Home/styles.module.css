@@ -43,7 +43,7 @@
   height: 3rem;
   font-size: 0.875rem;
   padding-left: 2.5rem;
-  border-radius: 6px;  
+  border-radius: 6px;
 }
 
 .contentInputs .inputs .inputDatePicker {
@@ -51,7 +51,7 @@
   height: 3rem;
   font-size: 0.875rem;
   padding-left: 2.5rem;
-  border-radius: 6px;  
+  border-radius: 6px;
 }
 
 .contentInputs .inputs input::placeholder {
@@ -88,7 +88,9 @@
 
 /* =============== */
 .category {
+  max-width: 1250px;
   margin-bottom: 2rem;
+  margin: 0 auto;
 }
 
 .category h2 {
@@ -103,12 +105,14 @@
 
 .contentRecomendacao {
   max-width: 1250px;
-  margin: 0 auto ;
+  margin: 0 auto;
 }
+
 .contentRecomendacao h2 {
   padding-top: 2rem;
   margin-bottom: 1.2rem;
 }
+
 .containerCard {
   display: flex;
   flex-wrap: wrap;
@@ -121,13 +125,13 @@
     padding-right: 1rem;
   }
 
-  .contentRecomendacao h2{
+  .contentRecomendacao h2 {
     margin: 1rem;
   }
 }
 
 /* REPONSIVIDADE TABLET */
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 850px) {
   .containerBuscador {
     width: 100%;
   }
@@ -136,9 +140,9 @@
     margin: 1rem;
   }
 
-  .contentRecomendacao h2{
+  .contentRecomendacao h2 {
     margin: 1rem;
-  }  
+  }
 }
 
 @media screen and (max-width: 799px) {
@@ -157,7 +161,7 @@
   }
 
   .contentInputs {
-    display: block;    
+    display: block;
   }
 
   .contentInputs .input {
@@ -173,24 +177,23 @@
     margin-top: 0.5rem;
   }
 
-  
+
 }
 
-/* RESPONSIVIDADE MOBIEL */
+/* RESPONSIVIDADE MOBILE */
 @media screen and (max-width:450px) {
   .containerBuscador {
     padding: 1rem;
   }
 
-  
 
-  
 
-  
 
-  
 
-  
-  
+
+
+
+
+
+
 }
-

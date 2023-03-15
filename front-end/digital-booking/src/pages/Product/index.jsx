@@ -148,10 +148,11 @@ export function Product() {
             </section>
 
             <section className={style.details}>
-                <h2>Descrição</h2>
                 <div className={style.descricao}>
+                <h2>Descrição</h2>
                     
-                <p>Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada Descrição detalhada</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa fugit, rerum sequi, eos pariatur fugiat repudiandae molestiae repellendus, dignissimos amet iste voluptates recusandae consequuntur rem alias. Eius consequatur officiis ab?
+                </p>
                 </div>
             </section>
 
