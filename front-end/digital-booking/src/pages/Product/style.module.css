@@ -100,6 +100,7 @@
 #first {
   grid-area: first;
 /*Style Politicas*/}
+/*Style Politicas*/
 
 .policy
 {
@@ -519,4 +520,3 @@
   color: #333;
   font-size: 2.1rem;
 }
-

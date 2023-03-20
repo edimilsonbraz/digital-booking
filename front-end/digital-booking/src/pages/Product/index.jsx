@@ -57,9 +57,11 @@ export function Product() {
         categoria: '',
         titulo: '',
         localizacao: '',
-        caracteristica: ''
-    })
-
+        descricao: '',
+        caracteristica: '',
+        politicas: ''
+      })
+    
 
     useEffect(() => {
     }, [id])
