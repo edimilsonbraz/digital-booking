@@ -4,6 +4,7 @@ import { Login } from "./pages/Login";
 import { Product } from "./pages/Product";
 import { Register } from "./pages/Register/";
 import { Reserva } from "./pages/Reserva";
+import { ReservaSucedida } from "./pages/ReservaSucedida";
 
 
 export function Router() {
@@ -14,6 +15,7 @@ export function Router() {
       <Route path="/register" element={<Register />} />
       <Route path="/produto/:id" element={<Product />} />
       <Route path="/produto/:id/reserva" element={<Reserva />} />
+      <Route path="/sucesso" element={<ReservaSucedida/>} />
     </Routes>
   )
 }
