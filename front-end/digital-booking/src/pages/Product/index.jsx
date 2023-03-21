@@ -20,7 +20,8 @@ import {
   faTelevision,
   faSnowflake,
   faPaw,
-  faCar
+  faCar,
+  faPeopleRoof
 } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
@@ -74,7 +75,7 @@ export function Product() {
 
   return (
     <>
-      <section className="ContainerProduct">
+      <section className={style.ContainerProduct}>
         <div className={style.headerdetails}>
           <div className={style.title}>
             <span>{data.categoria}</span>
@@ -96,7 +97,7 @@ export function Product() {
 
         {/* Grid de 5 primeiras imagens*/}
 
-        <div className={style.containerGridImages}>
+        <div className={`containerGlobal ${style.containerGridImages}`}>
           {data.fotos.slice(0, 5).map((urlImg, index) => (
             <div
               className={`${style.responsiveImages} ${style.gridAreas}`}
@@ -179,20 +180,37 @@ export function Product() {
         )}
       </section>
 
-      <section className={style.details}>
+      <section className={`containerGlobal ${style.details}`}>
         <div className={style.descricao}>
           <h2>Descrição</h2>
           <div className={style.separator}></div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa fugit,
-            rerum sequi, eos pariatur fugiat repudiandae molestiae repellendus,
-            dignissimos amet iste voluptates recusandae consequuntur rem alias.
-            Eius consequatur officiis ab?
+            Este luxuoso hotel está localizado junto aos teleféricos Grandvalira
+            em Soldeu. Com quartos e apartamentos, o Sport Hotel Hermitage & Spa
+            dispõe de um spa no local. Os quartos do Sport Hotel Hermitage & Spa
+            apresentam mobiliário de alta qualidade e roupa de cama em algodão
+            egípcio. Cada um tem televisão LCD por satélite, cofre, máquina de
+            café e mini-bar. A casa de banho privativa inclui uma banheira de
+            hidromassagem e um secador de cabelo. Está disponível acesso Wi-Fi
+            gratuito. Os hóspedes adultos do Sport Hotel Hermitage & Spa têm
+            acesso diário gratuito ao impressionante Sport Wellness Mountain Spa
+            durante 2 horas consecutivas por dia. Inclui piscinas de
+            temperaturas variadas, uma grande piscina com jactos e 2 banhos de
+            hidroterapia exteriores com vista para as pistas.
+          </p>
+          <p>
+            O Restaurante Ibaya do hotel serve refeições gourmet, enquanto o
+            Restaurante Hermitage Tradició serve cozinha tradicional, apenas
+            durante os meses de Inverno. O hotel também abriga um restaurante
+            gastronômico japonês, o Koy Hermitage, aberto durante os meses de
+            verão e inverno. Localizado no último andar, o elegante Glassbar
+            oferece coquetéis, cozinha de fusão e vistas incríveis. O acesso
+            Wi-Fi gratuito está disponível em todo o hotel.
           </p>
         </div>
       </section>
 
-      <section className={style.features}>
+      <section className={`containerGlobal ${style.features}`}>
         <span>{product.caracteristica}</span>
         <h2>O que esse lugar oferece?</h2>
         <div className={style.separator}></div>
@@ -218,20 +236,27 @@ export function Product() {
           <p>
             <FontAwesomeIcon icon={faSwimmer} /> - Piscina
           </p>
+          <p>
+            <FontAwesomeIcon icon={faPeopleRoof} /> - Quartos para famílias
+          </p>
         </div>
       </section>
 
-      <Policy />
+      <section className={`containerGlobal`}>
+        <Policy />
+      </section>
 
       <section className={style.containerReservation}>
-        <h2>Datas disponíveis</h2>
+        <div className={`containerGlobal`}>
+          <h2>Datas disponíveis</h2>
 
-        <div className={style.contentCalender}>
-          <Calender />
+          <div className={style.contentCalender}>
+            <Calender />
 
-          <div className={style.calenderText}>
-            <p>Adicione as datas da sua viagem para obter preços exatos</p>
-            <button>Iniciar reserva</button>
+            <div className={style.calenderText}>
+              <p>Adicione as datas da sua viagem para obter preços exatos</p>
+              <button>Iniciar reserva</button>
+            </div>
           </div>
         </div>
       </section>

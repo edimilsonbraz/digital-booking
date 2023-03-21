@@ -57,20 +57,15 @@
 .descricao
 {
   width: 100%;
-  min-height: 60px;
-  background-color: white;
-  display: block;
-  
-  padding: 0 25px;
   margin-top: 50px;
   margin-bottom: 100px;
 
 }
 
 
-.descricao p
-{
-  padding: 2rem;
+.descricao p {
+  line-height: 1.5;
+  padding: 1rem 0;
   font-size: 1.1rem;
   
 }
@@ -78,18 +73,12 @@
 
 .features {
   width: 100%;
-  min-height: 60px;
-  background-color: white;
-  display: block;
-
-  padding: 0 25px;
-  margin-top: 50px;
   margin-bottom: 100px;
 }
 
 .featuresIcons {
-  margin: 50px;
-  font-size: 1.5rem;
+  margin: 50px 0;
+  font-size: 1.3rem;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 5rem 5rem;
@@ -97,11 +86,8 @@
 }
 
 .featuresIcons p {
-  padding: 20px;
-
+  padding: 25px;
 }
-
-
 
 #first
 {
@@ -440,10 +426,10 @@
 
 }
 
-.featuresIcons p {
+/* .featuresIcons p {
   padding: 1.1rem;
   align-items: baseline;
-}
+} */
 
 /*Mobile*/
 @media screen and (max-width: 450px) {
