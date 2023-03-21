@@ -98,7 +98,9 @@ export function Reserva() {
       </form>
       
       <section className={style.policyContainer}>
-        <Policy />
+        <div className={`containerGlobal`}>
+          <Policy />
+        </div>
       </section>
 
     </>
