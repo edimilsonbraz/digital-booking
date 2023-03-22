@@ -21,6 +21,8 @@ export function Policy() {
               Diretrizes de distanciamento social e outras regulamentações
               relacionadas ao coronavírus se aplicam
             </li>
+            <li>Detector de fumaça</li>
+            <li>Depósito de segurança</li>
           </ul>
         </div>
         <div className={style.cancelamento}>
