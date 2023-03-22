@@ -124,10 +124,26 @@ label {
 /* Responsividade Calendario Tablet */
 @media screen and (max-width: 826px) {
 
-	/* .react-datepicker {
-		border: none;
-	} */
 	.react-datepicker__month-container {
 		float: none;
 	}
 }
+
+@media screen and (max-width: 1338px) {
+  .react-datepicker__month-container {
+    float: none;
+	}
+}
+
+
+
+/* 
+RESPONSIVIDADE PARA DESKTOP, TABLET E MOBILE
+
+320px — 480px: dispositivos móveis.
+480px — 768px: iPads, tablets.
+768px — 1024px: telas pequenas, laptops.
+1024px — 1200px: desktops, telas grandes.
+1200px e mais — Telas extragrandes. 
+
+*/

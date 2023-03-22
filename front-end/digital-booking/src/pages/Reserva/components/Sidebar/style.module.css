@@ -74,3 +74,45 @@
   background-color: var(--white);
   color: var(--primary);
 }
+
+
+/* RESPONSIVIDADE DESKTOP */
+@media screen and (max-width: 1275px) {
+  .sidebarContent h1 {
+    font-size: 2rem;
+    padding: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 1136px) {
+  .sidebarContent h1 {
+    font-size: 1.6rem;
+    padding: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 936px) {
+  .sidebarContent h1 {
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+
+  .sidebarText h2 {
+    font-size: 1.2rem;
+  }
+
+  .sidebarText .addressHotel p {
+    font-size: 0.875rem;
+  }
+
+  .checkInOut p {
+    font-size: 1rem;
+  }
+}
+
+/* TABLET */
+@media screen and  (max-width: 768px) {
+  .sidebarContainer {
+    flex: auto;
+  }
+}

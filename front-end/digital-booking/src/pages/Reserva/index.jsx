@@ -5,10 +5,13 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 import style from './style.module.css'
 import { Policy } from '../../components/Policy'
+import HeaderDetails from '../../components/HeaderDetails'
 
 export function Reserva() {
   return (
     <>
+      <HeaderDetails />
+
       <form action="" className={style.reservaContainer}>
         <section className={style.mainContainer}>
           <div className={style.formReserva}>
@@ -46,7 +49,11 @@ export function Reserva() {
                 <h2>Seu horário de chegada</h2>
 
                 <div className={style.contentChegada}>
-                  <FontAwesomeIcon icon={faCircleCheck} />
+                  <FontAwesomeIcon 
+                    icon={faCircleCheck} 
+                    size="lg" 
+                    style={{color: "#4de080",}}
+                  />
                   <p>
                     Seu quarto estará pronto para check-in entre 12:00 e 14:00
                   </p>
@@ -98,7 +105,7 @@ export function Reserva() {
       </form>
       
       <section className={style.policyContainer}>
-        <div className={`containerGlobal`}>
+        <div className={style.policyContent}>
           <Policy />
         </div>
       </section>

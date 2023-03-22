@@ -1,7 +1,7 @@
 .reservaContainer {
   display: flex;
   flex-wrap: wrap;
-  padding: 3rem 1.5rem;
+  padding: 3rem 4rem;
   gap: 3rem;
 
   margin-bottom: 4rem;
@@ -121,6 +121,70 @@
   background: #F2F2F2;
   width: 100%;
   height: 100%;
-  padding: 2rem 0;
+  padding: 2rem 4rem;
   /* margin-bottom: 4rem; */
+}
+
+
+/* RESPONSIVIDADE DESKTOP */
+@media screen and (max-width: 1522px) {
+  .formContent .groupInput {
+    padding: 0.875rem;
+  }
+
+  .formContent .groupInput label {
+    display: block;
+    
+  }
+  
+  .formContent .groupInput input {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and  (max-width: 1338px) {
+  .contentChegada .inputTime .iconSelect {
+    width: 60%;
+  }
+}
+
+@media screen and  (max-width: 966px) {
+  .reservaContainer {
+    padding: 2rem;
+    gap: 2rem;
+  }
+  .contentChegada .inputTime .iconSelect {
+    width: 100%;
+  }
+}
+
+/* TABLET */
+@media screen and (max-width: 768px) {
+  .contentChegada {
+    padding: 1rem;
+  }
+  .contentChegada p{
+    font-size: 0.875rem;
+  }
+}
+
+/* MOBILE */
+@media screen and  (max-width: 488px) {
+  .reservaContainer {
+    padding: 1rem 1em;
+    gap: 0;
+  }
+
+  .contentChegada {
+    padding: 0.5rem;
+  }
+
+  .contentChegada p{
+    font-size: 0.775rem;
+  }
+  
+  .policyContainer {
+    padding: 1rem;
+  }
 }
