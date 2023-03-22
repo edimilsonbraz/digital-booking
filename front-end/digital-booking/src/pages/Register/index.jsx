@@ -1,11 +1,10 @@
-import { useRef, useState} from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { checkName, checkConfirmPassword, checkEmail, checkPassword } from "../../Scripts/validateForm";
 
 import styles from './styles.module.css';
 
-export function Register ()
-{
+export function Register() {
   const passwRef = useRef();
   const confirmPasswRef = useRef();
   const iconRef = useRef();
@@ -35,8 +34,7 @@ export function Register ()
 
   const showHide = () => //Função para visualização de senha do campo input
   {
-    if (passwRef.current.type === 'password')
-    {
+    if (passwRef.current.type === 'password') {
       passwRef.current.type = "text"
       iconRef.current.className = `${styles.hide}`
 
@@ -56,18 +54,18 @@ export function Register ()
             <input className={nome ? 'border-error' : ''} ref={nomeRef} type="text" name="" id="name" />
           </div>
           <div>
-          <label htmlFor="lastname">Sobrenome</label>
-          <input className={sobrenome ? 'border-error' : ''}  ref={sobrenomeRef} type="text" name="" id="lastname" />
+            <label htmlFor="lastname">Sobrenome</label>
+            <input className={sobrenome ? 'border-error' : ''} ref={sobrenomeRef} type="text" name="" id="lastname" />
           </div>
         </div>
         <div>
           <label htmlFor="email">E-mail</label>
-          <input className={emailError ? 'border-error' : ''} type="email" name="" id="email" onChange={e => setEmail(e.target.value)} value={email}/>
+          <input className={emailError ? 'border-error' : ''} type="email" name="" id="email" onChange={e => setEmail(e.target.value)} value={email} />
         </div>
         <div>
           <label htmlFor="password">Senha</label>
           <div className={styles.containerPassword}>
-            <input className={password ? 'border-error' : ''} ref={passwRef} type="password" name="" id="password"/>
+            <input className={password ? 'border-error' : ''} ref={passwRef} type="password" name="" id="password" />
 
             <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
 
@@ -82,15 +80,15 @@ export function Register ()
           <span>Já tem uma conta? <Link to="/login">Iniciar sessão</Link></span>
         </div>
       </form>
-        {nome || sobrenome || password || confirmPassword || emailError ? <div className={styles.containerError}>
-          <ul>
-            {nome ? <li> * O nome digitado não é válido</li> : ''}
-            {sobrenome ? <li> * O sobrenome digitado não é válido</li> : ''}
-            {emailError ? <li> * E-mail digitado não é válido</li> : ''}
-            {password ? <li> * A senha deve ter mais de seis caracteres.</li> : ''}
-            {confirmPassword ? <li> * As senhas devem ser idênticas</li> : ''}
-          </ul>
-        </div> : ''}  
+      {nome || sobrenome || password || confirmPassword || emailError ? <div className={styles.containerError}>
+        <ul>
+          {nome ? <li> * O nome digitado não é válido</li> : ''}
+          {sobrenome ? <li> * O sobrenome digitado não é válido</li> : ''}
+          {emailError ? <li> * E-mail digitado não é válido</li> : ''}
+          {password ? <li> * A senha deve ter mais de seis caracteres.</li> : ''}
+          {confirmPassword ? <li> * As senhas devem ser idênticas</li> : ''}
+        </ul>
+      </div> : ''}
     </div>
   );
 }

@@ -1,5 +1,4 @@
-.register
-{
+.register {
 	width: 500px;
 	min-height: 550px;
 	margin: 0 auto;
@@ -11,13 +10,11 @@
 	padding: 5px;
 }
 
-.register h1
-{
-	margin-bottom: 20px ;
+.register h1 {
+	margin-bottom: 20px;
 }
 
-.register form
-{
+.register form {
 	width: 100%;
 	height: 450px;
 	display: flex;
@@ -25,26 +22,31 @@
 	justify-content: space-around;
 }
 
-.register div:nth-child(1) 
-{
+.register div:nth-child(1) {
 	display: flex;
 	justify-content: space-between;
 }
 
-.register div:nth-child(1) input:nth-child(n + 2) /*Define o width dos inputs nome e sobrenome*/
-{
+.register div:nth-child(1) input:nth-child(n + 2)
+
+/*Define o width dos inputs nome e sobrenome*/
+	{
 	width: 240px;
 }
 
-.register div:nth-child(5) /*Define a organização de display da div com botao submit*/
-{
+.register div:nth-child(5)
+
+/*Define a organização de display da div com botao submit*/
+	{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.register div:nth-child(5) button /*Estilização do botao submit*/ 
-{
+.register div:nth-child(5) button
+
+/*Estilização do botao submit*/
+	{
 	width: 50%;
 	height: 40px;
 	margin: 20px 0 10px 0;
@@ -55,16 +57,20 @@
 	font-size: 1rem;
 }
 
-.register div:nth-child(5) button:hover /*Estilização do botao submit*/ 
-{
+.register div:nth-child(5) button:hover
+
+/*Estilização do botao submit*/
+	{
 	background-color: var(--white);
 	border: var(--primary) 1px solid;
 	border-radius: 6px;
 	color: var(--primary);
 }
 
-.register input /*Estilização dos inputs*/
-{
+.register input
+
+/*Estilização dos inputs*/
+	{
 	width: 100%;
 	height: 40px;
 	border-radius: 6px;
@@ -74,23 +80,22 @@
 	font-size: 1rem;
 }
 
-.register a
-{
+.register a {
 	color: var(--primary);
 }
 
-.containerPassword
-{
+.containerPassword {
 	position: relative;
 }
 
-.containerPassword div:nth-child(2)
-{
+.containerPassword div:nth-child(2) {
 	background-color: red;
 }
 
-#icon /*Estilização do icone de mostrar senha*/
-{
+#icon
+
+/*Estilização do icone de mostrar senha*/
+	{
 	width: 20px;
 	height: 18px;
 	cursor: pointer;
@@ -101,14 +106,12 @@
 	background-size: cover;
 }
 
-#icon.hide
-{
+#icon.hide {
 	background: url('../../assets/visibility-off.svg');
 	background-size: cover;
 }
 
-.containerError
-{
+.containerError {
 	width: 100%;
 	height: auto;
 	background-color: var(--white);
@@ -120,35 +123,29 @@
 	border-radius: 5px;
 }
 
-.containerError li
-{
+.containerError li {
 	margin: 5px;
 	list-style: none;
 }
 
-.border-error
-{
+.border-error {
 	border: 12px;
 	background-color: rgba(255, 109, 109, 0.589);
 }
 
 /*Responsividade*/
 @media screen and (max-width: 528px) {
-	.register 
-	{
+	.register {
 		width: 90%
 	}
 
-	.register div:nth-child(1) 
-	{
+	.register div:nth-child(1) {
 		flex-direction: column;
 		height: 108px;
 	}
 
-	.register div:nth-child(1) input:nth-child(n + 2)
-	{
+	.register div:nth-child(1) input:nth-child(n + 2) {
 		width: 100%;
 	}
 
 }
-

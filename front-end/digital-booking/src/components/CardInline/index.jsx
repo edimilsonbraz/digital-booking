@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 
-export function CardInline({img, title, star, numberAvaliation, textAvaliation, description}) {
+export function CardInline({ img, title, star, numberAvaliation, textAvaliation, description }) {
   return (
     <>
       <div className={styles.containerCardInline}>
@@ -48,7 +48,7 @@ export function CardInline({img, title, star, numberAvaliation, textAvaliation, 
             </div>
           </div>
         </div>
-      </div>     
+      </div>
     </>
   )
 }

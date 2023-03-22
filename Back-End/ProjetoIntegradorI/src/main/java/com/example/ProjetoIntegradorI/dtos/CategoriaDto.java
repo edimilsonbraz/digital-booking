@@ -12,6 +12,5 @@ public class CategoriaDto {
 
     private String qualificacaoCategoria;
     private String descricaoCategoria;
-    private String urlImagemCategoria;
 
 }

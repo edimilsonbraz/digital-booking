@@ -15,9 +15,7 @@ import lombok.Setter;
 public class CidadesModel {
 
     @Id
-    @SequenceGenerator(name = "Cidades_sequence", sequenceName = "cidades_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomeCidade;
     private String Pais;

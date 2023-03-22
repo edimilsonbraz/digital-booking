@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import category from '../../../categories.json'
+// import products from '../../../products.json'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -14,9 +15,49 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
-
+const products = [
+  {
+    id: 1,
+    nome: 'Alagoas',
+    produtos: [
+      {
+        nome: 'Maceió'
+      },
+      {
+        nome: 'Arapiraca'
+      },
+      {
+        nome: 'Palmeira dos Índios'
+      },
+      {
+        nome: 'Rio Largo'
+      },
+      {
+        nome: 'Penedo'
+      }
+    ]
+  },
+  { id: 2, nome: 'Bahia', produtos: [] },
+  { id: 3, nome: 'Sergipe', produtos: [] },
+  { id: 4, nome: 'Ceará', produtos: [] }
+]
 export function Home() {
   const hotels = category.hotels
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredProducts, setFilteredProducts] = useState([])
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value)
+  }
+
+  function filterCity() {
+    const filterProducts = products.filter((product) =>
+      product.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    setFilteredProducts(filterProducts)
+  }
+  // console.log(filteredProducts)
 
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
@@ -40,7 +81,14 @@ export function Home() {
             <label htmlFor="destino">
               <FontAwesomeIcon icon={faLocationDot} />
             </label>
-            <input type="text" id="destino" placeholder="Onde vamos?" />
+            <input
+              type="text"
+              id="destino"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="Onde vamos?"
+              required
+            />
           </div>
 
           <div className={styles.inputs}>
@@ -71,16 +119,29 @@ export function Home() {
             </label>
           </div>
 
-          <button type="submit" className={styles.buttonBuscar}>
+          <button
+            type="submit"
+            className={styles.buttonBuscar}
+            onClick={filterCity}
+          >
             Buscar
           </button>
           {/* </form> */}
         </div>
       </div>
 
-      <section className={`containerGlobal ${styles.category}`}>
-        <h2>Buscar por tipo de acomodação</h2>
+      {/* <div>
+        <h1>Produtos Filtrados</h1>
+        <ul>
+          {filteredProducts.map((product) => (
+            <li key={product.id}>{product.nome}</li>
+          ))}
+        </ul>
+      </div> */}
 
+      <section className={`containerGlobal ${styles.category}`}>
+      {/* <section className={styles.category}> */}
+        <h2>Buscar por tipo de acomodação</h2>
         <ContainerCategory />
       </section>
 
