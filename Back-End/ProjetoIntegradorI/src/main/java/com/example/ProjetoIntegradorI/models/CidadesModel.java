@@ -18,11 +18,11 @@ public class CidadesModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomeCidade;
-    private String Pais;
+    private String pais;
 
-    public CidadesModel(String nomeCidade, String Pais) {
+    public CidadesModel(String nomeCidade, String pais) {
         this.nomeCidade = nomeCidade;
-        this.Pais = Pais;
+        this.pais = pais;
     }
 
 

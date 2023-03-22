@@ -33,9 +33,9 @@ public class CidadesServiceImpl implements IBookingService<CidadesModel> {
     public String alterar(CidadesModel cidadesModel) {
         if(cidadesModel != null && cidadesRepository.findById(cidadesModel.getId()).isPresent()){
             cidadesRepository.saveAndFlush(cidadesModel);
-            return "Usuário alterado com sucesso!";
+            return "Cidade alterada com sucesso!";
         }
-        return "Não foi possível alterar os dados do usuário.";
+        return "Não foi possível alterar os dados da cidade.";
     }
 
     @Override

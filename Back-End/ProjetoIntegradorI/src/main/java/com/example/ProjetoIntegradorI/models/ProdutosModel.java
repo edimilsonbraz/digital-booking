@@ -1,6 +1,7 @@
 package com.example.ProjetoIntegradorI.models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class ProdutosModel {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "Produtos_Caracteristicas",
-            joinColumns = { @JoinColumn(name = "produtos_id") },
+            joinColumns = { @JoinColumn(name = "produtos_id", foreignKey = @ForeignKey (name = "fkproduto"))},
             inverseJoinColumns = { @JoinColumn(name = "caracteristicas_id") }
     )
     private Set<CaracteristicasModel> produtosCaracteristica = new HashSet<>();

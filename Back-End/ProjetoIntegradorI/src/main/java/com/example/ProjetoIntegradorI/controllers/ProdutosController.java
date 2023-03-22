@@ -28,14 +28,11 @@ public class ProdutosController {
     private CidadesServiceImpl cidadesService;
 
     @Autowired
-    public ProdutosController(ProdutosServiceImpl produtosService) {
+    public ProdutosController(ProdutosServiceImpl produtosService, CategoriaServiceImpl categoriaService, CidadesServiceImpl cidadesService) {
         this.produtosService = produtosService;
-    }
-    public ProdutosController(CategoriaServiceImpl categoriaService) { this.categoriaService = categoriaService;}
-    public ProdutosController(CidadesServiceImpl cidadesService) {
+        this.categoriaService = categoriaService;
         this.cidadesService = cidadesService;
     }
-
 
 
     /// POST
@@ -44,6 +41,7 @@ public class ProdutosController {
         try {
             return ResponseEntity.ok(produtosService.salvar(produtosModel));
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -61,38 +59,17 @@ public class ProdutosController {
     }
 
 
-    /// GET PRODUTO BY CATEGORIA
+    // GET PRODUTOS BY CATEGORIA
+    @GetMapping("/produtoscategoria/{id}")
+    public ResponseEntity<List<ProdutosModel>> findByCategoria(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(produtosService.findByCategoria(id));
+    }
 
-//    @GetMapping("/produtos/categoria/{id}")
-//    public ResponseEntity<List<ProdutosModel>> buscarPorCategoria(@PathVariable Long id) throws ResourceNotFoundException {
-//        try {
-//            List<CategoriaModel> categoriaModel = categoriaService.buscarPorId(id);
-//            List<ProdutosModel> produtosModel = produtosService.findByCategoria_Id(categoriaModel);
-//            if (produtosModel != null && produtosModel.isPresent()) {
-//                return ResponseEntity.ok(produtosModel);
-//            }
-//            throw new ResourceNotFoundException("Não foi encontrado o produto com a categoria " + id);
-//        } catch (SQLException e) {
-//            throw new ResourceNotFoundException("Erro ao buscar o produto com a categoria " + id);
-//        }
-//    }
-//
-//    /// GET PRODUTO BY CIDADE
-//
-//    @GetMapping("/produtos/cidades/{id}")
-//    public ResponseEntity<Optional<ProdutosModel>> buscarPorCidade(@PathVariable Long id) throws ResourceNotFoundException {
-//        try {
-//            Optional<CidadesModel> cidadesModel  = cidadesService.buscarPorId(id);
-//            Optional<ProdutosModel> produtosModel = produtosService.findByCidades_Id(cidadesModel);
-//            if (produtosModel != null && produtosModel.isPresent()) {
-//                return ResponseEntity.ok(produtosModel);
-//            }
-//            throw new ResourceNotFoundException("Não foi encontrado o produto com a cidade " + id);
-//        } catch (SQLException e) {
-//            throw new ResourceNotFoundException("Erro ao buscar o produto com a cidade " + id);
-//        }
-//    }
-
+    // GET PRODUTOS BY CIDADES
+    @GetMapping("/produtoscidades/{id}")
+    public List<ProdutosModel> findByCidades(@PathVariable Long id) throws ResourceNotFoundException {
+        return produtosService.findByCidades(id);
+    }
 
     // GET BY ID
     @GetMapping("/produtos/{id}")

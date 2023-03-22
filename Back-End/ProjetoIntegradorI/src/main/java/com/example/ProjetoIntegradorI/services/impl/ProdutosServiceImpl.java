@@ -1,5 +1,6 @@
 package com.example.ProjetoIntegradorI.services.impl;
 
+import com.example.ProjetoIntegradorI.exceptions.ResourceNotFoundException;
 import com.example.ProjetoIntegradorI.models.CategoriaModel;
 import com.example.ProjetoIntegradorI.models.CidadesModel;
 import com.example.ProjetoIntegradorI.models.ProdutosModel;
@@ -8,6 +9,7 @@ import com.example.ProjetoIntegradorI.repositories.CidadesRepository;
 import com.example.ProjetoIntegradorI.repositories.ProdutosRepository;
 import com.example.ProjetoIntegradorI.services.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -18,13 +20,19 @@ import java.util.Optional;
 public class ProdutosServiceImpl implements IBookingService<ProdutosModel> {
 
     private final ProdutosRepository produtosRepository;
+    private final CategoriaRepository categoriaRepository;
+    private final CidadesRepository cidadesRepository;
 
 
-    public ProdutosServiceImpl(ProdutosRepository produtosRepository) { this.produtosRepository = produtosRepository; }
+    public ProdutosServiceImpl(ProdutosRepository produtosRepository, CategoriaRepository categoriaRepository, CidadesRepository cidadesRepository) {
+        this.produtosRepository = produtosRepository;
+        this.categoriaRepository = categoriaRepository;
+        this.cidadesRepository = cidadesRepository;
+    }
 
     @Override
     public ProdutosModel salvar(ProdutosModel produtosModel) {
-        if(produtosModel != null){
+        if (produtosModel != null) {
             return produtosRepository.save(produtosModel);
         }
         return new ProdutosModel();
@@ -32,7 +40,7 @@ public class ProdutosServiceImpl implements IBookingService<ProdutosModel> {
 
     @Override
     public String alterar(ProdutosModel produtosModel) {
-        if(produtosModel != null && produtosRepository.findById(produtosModel.getId()).isPresent()){
+        if (produtosModel != null && produtosRepository.findById(produtosModel.getId()).isPresent()) {
             produtosRepository.saveAndFlush(produtosModel);
             return "Produto alterado com sucesso!";
         }
@@ -51,12 +59,25 @@ public class ProdutosServiceImpl implements IBookingService<ProdutosModel> {
 
     @Override
     public boolean excluir(Long id) throws SQLException {
-        if(produtosRepository.findById(id).isPresent()){
+        if (produtosRepository.findById(id).isPresent()) {
             produtosRepository.deleteById(id);
             return true;
         }
         return false;
     }
 
+    //    public List<ProdutosModel> getProductsByCategory(Long categoriaId) {
+//        CategoriaModel categoriaModel = categoriaRepository.findById(categoriaId).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+//        List<ProdutosModel> products = produtosRepository.findByCategory(category);
+//        return products;
+//    }
+    public List<ProdutosModel> findByCategoria(Long id) throws ResourceNotFoundException {
+        CategoriaModel categoriaModel = categoriaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+        return produtosRepository.findByCategoria(categoriaModel);
+    }
 
+    public List<ProdutosModel> findByCidades(Long id) throws ResourceNotFoundException {
+        CidadesModel cidadesModel = cidadesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cidade not found"));
+        return produtosRepository.findByCidades(cidadesModel);
+    }
 }

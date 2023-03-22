@@ -31,9 +31,9 @@ public class CategoriaServiceImpl implements IBookingService<CategoriaModel> {
     public String alterar(CategoriaModel categoriaModel) {
         if(categoriaModel != null && categoriaRepository.findById(categoriaModel.getId()).isPresent()){
             categoriaRepository.saveAndFlush(categoriaModel);
-            return "Usuário alterado com sucesso!";
+            return "Categoria alterada com sucesso!";
         }
-        return "Não foi possível alterar os dados do usuário.";
+        return "Não foi possível alterar os dados da categoria.";
     }
 
     @Override
