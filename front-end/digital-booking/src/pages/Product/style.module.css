@@ -87,6 +87,9 @@
 
 .featuresIcons p {
   padding: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #first
@@ -193,6 +196,7 @@
   width: 100%;
   min-height: 200px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 
@@ -365,10 +369,23 @@
   .dot.active {
     background: orangered;
   }
+  
 }
 
 /* Responsividade Calendario Desktop*/
 @media screen and (max-width:1206px) {
+  .descricao {
+    padding: 2rem;
+  }
+
+  .features {
+    padding: 2rem;
+  }
+  
+  .policyReserva {
+    padding: 2rem;
+  }
+
   .contentCalender {
     grid-template-columns: 2fr;
     justify-content: center;
@@ -426,19 +443,32 @@
 
 }
 
-/* .featuresIcons p {
-  padding: 1.1rem;
-  align-items: baseline;
-} */
-
 /*Mobile*/
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 480px) {
+  .descricao {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .features {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
   .featuresIcons {
     width: 100%;
     font-size: 1rem;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 15%;
+  }
+
+  .features h2 {
+    padding-top: 0;
+  }
+
+  .featuresIcons p {
+    padding: 15px;
   }
 
   .policy .politicas 

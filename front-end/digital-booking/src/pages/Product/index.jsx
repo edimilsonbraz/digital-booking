@@ -242,7 +242,7 @@ export function Product() {
         </div>
       </section>
 
-      <section className={`containerGlobal`}>
+      <section className={`containerGlobal ${style.policyReserva}` }>
         <Policy />
       </section>
 

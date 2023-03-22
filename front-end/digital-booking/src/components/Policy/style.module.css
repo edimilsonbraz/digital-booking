@@ -49,6 +49,9 @@
 
 /*MOBILE*/
 @media screen and (max-width: 479px) {
+  .policy {
+    margin-bottom: 25px;
+  }
   .policy .politicas {
     margin: 10px;  
     grid-template-columns: 100%; 
