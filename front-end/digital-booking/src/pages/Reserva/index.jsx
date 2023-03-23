@@ -1,14 +1,27 @@
-import { Calender } from '../../components/Calender'
-// import { Sidebar } from './components/Sidebar'
+import { useState } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
 
-import style from './style.module.css'
+import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 import HeaderDetails from '../../components/HeaderDetails'
-import { useState } from 'react'
+
+import style from './style.module.css'
 
 export function Reserva() {
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+
+  const onChangeDates = (dates) => {
+    const [start, end] = dates
+    setStartDate(start)
+    setEndDate(end)
+
+  }
+  
+  
+
   const [hora, setHora] = useState('')
   function handleSubmit(event) {
     event.preventDefault();
@@ -19,8 +32,15 @@ export function Reserva() {
       alert("Preencha o horario de chegada")
     }
 
+    if(startDate !== null) {
+      console.log("Check-in => " + startDate)
+      console.log("Check-out => " + endDate)     
+    }else {
+      alert("Selecione as datas que deseja reservar")
+    }
    
   }
+  
 
   return (
     <>
@@ -56,7 +76,11 @@ export function Reserva() {
               <div className={style.dataReserva}>
                 <h2>Selecione sua data de reserva</h2>
 
-                <Calender />
+                <Calender  
+                  onChangeDates={onChangeDates} 
+                  startDate={startDate}
+                  endDate={endDate}
+                />
               </div>
 
               <div className={style.horarioChegada}>

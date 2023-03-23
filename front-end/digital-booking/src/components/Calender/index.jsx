@@ -5,21 +5,9 @@ import br from 'date-fns/locale/pt-BR'
 registerLocale('br', br)
 
 import style from './style.module.css'
-import { useState } from 'react'
 
-export function Calender() {
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-
-  const onChangeDates = (dates) => {
-    const [start, end] = dates
-    setStartDate(start)
-    setEndDate(end)
-
-  }
+export function Calender({onChangeDates, startDate, endDate}) {
   
-  console.log("Check-in => " + startDate)
-  console.log("Check-out => " + endDate)
 
   return (
     <div className={style.contentCalender}>
