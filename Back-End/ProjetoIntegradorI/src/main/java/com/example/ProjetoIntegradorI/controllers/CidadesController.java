@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin
 @RestController
 public class CidadesController {
 
