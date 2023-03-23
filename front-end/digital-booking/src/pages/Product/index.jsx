@@ -34,12 +34,12 @@ export function Product() {
     titulo: 'Hermitage Hotel',
     localizacao: 'Buenos Aires, Argentina - 900m da praia',
     fotos: [
-      'https://picsum.photos/id/12/3000',
-      'https://picsum.photos/id/13/3000',
-      'https://picsum.photos/id/37/3000',
-      'https://picsum.photos/id/49/3000',
-      'https://picsum.photos/id/57/3000',
-      'https://picsum.photos/id/58/3000'
+      'https://picsum.photos/id/12/600/338',
+      'https://picsum.photos/id/13/600/338',
+      'https://picsum.photos/id/37/600/338',
+      'https://picsum.photos/id/49/600/338',
+      'https://picsum.photos/id/57/600/338',
+      'https://picsum.photos/id/58/600/338'
     ]
   })
   const [currentSlide, setCurrentSlide] = useState(0)

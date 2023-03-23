@@ -35,6 +35,7 @@
 		],
 		"hotels": [
 			{
+				"id": 1,
 				"img": "http://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg",
 				"star": "⭐⭐⭐⭐⭐",
 				"numberAvaliation": 10,
@@ -45,6 +46,7 @@
 			}
 			,
 			{
+				"id": 2,
 				"img": "https://images.trvl-media.com/lodging/2000000/1890000/1887800/1887706/82dea5d4.jpg?impolicy=resizecrop&rw=598&ra=fit",
 				"star": "⭐⭐⭐",
 				"numberAvaliation": 5,
@@ -54,6 +56,7 @@
 				"description": "No coração de Faial Prime Suíte, desfrute de uma pousada inspirada nas paixões de Florianópolis."
 			},
 			{
+				"id": 3,
 				"img": "https://images.trvl-media.com/lodging/4000000/3860000/3854700/3854700/5012a133.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium",
 				"star": "⭐⭐⭐⭐",
 				"title": "Palácio Tangará",
@@ -63,6 +66,7 @@
 				"description": "No coração de Faial Prime Suíte, desfrute de uma pousada inspirada nas paixões de Florianópolis."
 			},
 			{
+				"id": 4,
 				"img": "https://images.trvl-media.com/lodging/10000000/9600000/9599500/9599422/90b654ee.jpg?impolicy=resizecrop&rw=1200&ra=fit",
 				"star": "⭐⭐⭐",
 				"numberAvaliation": 5,

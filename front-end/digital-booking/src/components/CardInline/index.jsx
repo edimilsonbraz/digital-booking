@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import styles from './styles.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,8 +9,22 @@ import {
   faSwimmer
 } from '@fortawesome/free-solid-svg-icons'
 
+export function CardInline({
+  id,
+  img,
+  title,
+  star,
+  numberAvaliation,
+  textAvaliation,
+  description
+}) {
 
-export function CardInline({ img, title, star, numberAvaliation, textAvaliation, description }) {
+  const navigate = useNavigate()
+
+  function handleNavigate(id) {
+    navigate("/produto/" + id)
+  }
+
   return (
     <>
       <div className={styles.containerCardInline}>
@@ -43,8 +59,10 @@ export function CardInline({ img, title, star, numberAvaliation, textAvaliation,
             <div className={styles.contentText}>
               <p>{description}</p>
             </div>
-            <div >
-              <button className={styles.button}>Ver mais</button>
+            <div>
+              <button className={styles.button} onClick={() => {handleNavigate(id)}}>
+                Ver mais
+              </button>
             </div>
           </div>
         </div>

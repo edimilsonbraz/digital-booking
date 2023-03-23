@@ -10,18 +10,23 @@ import { useState } from 'react'
 export function Calender() {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
-  const onChange = (dates) => {
+
+  const onChangeDates = (dates) => {
     const [start, end] = dates
     setStartDate(start)
     setEndDate(end)
+
   }
+  
+  console.log("Check-in => " + startDate)
+  console.log("Check-out => " + endDate)
 
   return (
     <div className={style.contentCalender}>
       <DatePicker
         className={style.reactDatepicker__monthContainer}
         selected={startDate}
-        onChange={onChange}
+        onChange={onChangeDates}
         startDate={startDate}
         endDate={endDate}
         selectsRange
