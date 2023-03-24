@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +10,7 @@ import HeaderDetails from '../../components/HeaderDetails'
 import style from './style.module.css'
 
 export function Reserva() {
+
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
@@ -19,8 +20,6 @@ export function Reserva() {
     setEndDate(end)
 
   }
-  
-  
 
   const [hora, setHora] = useState('')
   function handleSubmit(event) {
