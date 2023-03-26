@@ -1,8 +1,11 @@
-import { useRef, useState } from "react";
+import axios from "axios";
+import { useRef, useState, } from "react";
 import { Link } from "react-router-dom";
 import { checkName, checkConfirmPassword, checkEmail, checkPassword } from "../../Scripts/validateForm";
-
 import styles from './styles.module.css';
+
+
+
 
 export function Register() {
   const passwRef = useRef();
@@ -20,17 +23,36 @@ export function Register() {
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
-  const handlerSubmit = (event) => //Evento de submit que faz validações dos campos input
-  {
+  async function registerUser(userData) {
+    return await axios.post("http://54.233.215.156:8080/usuario/users", userData);
+  }
+
+  const handlerSubmit = async (event) => {
     event.preventDefault();
+
+    const userData = {
+      nome: nomeRef.current.value,
+      sobrenome: sobrenomeRef.current.value,
+      email: email,
+      password: passwRef.current.value
+    };
+  
+    try {
+      const response = await registerUser(userData);
+      console.log(response); // Tratar a resposta do servidor aqui
+    } catch (error) {
+      console.log(error); // Tratar o erro aqui
+      alert("Erro ao se cadastrar  " + error)
+    }
 
     checkEmail(email) ? setEmailError(false) : setEmailError(true);
     checkPassword(passwRef.current.value) ? setPassword(false) : setPassword(true);
     checkConfirmPassword(passwRef.current.value, confirmPasswRef.current.value) ? setConfirmPassword(false) : setConfirmPassword(true);
     checkName(nomeRef.current.value) ? setNome(false) : setNome(true);
     checkName(sobrenomeRef.current.value) ? setSobrenome(false) : setSobrenome(true);
+  };
 
-  }
+  
 
   const showHide = () => //Função para visualização de senha do campo input
   {
