@@ -24,7 +24,7 @@ export function Register() {
   const [emailError, setEmailError] = useState(false);
 
   async function registerUser(userData) {
-    return await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/users", userData);
+    return await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario/salvar", userData);
   }
 
   const handlerSubmit = async (event) => {

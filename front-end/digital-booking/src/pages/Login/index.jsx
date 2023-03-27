@@ -48,7 +48,7 @@ export function Login() {
 
   async function auth() {
     try {
-      const response = await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
+      const response = await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario/salvar", {
         email,
         password,
       });
