@@ -1,10 +1,13 @@
+import axios from "axios";
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { checkEmail, checkPassword } from '../../Scripts/validateForm'
+// import loginApi from '../../service/api'
 
 import styles from './styles.module.css'
 
 export function Login() {
+
   const passwRef = useRef()
   const iconRef = useRef()
 
@@ -19,6 +22,8 @@ export function Login() {
     event //Evento de submit que faz validações dos campos input
   ) => {
     event.preventDefault()
+
+    auth()
 
     checkEmail(email) ? setEmailError(false) : setEmailError(true)
     checkPassword(passwRef.current.value)
@@ -38,6 +43,29 @@ export function Login() {
       iconRef.current.className = ''
     }
   }
+
+
+
+  async function auth() {
+    try {
+      const response = await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario/salvar", {
+        email,
+        password,
+      });
+  
+      saveToken(response.data.token);
+      Navigate("/Home");
+      alert("Bem vindo!");
+    } catch (error) {
+      alert("Erro ao logar  " + error);
+    }
+  }
+
+
+  
+
+
+
 
   return (
     <div className={styles.login}>

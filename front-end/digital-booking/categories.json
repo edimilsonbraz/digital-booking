@@ -1,7 +1,7 @@
 {
     "category": [
 			{
-				"img": "http://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg",
+				"img": "https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg",
 				"category": "Resort",
 				"title": "Resorts",
 				"location": "Salvador",
@@ -36,7 +36,7 @@
 		"hotels": [
 			{
 				"id": 1,
-				"img": "http://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg",
+				"img": "https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg",
 				"star": "⭐⭐⭐⭐⭐",
 				"numberAvaliation": 10,
 				"textAvaliation": "muito bom",
