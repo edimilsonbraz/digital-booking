@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import category from '../../../categories.json'
 
 import DatePicker from 'react-datepicker'
@@ -18,22 +19,25 @@ import styles from './styles.module.css'
 export function Home() {
   const hotels = category.hotels
 
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value)
-  }
-
+  const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
-  // function onChange(dates) {
-  //   event.preventDefault()
-  //   const [start, end] = dates
-  //   setStartDate(start)
-  //   setEndDate(end)
-  //   console.log(startDate + '==>' + endDate)
-  // }
+  useEffect(() => {
+    getCidades()
+  }, [])
+
+  async function getCidades() {
+    try {
+      const response = await axios.get(
+        'http://devdigitalbooking.ctdprojetos.com.br:8080/cidades'
+      )
+      console.log(response.data)
+      setCities(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar cidades' + error)
+    }
+  }
 
   return (
     <>
@@ -46,14 +50,20 @@ export function Home() {
             <label htmlFor="destino">
               <FontAwesomeIcon icon={faLocationDot} />
             </label>
-            <input
-              type="text"
-              id="destino"
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="Onde vamos?"
-              required
-            />
+            <select 
+              type="text" 
+              id="destino" 
+              defaultValue={'DEFAULT'} 
+            >
+              <option value="DEFAULT" disabled>Onde vamos?</option>
+    
+              {cities.map((city) => (
+                <option value={city.nomeCidade} key={city.id}>
+                  {city.nomeCidade}
+                  {'\n'}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className={styles.inputs}>
@@ -84,10 +94,7 @@ export function Home() {
             </label>
           </div>
 
-          <button
-            type="submit"
-            className={styles.buttonBuscar}
-          >
+          <button type="submit" className={styles.buttonBuscar}>
             Buscar
           </button>
           {/* </form> */}
@@ -98,7 +105,6 @@ export function Home() {
         <h2>Buscar por tipo de acomodação</h2>
 
         <ContainerCategory />
-
       </section>
 
       <section className={styles.containerRecomendacao}>

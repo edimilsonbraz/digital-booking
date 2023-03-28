@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
@@ -64,21 +63,7 @@ export function Reserva() {
     }
    
   }
-
-  useEffect(() => {
-    // getCidades();
-  }, [])
-
-  async function getCidades() {
-    try {
-      const response = await axios.get("http://devdigitalbooking.ctdprojetos.com.br:8080/cidades")
-      console.log(response.data)
-    }catch(error) {
-      console.log("Erro ao buscar cidades" + error)
-    }
-  }
   
-
   return (
     <>
       <HeaderDetails />
