@@ -43,9 +43,9 @@ export function Product() {
     navigateTo('/produto/:id/reserva')
 
     } else {
-      // Ir pra pagina de login e exibir uma mensagem especifica
-    navigateTo('/login')
-
+      // Se usuario nao estiver logado 
+      //Ir pra pagina de login e exibir uma mensagem especifica
+    navigateTo('/login');
     }
   }
 
