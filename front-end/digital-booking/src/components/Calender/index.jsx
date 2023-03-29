@@ -12,7 +12,6 @@ export function Calender({onChangeDates, startDate, endDate}) {
   return (
     <div className={style.contentCalender}>
       <DatePicker
-        className={style.reactDatepicker__monthContainer}
         selected={startDate}
         onChange={onChangeDates}
         startDate={startDate}

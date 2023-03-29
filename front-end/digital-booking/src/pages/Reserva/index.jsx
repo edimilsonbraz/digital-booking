@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
@@ -10,21 +13,37 @@ import HeaderDetails from '../../components/HeaderDetails'
 import style from './style.module.css'
 
 export function Reserva() {
-
+  const [cidade, setCidade] = useState('')
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
+  const [hora, setHora] = useState('')
 
+  const navigate = useNavigate()
+
+  // Evento que pega as datas de reserva
   const onChangeDates = (dates) => {
     const [start, end] = dates
     setStartDate(start)
     setEndDate(end)
-
   }
 
-  const [hora, setHora] = useState('')
+  //Formata datas
+  function datesFormatted(date) {
+    const newDateFormatted = format(new Date(date), `dd '/' MM '/' yyyy`, {
+      locale: ptBR,
+    })
+
+    return newDateFormatted
+  }
+  
   function handleSubmit(event) {
     event.preventDefault();
-    
+    if(cidade !== '') {
+      console.log("Cidade escolhida => " + cidade)
+    }else {
+      alert("Preencha o campo cidade")
+    }
+
     if(hora !== '') {
       console.log("Horário de chegada => " + hora)
     }else {
@@ -33,14 +52,18 @@ export function Reserva() {
 
     if(startDate !== null) {
       console.log("Check-in => " + startDate)
-      console.log("Check-out => " + endDate)     
+      console.log("Check-out => " + endDate)
+      
+      setTimeout(() => {
+        navigate("/sucesso")
+
+      }, 2000)
     }else {
       alert("Selecione as datas que deseja reservar")
     }
    
   }
   
-
   return (
     <>
       <HeaderDetails />
@@ -68,7 +91,12 @@ export function Reserva() {
                   />
 
                   <label htmlFor="">Cidade</label>
-                  <input type="text" className={style.lastInput} />
+                  <input 
+                    type="text" 
+                    value={cidade}
+                    className={style.lastInput} 
+                    onChange={(e) => setCidade(e.target.value)}
+                  />
                 </div>
               </div>
 
@@ -162,11 +190,24 @@ export function Reserva() {
             <div className={style.checkInOut}>
               <div>
                 <p>Check-in</p>
-                <span>___ /___ /______</span>
+                {
+                  startDate !== null 
+                  ? 
+                    <span>{datesFormatted(startDate)}</span>
+                  : 
+                    <span>___ /___ /______</span>
+                }
+                
               </div>
               <div>
                 <p>Check-out</p>
-                <span>___ /___ /______</span>
+                {
+                  endDate !== null 
+                  ? 
+                    <span>{datesFormatted(endDate)}</span>
+                  : 
+                    <span>___ /___ /______</span>
+                }
               </div>
             </div>
 
