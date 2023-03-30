@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { checkEmail, checkPassword } from '../../Scripts/validateForm'
 // import loginApi from '../../service/api'
 
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 export function Login() {
 
@@ -52,7 +52,7 @@ export function Login() {
         email,
         password,
       });
-  
+
       saveToken(response.data.token);
       Navigate("/Home");
       alert("Bem vindo!");
@@ -60,61 +60,56 @@ export function Login() {
       alert("Erro ao logar  " + error);
     }
   }
-
-
-  
-
-
-
-
   return (
-    <div className={styles.login}>
-      <h1>Iniciar sessão</h1>
-      <form action="">
-        <div>
-          <label htmlFor="email">E-mail</label>
-          <input
-            className={emailError ? 'border-error' : ''}
-            type="email"
-            name=""
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </div>
+    <>
+      <div className={styles.login}>
+        <h1>Iniciar sessão</h1>
+        <form action="">
+          <div>
+            <label htmlFor="email">E-mail</label>
+            <input
+              className={emailError ? 'border-error' : ''}
+              type="email"
+              name=""
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </div>
 
-        <div className={styles.loginpassword}>
-          <label htmlFor="password">Senha</label>
-          <input
-            className={password ? 'border-error' : ''}
-            ref={passwRef}
-            type="password"
-            name=""
-            id="password"
-          />
-          <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
+          <div className={styles.loginpassword}>
+            <label htmlFor="password">Senha</label>
+            <input
+              className={password ? 'border-error' : ''}
+              ref={passwRef}
+              type="password"
+              name=""
+              id="password"
+            />
+            <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
 
-        </div>
+          </div>
 
-        <div>
-          <button type="submit" onClick={handlerSubmit}>
-            Iniciar
-          </button>
-          <span>
-            Não é cadastrado? <Link to="/register">Criar conta</Link>
-          </span>
-        </div>
-      </form>
-      {password || emailError ? (
-        <div className={styles.containerError}>
-          <ul>
-            {emailError ? <li> * E-mail digitado não é válido</li> : ''}
-            {password ? <li>* A senha deve ter mais de seis caracteres.</li> : ''}
-          </ul>
-        </div>
-      ) : (
-        ''
-      )}
-    </div>
+          <div>
+            <button type="submit" onClick={handlerSubmit}>
+              Iniciar
+            </button>
+            <span>
+              Não é cadastrado? <Link to="/register">Criar conta</Link>
+            </span>
+          </div>
+        </form>
+        {password || emailError ? (
+          <div className={styles.containerError}>
+            <ul>
+              {emailError ? <li> * E-mail digitado não é válido</li> : ''}
+              {password ? <li>* A senha deve ter mais de seis caracteres.</li> : ''}
+            </ul>
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
+    </>
   )
 }

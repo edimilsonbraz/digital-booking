@@ -15,6 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
+import api from '../../service/api'
 
 export function Home() {
   const hotels = category.hotels
@@ -39,65 +40,80 @@ export function Home() {
     }
   }
 
+  async function buscarProdutoPorCidade(id) {
+    try {
+      const response = await api.get('produtoscidades/' + id)
+        .then(response => response.data)
+        console.log(response);
+
+    } catch (error) {
+      console.log('Erro ao buscar produto por cidade ' + error)
+    }
+  }
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    console.log(buscarProdutoPorCidade(1));
+  }
+
   return (
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
 
         <div className={`containerGlobal ${styles.contentInputs}`}>
-          {/* <form action=""> */}
-          <div className={styles.inputs}>
-            <label htmlFor="destino">
-              <FontAwesomeIcon icon={faLocationDot} />
-            </label>
-            <select 
-              type="text" 
-              id="destino" 
-              defaultValue={'DEFAULT'} 
-            >
-              <option value="DEFAULT" disabled>Onde vamos?</option>
-    
-              {cities.map((city) => (
-                <option value={city.nomeCidade} key={city.id}>
-                  {city.nomeCidade}
-                  {'\n'}
-                </option>
-              ))}
-            </select>
-          </div>
+          <form action="">
+            <div className={styles.inputs}>
+              <label htmlFor="destino">
+                <FontAwesomeIcon icon={faLocationDot} />
+              </label>
+              <select
+                type="text"
+                id="destino"
+                defaultValue={'DEFAULT'}
+              >
+                <option value="DEFAULT" disabled>Onde vamos?</option>
 
-          <div className={styles.inputs}>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-in"
-            />
+                {cities.map((city) => (
+                  <option value={city.nomeCidade} key={city.id}>
+                    {city.nomeCidade}  
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-out"
-            />
-            <label htmlFor="check-out">
-              <FontAwesomeIcon icon={faCalendarCheck} />
-            </label>
-          </div>
+            <div className={styles.inputs}>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-in"
+              />
 
-          <button type="submit" className={styles.buttonBuscar}>
-            Buscar
-          </button>
-          {/* </form> */}
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-out"
+              />
+              <label htmlFor="check-out">
+                <FontAwesomeIcon icon={faCalendarCheck} />
+              </label>
+            </div>
+
+            <button onClick={handlerSubmit} type="submit" className={styles.buttonBuscar}>
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
 

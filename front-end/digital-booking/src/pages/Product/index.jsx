@@ -31,6 +31,9 @@ import {
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 export function Product() {
 
   const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
@@ -39,13 +42,17 @@ export function Product() {
 
   const reservarProduto = () => {
     if (isLogged) {
+      //Se estiver logado
       // Ir para a pagina de reserva do produto
-    navigateTo('/produto/:id/reserva')
+    const url = new URL(window.location.href);
+
+    navigateTo(url.pathname + '/reserva');
 
     } else {
       // Se usuario nao estiver logado 
       //Ir pra pagina de login e exibir uma mensagem especifica
     navigateTo('/login');
+    toast.error("Para fazer uma reserva você precisa estar logado!");
     }
   }
 
