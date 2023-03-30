@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef, useState, } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkName, checkConfirmPassword, checkEmail, checkPassword } from "../../Scripts/validateForm";
 import styles from './styles.module.css';
 
@@ -23,6 +23,8 @@ export function Register() {
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
+  const navigate = useNavigate()
+
   async function registerUser(userData) {
     return await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario/salvar", userData);
   }
@@ -36,6 +38,9 @@ export function Register() {
       email: email,
       password: passwRef.current.value
     };
+
+
+    navigate("/Login")
   
     try {
       const response = await registerUser(userData);
@@ -44,6 +49,9 @@ export function Register() {
       console.log(error); // Tratar o erro aqui
       alert("Erro ao se cadastrar  " + error)
     }
+
+
+
 
     checkEmail(email) ? setEmailError(false) : setEmailError(true);
     checkPassword(passwRef.current.value) ? setPassword(false) : setPassword(true);
