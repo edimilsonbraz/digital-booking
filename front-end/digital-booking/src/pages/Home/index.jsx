@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import category from '../../../categories.json'
 
 import DatePicker from 'react-datepicker'
@@ -14,26 +15,46 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
+import api from '../../service/api'
 
 export function Home() {
   const hotels = category.hotels
 
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value)
-  }
-
+  const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
-  // function onChange(dates) {
-  //   event.preventDefault()
-  //   const [start, end] = dates
-  //   setStartDate(start)
-  //   setEndDate(end)
-  //   console.log(startDate + '==>' + endDate)
-  // }
+  useEffect(() => {
+    getCidades()
+  }, [])
+
+  async function getCidades() {
+    try {
+      const response = await axios.get(
+        'http://devdigitalbooking.ctdprojetos.com.br:8080/cidades'
+      )
+      console.log(response.data)
+      setCities(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar cidades' + error)
+    }
+  }
+
+  async function buscarProdutoPorCidade(id) {
+    try {
+      const response = await api.get('produtoscidades/' + id)
+        .then(response => response.data)
+        console.log(response);
+
+    } catch (error) {
+      console.log('Erro ao buscar produto por cidade ' + error)
+    }
+  }
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    console.log(buscarProdutoPorCidade(1));
+  }
 
   return (
     <>
@@ -41,56 +62,58 @@ export function Home() {
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
 
         <div className={`containerGlobal ${styles.contentInputs}`}>
-          {/* <form action=""> */}
-          <div className={styles.inputs}>
-            <label htmlFor="destino">
-              <FontAwesomeIcon icon={faLocationDot} />
-            </label>
-            <input
-              type="text"
-              id="destino"
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="Onde vamos?"
-              required
-            />
-          </div>
+          <form action="">
+            <div className={styles.inputs}>
+              <label htmlFor="destino">
+                <FontAwesomeIcon icon={faLocationDot} />
+              </label>
+              <select
+                type="text"
+                id="destino"
+                defaultValue={'DEFAULT'}
+              >
+                <option value="DEFAULT" disabled>Onde vamos?</option>
 
-          <div className={styles.inputs}>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-in"
-            />
+                {cities.map((city) => (
+                  <option value={city.nomeCidade} key={city.id}>
+                    {city.nomeCidade}  
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-out"
-            />
-            <label htmlFor="check-out">
-              <FontAwesomeIcon icon={faCalendarCheck} />
-            </label>
-          </div>
+            <div className={styles.inputs}>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-in"
+              />
 
-          <button
-            type="submit"
-            className={styles.buttonBuscar}
-          >
-            Buscar
-          </button>
-          {/* </form> */}
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-out"
+              />
+              <label htmlFor="check-out">
+                <FontAwesomeIcon icon={faCalendarCheck} />
+              </label>
+            </div>
+
+            <button onClick={handlerSubmit} type="submit" className={styles.buttonBuscar}>
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
 
@@ -98,7 +121,6 @@ export function Home() {
         <h2>Buscar por tipo de acomodação</h2>
 
         <ContainerCategory />
-
       </section>
 
       <section className={styles.containerRecomendacao}>

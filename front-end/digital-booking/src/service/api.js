@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create(
-    {baseURL:""}
+    {baseURL:"http://devdigitalbooking.ctdprojetos.com.br:8080/"}
 );
 
 export default api;
