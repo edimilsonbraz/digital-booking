@@ -14,6 +14,7 @@ export function CardInline({
   img,
   title,
   star,
+  categoriaProduto,
   numberAvaliation,
   textAvaliation,
   description
@@ -35,7 +36,7 @@ export function CardInline({
           <div className={styles.contentDescription}>
             <div className={styles.contentAvaliation}>
               <div className={styles.stars}>
-                <p>Hotel</p>
+                <p>{categoriaProduto}</p>
                 <span>{star}</span>
                 <h3>{title}</h3>
               </div>

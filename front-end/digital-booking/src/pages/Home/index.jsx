@@ -20,11 +20,13 @@ export function Home() {
   const hotels = category.hotels
 
   const [cities, setCities] = useState([])
+  const [products, setProducts] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
   useEffect(() => {
     getCidades()
+    getProdutos()
   }, [])
 
   async function getCidades() {
@@ -32,12 +34,24 @@ export function Home() {
       const response = await axios.get(
         'http://devdigitalbooking.ctdprojetos.com.br:8080/cidades'
       )
-      console.log(response.data)
+      // console.log(response.data)
       setCities(response.data)
     } catch (error) {
       console.log('Erro ao buscar cidades' + error)
     }
   }
+
+  async function getProdutos() {
+    try {
+      const response = await axios.get(
+        'http://devdigitalbooking.ctdprojetos.com.br:8080/produtos'
+      )
+      setProducts(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar produtos' + error)
+    }
+  }
+  console.log(products)
 
   return (
     <>
@@ -112,7 +126,7 @@ export function Home() {
           <h2>Recomendações</h2>
 
           <div className={styles.containerCard}>
-            {hotels.map((item) => {
+            {/* {hotels.map((item) => {
               return (
                 <CardInline
                   key={item.id}
@@ -125,7 +139,22 @@ export function Home() {
                   description={item.description}
                 />
               )
-            })}
+            })} */}
+
+            {products.map((product) => {
+              return (
+                <CardInline 
+                  key={product.id}
+                  id={product.id}
+                  categoriaProduto={product.categoria.descricaoCategoria}
+                  numberAvaliation={product.categoria.qualificacaoCategoria}
+                  title={product.nomeProduto}
+                  description={product.descricaoProduto}
+                />
+              )
+            })
+              
+            }
           </div>
         </div>
       </section>

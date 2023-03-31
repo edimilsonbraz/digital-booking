@@ -25,6 +25,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
+import axios from 'axios'
 
 export function Product() {
   const { id } = useParams()
@@ -65,7 +66,9 @@ export function Product() {
     politicas: ''
   })
 
-  useEffect(() => {}, [id])
+  useEffect(() => {
+    getProduct()
+  }, [])
 
   const slide = () => setSlides(!slides)
 
@@ -73,13 +76,28 @@ export function Product() {
   const [titulo, setTitulo] = useState('')
   const [localizacao, setLocalizacao] = useState('')
 
+  const [newProduct, setNewProduct] = useState([])
+
+  async function getProduct() {
+    try {
+      const response = await axios.get(
+        `http://devdigitalbooking.ctdprojetos.com.br:8080/produtos/${id}`
+      )
+      setNewProduct(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar produto por id ' + error)
+    }
+  }
+
+  console.log(newProduct)
+
   return (
     <>
       <section className={style.ContainerProduct}>
         <div className={style.headerdetails}>
           <div className={style.title}>
-            <span>{data.categoria}</span>
-            <h1>{data.titulo}</h1>
+            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            <h1>{newProduct.nomeProduto}</h1>
           </div>
           <div className={style.backpage}>
             <Link to="/">
@@ -92,7 +110,8 @@ export function Product() {
 
         <div className={style.locationdetails}>
           <FontAwesomeIcon icon={faLocationDot} />
-          <p>{data.localizacao}</p>
+          {/* <p>{newProduct.cidades.nomeCidade}</p>*/}
+          {/* <span>{newProduct.cidades.pais}</span>  */}
         </div>
 
         {/* Grid de 5 primeiras imagens*/}
@@ -184,29 +203,7 @@ export function Product() {
         <div className={style.descricao}>
           <h2>Descrição</h2>
           <div className={style.separator}></div>
-          <p>
-            Este luxuoso hotel está localizado junto aos teleféricos Grandvalira
-            em Soldeu. Com quartos e apartamentos, o Sport Hotel Hermitage & Spa
-            dispõe de um spa no local. Os quartos do Sport Hotel Hermitage & Spa
-            apresentam mobiliário de alta qualidade e roupa de cama em algodão
-            egípcio. Cada um tem televisão LCD por satélite, cofre, máquina de
-            café e mini-bar. A casa de banho privativa inclui uma banheira de
-            hidromassagem e um secador de cabelo. Está disponível acesso Wi-Fi
-            gratuito. Os hóspedes adultos do Sport Hotel Hermitage & Spa têm
-            acesso diário gratuito ao impressionante Sport Wellness Mountain Spa
-            durante 2 horas consecutivas por dia. Inclui piscinas de
-            temperaturas variadas, uma grande piscina com jactos e 2 banhos de
-            hidroterapia exteriores com vista para as pistas.
-          </p>
-          <p>
-            O Restaurante Ibaya do hotel serve refeições gourmet, enquanto o
-            Restaurante Hermitage Tradició serve cozinha tradicional, apenas
-            durante os meses de Inverno. O hotel também abriga um restaurante
-            gastronômico japonês, o Koy Hermitage, aberto durante os meses de
-            verão e inverno. Localizado no último andar, o elegante Glassbar
-            oferece coquetéis, cozinha de fusão e vistas incríveis. O acesso
-            Wi-Fi gratuito está disponível em todo o hotel.
-          </p>
+          <p>{newProduct.descricaoProduto}</p>
         </div>
       </section>
 
@@ -242,7 +239,7 @@ export function Product() {
         </div>
       </section>
 
-      <section className={`containerGlobal ${style.policyReserva}` }>
+      <section className={`containerGlobal ${style.policyReserva}`}>
         <Policy />
       </section>
 
@@ -263,4 +260,3 @@ export function Product() {
     </>
   )
 }
-// useEffect(() => {}, [id])
