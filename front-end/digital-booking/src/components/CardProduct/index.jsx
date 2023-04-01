@@ -9,7 +9,7 @@ import {
   faSwimmer
 } from '@fortawesome/free-solid-svg-icons'
 
-export function CardInline({
+export function CardProduct({
   id,
   img,
   title,

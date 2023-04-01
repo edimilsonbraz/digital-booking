@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom'
 import style from './style.module.css'
 import { Link } from 'react-router-dom'
 
+import { useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { IsLoggedContext } from '../../context/IsLoggedContext';
+
 //Importes do slide
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
@@ -27,7 +32,31 @@ import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 import axios from 'axios'
 
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 export function Product() {
+
+  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
+  const navigateTo = useNavigate();
+
+
+  const reservarProduto = () => {
+    if (isLogged) {
+      //Se estiver logado
+      // Ir para a pagina de reserva do produto
+    const url = new URL(window.location.href);
+
+    navigateTo(url.pathname + '/reserva');
+
+    } else {
+      // Se usuario nao estiver logado 
+      //Ir pra pagina de login e exibir uma mensagem especifica
+    navigateTo('/login');
+    toast.error("Para fazer uma reserva você precisa estar logado!");
+    }
+  }
+
   const { id } = useParams()
 
   const [data, setData] = useState({
@@ -110,7 +139,7 @@ export function Product() {
 
         <div className={style.locationdetails}>
           <FontAwesomeIcon icon={faLocationDot} />
-          {/* <p>{newProduct.cidades.nomeCidade}</p>*/}
+          {/* <p>{newProduct.cidades.nomeCidade}</p> */}
           {/* <span>{newProduct.cidades.pais}</span>  */}
         </div>
 
@@ -189,9 +218,8 @@ export function Product() {
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
-                  className={`${style.dot} ${
-                    currentSlide === idx ? style.active : ''
-                  }`}
+                  className={`${style.dot} ${currentSlide === idx ? style.active : ''
+                    }`}
                 ></button>
               )
             })}
@@ -252,7 +280,7 @@ export function Product() {
 
             <div className={style.calenderText}>
               <p>Adicione as datas da sua viagem para obter preços exatos</p>
-              <button>Iniciar reserva</button>
+              <button onClick={reservarProduto}>Iniciar reserva</button>
             </div>
           </div>
         </div>

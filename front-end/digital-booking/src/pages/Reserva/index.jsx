@@ -51,8 +51,6 @@ export function Reserva() {
     }
 
     if(startDate !== null) {
-      console.log("Check-in => " + startDate)
-      console.log("Check-out => " + endDate)
       
       setTimeout(() => {
         navigate("/sucesso")
