@@ -1,4 +1,4 @@
-import { Navigate, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ToggleMenu } from '../ToggleMenu';
 import { useState } from 'react';
 import styles from './styles.module.css'
@@ -44,7 +44,7 @@ export function Header() {
           <NavLink to="/" end title="Home">
             <img src={logo1} alt="" />
           </NavLink>
-          <p>Sinta-se em casa</p>
+          <p>Digital Booking</p>
         </div>
         <ToggleMenu />
 

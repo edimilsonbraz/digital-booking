@@ -65,7 +65,7 @@ export function Home() {
   return (
     <>
       <div className={styles.containerBuscador}>
-        <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+        <h1>Buscar ofertas em hotéis, resorts e muito mais</h1>
 
         <div className={`containerGlobal ${styles.contentInputs}`}>
           <form action="">

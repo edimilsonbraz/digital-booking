@@ -1,6 +1,8 @@
 .containerBuscador {
-  background-color: var(--title);
-  padding: 2rem;
+  background: url("../../assets/bg-search-box.jpg") no-repeat center center;
+  background-size: cover;
+  opacity: 0.8;
+  padding: 4rem;
   text-align: center;
 }
 
