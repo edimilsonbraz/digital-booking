@@ -26,7 +26,8 @@
 }
 
 .card span {
-    font-size: .8rem;
+  font-size: .8rem;
+  margin-right: 0.5rem;
 }
 
 /*Estilização da imagem do card*/

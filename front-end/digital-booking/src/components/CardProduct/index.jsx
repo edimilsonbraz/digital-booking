@@ -9,65 +9,63 @@ import {
   faSwimmer
 } from '@fortawesome/free-solid-svg-icons'
 
-export function CardProduct({
-  id,
-  img,
-  title,
-  star,
-  categoriaProduto,
-  numberAvaliation,
-  textAvaliation,
-  description
-}) {
-
+export function CardProduct({ product }) {
   const navigate = useNavigate()
 
   function handleNavigate(id) {
-    navigate("/produto/" + id)
+    navigate('/produto/' + id)
   }
 
   return (
-    <>
-      <div className={styles.containerCardInline}>
-        <div className={styles.contentCard}>
-          <div className={styles.contentImage}>
-            <img src={img} alt="" />
-          </div>
-          <div className={styles.contentDescription}>
-            <div className={styles.contentAvaliation}>
-              <div className={styles.stars}>
-                <p>{categoriaProduto}</p>
-                <span>{star}</span>
-                <h3>{title}</h3>
-              </div>
-              <div className={styles.avaliation}>
-                <div>
-                  <span>{numberAvaliation}</span>
-                </div>
-                <p>{textAvaliation}</p>
-              </div>
+    <div className={styles.containerCardInline} key={product.id}>
+      <div className={styles.contentCard}>
+        <div className={styles.contentImage}>
+          <img
+            src="https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg"
+            alt=""
+          />
+        </div>
+        <div className={styles.contentDescription}>
+          <div className={styles.contentAvaliation}>
+            <div className={styles.stars}>
+              <p>{product.categoria.descricaoCategoria}</p>
+              <span>⭐⭐⭐⭐⭐</span>
+              <h3>{product.nomeProduto}</h3>
             </div>
-
-            <div className={styles.contentIcons}>
+            <div className={styles.avaliation}>
               <div>
-                <FontAwesomeIcon icon={faLocationDot} />
-                <p>A 900 metros da praia</p>
-                <FontAwesomeIcon icon={faSwimmer} />
-                <FontAwesomeIcon icon={faWifi} />
+                <span>9</span>
               </div>
-              <div></div>
+              <p>Muito bom</p>
             </div>
-            <div className={styles.contentText}>
-              <p>{description}</p>
-            </div>
+          </div>
+
+          <div className={styles.contentIcons}>
             <div>
-              <button className={styles.button} onClick={() => {handleNavigate(id)}}>
-                Ver mais
-              </button>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <p>A 900 metros da praia</p>
+              <FontAwesomeIcon icon={faSwimmer} />
+              <FontAwesomeIcon icon={faWifi} />
             </div>
+            <div></div>
+          </div>
+          <div className={styles.contentText}>
+            <p className={styles.contentTextDescription}>
+              {product.descricaoProduto}
+            </p>
+          </div>
+          <div>
+            <button
+              className={styles.button}
+              onClick={() => {
+                handleNavigate(product.id)
+              }}
+            >
+              Ver mais
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

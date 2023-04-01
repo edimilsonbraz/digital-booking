@@ -18,7 +18,7 @@ export function CardCategory() {
       console.log('Erro ao buscar categorias' + error)
     }
   }
-console.log(category)
+  
   return (
     <div className={styles.containerCategory}>
       <div className={styles.containerCard}>
@@ -27,9 +27,10 @@ console.log(category)
           return (
             <div className={styles.card} key={current.id}>
               <div style={{ backgroundImage: `url(${current.urlImagemCategoria})` }}></div>
-              <div>
+              <div className={styles.quantityItens}>
                 <h1>{current.descricaoCategoria}</h1>
-                <span>25.485 {current.descricaoCategoria}</span>
+                <span>{current.qualificacaoCategoria}</span>
+                <span>{current.descricaoCategoria}</span>
               </div>
             </div>
           )
