@@ -5,6 +5,7 @@ import { Product } from "./pages/Product";
 import { Register } from "./pages/Register/";
 import { Reserva } from "./pages/Reserva";
 import { ReservaSucedida } from "./pages/ReservaSucedida";
+import { ProdutoCadastrado } from "./pages/ProdutoCadastrado";
 
 
 export function Router() {
@@ -16,6 +17,7 @@ export function Router() {
       <Route path="/produto/:id" element={<Product />} />
       <Route path="/produto/:id/reserva" element={<Reserva />} />
       <Route path="/sucesso" element={<ReservaSucedida/>} />
+      <Route path="/produtoCadastrado" element={<ProdutoCadastrado/>} />
     </Routes>
   )
 }
