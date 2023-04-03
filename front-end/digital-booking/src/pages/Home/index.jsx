@@ -16,10 +16,10 @@ import {
 import styles from './styles.module.css'
 
 export function Home() {
+  const [products, setProducts] = useState([])
   const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
-  const [products, setProducts] = useState([])
 
   useEffect(() => {
     getCidades()
@@ -126,7 +126,7 @@ export function Home() {
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>
 
-        <CardCategory />
+        <CardCategory products={products}/>
       </section>
 
       <section className={styles.containerRecomendacao}>
