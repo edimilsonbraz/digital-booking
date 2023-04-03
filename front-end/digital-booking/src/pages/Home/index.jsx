@@ -37,14 +37,16 @@ export function Home() {
 
   async function buscarProdutoPorCidade(id) {
     try {
-      const response = await api
-        .get('produtoscidades/' + id)
-        .then((response) => response.data)
-      console.log(response)
+      const response = await api.get('produtoscidades/' + id)
+        .then(response => response.data)
+      console.log(response);
     } catch (error) {
       console.log('Erro ao buscar produto por cidade ' + error)
     }
   }
+  
+  // State que armazena valor de cidade escolhido no select da pesquisa por cidade
+  const [selectValue, setSelectValue] = useState('');
 
   const handlerSubmit = (e) => {
     e.preventDefault()
@@ -60,24 +62,26 @@ export function Home() {
     }
   }
 
+
   return (
     <>
       <div className={styles.containerBuscador}>
-        <h1>Buscar ofertas em hotéis, resorts e muito mais</h1>
-
-        <div className={`containerGlobal ${styles.contentInputs}`}>
-          <form action="">
+        <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+        <div >
+          <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>
               <label htmlFor="destino">
                 <FontAwesomeIcon icon={faLocationDot} />
               </label>
-              <select type="text" id="destino" defaultValue={'DEFAULT'}>
-                <option value="DEFAULT" disabled>
-                  Onde vamos?
-                </option>
+              <select
+                type="text"
+                id="destino"
+                defaultValue={"DEFAULT"} onChange={e => setSelectValue(e.target.value)}
+              >
+                <option value="DEFAULT" disabled>Onde vamos?</option>
 
                 {cities.map((city) => (
-                  <option value={city.nomeCidade} key={city.id}>
+                  <option value={city.id} key={city.id}>
                     {city.nomeCidade}
                   </option>
                 ))}
