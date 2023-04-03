@@ -33,7 +33,6 @@ export function Home() {
       const response = await axios.get(
         'http://devdigitalbooking.ctdprojetos.com.br:8080/cidades'
       )
-      console.log(response.data)
       setCities(response.data)
     } catch (error) {
       console.log('Erro ao buscar cidades' + error)
@@ -44,25 +43,27 @@ export function Home() {
     try {
       const response = await api.get('produtoscidades/' + id)
         .then(response => response.data)
-        console.log(response);
-
+      console.log(response);
     } catch (error) {
       console.log('Erro ao buscar produto por cidade ' + error)
     }
   }
+  
+  // State que armazena valor de cidade escolhido no select da pesquisa por cidade
+  const [selectValue, setSelectValue] = useState('');
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log(buscarProdutoPorCidade(1));
+    console.log(buscarProdutoPorCidade(selectValue));
   }
+
 
   return (
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
-
-        <div className={`containerGlobal ${styles.contentInputs}`}>
-          <form action="">
+        <div >
+          <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>
               <label htmlFor="destino">
                 <FontAwesomeIcon icon={faLocationDot} />
@@ -70,13 +71,13 @@ export function Home() {
               <select
                 type="text"
                 id="destino"
-                defaultValue={'DEFAULT'}
+                defaultValue={"DEFAULT"} onChange={e => setSelectValue(e.target.value)}
               >
                 <option value="DEFAULT" disabled>Onde vamos?</option>
 
                 {cities.map((city) => (
-                  <option value={city.nomeCidade} key={city.id}>
-                    {city.nomeCidade}  
+                  <option value={city.id} key={city.id}>
+                    {city.nomeCidade}
                   </option>
                 ))}
               </select>
@@ -119,7 +120,6 @@ export function Home() {
 
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>
-
         <ContainerCategory />
       </section>
 
