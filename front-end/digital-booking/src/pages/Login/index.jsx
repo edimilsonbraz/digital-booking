@@ -107,7 +107,6 @@ export function Login() {
               id="password"
             />
             <div ref={iconRef} id={styles.icon} onClick={showHide}></div>
-
           </div>
 
           <div>
