@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import api from '../../service/api'
 
 import styles from './styles.module.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Category } from '../../pages/Category'
 
 export function CardCategory({products}) {
   const navigate = useNavigate()
@@ -33,24 +34,19 @@ export function CardCategory({products}) {
     const filterCategory = products.filter(product => {
       return product.categoria.descricaoCategoria === categoryClicked
     })
-    
     setProductByCategory(filterCategory)
-    
-
   }
 
   return (
     <div className={styles.containerCategory}>
       <div className={styles.containerCard}>
-       
         {category.map((current) => {
           return (
             <div 
               className={styles.card} 
               key={current.id} 
               value={current.descricaoCategoria}
-              // onClick={() => handleFilterCategory(current.descricaoCategoria)}
-              onClick={() => {handleNavigate(current.descricaoCategoria)}}
+              onClick={() => {handleNavigate(current.id)}}
             > 
               <div style={{ backgroundImage: `url(${current.urlImagemCategoria})` }}></div>
               <div className={styles.quantityItens}>
