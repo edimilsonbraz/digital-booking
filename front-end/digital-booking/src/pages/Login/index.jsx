@@ -1,84 +1,92 @@
 import axios from "axios";
-import { useRef, useState, useEffect } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
-import { checkEmail, checkPassword } from '../../Scripts/validateForm'
+import { useRef, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { checkEmail, checkPassword } from "../../Scripts/validateForm";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 export function Login() {
+  const passwRef = useRef();
+  const iconRef = useRef();
 
-  const passwRef = useRef()
-  const iconRef = useRef()
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [username, setUsername] = useState("");
 
-  const [email, setEmail] = useState('')
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  // Gerenciamento de erros do formulário com useState
+  const [password, setPassword] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
-  //Gerenciamento de erros do form com useState
-  const [password, setPassword] = useState(false)
-  const [emailError, setEmailError] = useState(false)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handlerSubmit = (event) => {
-    event.preventDefault()
+    const isEmailValid = checkEmail(email);
+    const isPasswordValid = checkPassword(passwRef.current.value);
 
-    auth()
+    setEmailError(!isEmailValid);
+    setPassword(!isPasswordValid);
 
+    if (isEmailValid && isPasswordValid) {
+      try {
+        const response = await auth(email, passwRef.current.value);
+        saveToken(response.data.token);
+        setUsername(response.data.nome);
+        alert("Bem-vindo, " + response.data.nome + "!");
+        navigate("/");
+      } catch (error) {
+        alert("Erro ao logar " + error);
+      }
+    }
     
+  };
 
-    checkEmail(email) ? setEmailError(false) : setEmailError(true)
-    checkPassword(passwRef.current.value)
-      ? setPassword(false)
-      : setPassword(true)
-
-  }
+  
 
   useEffect(() => {
     if (token) {
-      axios.get('http://devdigitalbooking.ctdprojetos.com.br:8080/usuario', {
-        headers: { Authorization: `Bearer ${token}` }
-      }).catch(() => {
-        // token inválido, remover do localStorage
-        localStorage.removeItem('token')
-        setToken(null)
-      })
+      axios
+        .get("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .catch(() => {
+          // Token inválido, remover do localStorage
+          localStorage.removeItem("token");
+          setToken(undefined);
+        });
     }
-  }, [token])
+  }, [token]);
 
+  async function auth(email, password) {
+    const response = await axios.get("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
+      email,
+      password,
+    });
 
-
-  const showHide = () =>
-  {
-    if (passwRef.current.type === 'password') {
-      passwRef.current.type = 'text'
-      iconRef.current.className = `${styles.hide}`
-
-    } else {
-      passwRef.current.type = 'password'
-      iconRef.current.className = ''
+    if (!response.data.token) {
+      throw new Error("Token está indefinido.");
     }
-  }
 
-  async function auth() {
-    try {
-      const response = await axios.get("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
-        email,
-        password: passwRef.current.value,
-      });
-
-      navigate("/")
-      saveToken(response.data.token);
-      alert("Bem vindo!");
-    } catch (error) {
-      alert("Erro ao logar  " + error);
-    }
-    window.location.reload();
+    return response;
   }
 
   function saveToken(token) {
-    localStorage.setItem('token', token)
-    setToken(token)
+      localStorage.setItem("token", token);
+      setToken(token);
+    
   }
+
+  const showHide = () => {
+    if (passwRef.current.type === "password") {
+      passwRef.current.type = "text";
+      iconRef.current.className = `${styles.hide}`;
+    } else {
+      passwRef.current.type = "password";
+      iconRef.current.className = "";
+    }
+  };
+
 
   return (
     <>
@@ -110,7 +118,7 @@ export function Login() {
           </div>
 
           <div>
-            <button type="submit" onClick={handlerSubmit}>
+            <button type="submit" onClick={handleSubmit}>
               Iniciar
             </button>
             <span>
