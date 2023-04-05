@@ -1,12 +1,12 @@
 import styles from './styles.module.css';
 
-export function Card(props) {
+export function Card({img, title, number}) {
     return (
         <div className={styles.card}>
-            <div style={{ backgroundImage: `url(${props.img})` }}></div>
+            <div style={{ backgroundImage: `url(${img})` }}></div>
             <div>
-                <h1>{props.title}</h1>
-                <span>{props.number} hotéis</span>
+                <h1>{title}</h1>
+                <span>{number} hotéis</span>
             </div>
         </div>
     );

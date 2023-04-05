@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary'
 import { ToastContainer } from 'react-toastify'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -10,7 +11,9 @@ export function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Router />
+      <ErrorBoundary>
+        <Router />
+      </ErrorBoundary>
       <Footer />
       <ToastContainer/>
     </BrowserRouter>

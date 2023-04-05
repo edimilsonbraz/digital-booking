@@ -1,12 +1,11 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
-import category from '../../../categories.json'
+import api from '../../service/api'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { ContainerCategory } from '../../components/ContainerCategory'
-import { CardInline } from '../../components/CardInline'
+import { CardCategory } from '../../components/CardCategory'
+import { CardProduct } from '../../components/CardProduct'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -15,25 +14,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
-import api from '../../service/api'
 
 export function Home() {
-  const hotels = category.hotels
-
+  const [products, setProducts] = useState([])
   const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
   useEffect(() => {
     getCidades()
+    getProdutos()
   }, [])
 
   async function getCidades() {
     try {
-      const response = await axios.get(
-        'http://devdigitalbooking.ctdprojetos.com.br:8080/cidades'
-      )
-      console.log(response.data)
+      const response = await api.get('cidades')
       setCities(response.data)
     } catch (error) {
       console.log('Erro ao buscar cidades' + error)
@@ -44,25 +39,36 @@ export function Home() {
     try {
       const response = await api.get('produtoscidades/' + id)
         .then(response => response.data)
-        console.log(response);
-
+      console.log(response);
     } catch (error) {
       console.log('Erro ao buscar produto por cidade ' + error)
     }
   }
+  
+  // State que armazena valor de cidade escolhido no select da pesquisa por cidade
+  const [selectValue, setSelectValue] = useState('');
 
   const handlerSubmit = (e) => {
-    e.preventDefault();
-    console.log(buscarProdutoPorCidade(1));
+    e.preventDefault()
+    console.log(buscarProdutoPorCidade(selectValue));
   }
+
+  async function getProdutos() {
+    try {
+      const response = await api.get('produtos')
+      setProducts(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar produtos' + error)
+    }
+  }
+
 
   return (
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
-
-        <div className={`containerGlobal ${styles.contentInputs}`}>
-          <form action="">
+        <div >
+          <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>
               <label htmlFor="destino">
                 <FontAwesomeIcon icon={faLocationDot} />
@@ -70,13 +76,13 @@ export function Home() {
               <select
                 type="text"
                 id="destino"
-                defaultValue={'DEFAULT'}
+                defaultValue={"DEFAULT"} onChange={e => setSelectValue(e.target.value)}
               >
                 <option value="DEFAULT" disabled>Onde vamos?</option>
 
                 {cities.map((city) => (
-                  <option value={city.nomeCidade} key={city.id}>
-                    {city.nomeCidade}  
+                  <option value={city.id} key={city.id}>
+                    {city.nomeCidade}
                   </option>
                 ))}
               </select>
@@ -110,7 +116,11 @@ export function Home() {
               </label>
             </div>
 
-            <button onClick={handlerSubmit} type="submit" className={styles.buttonBuscar}>
+            <button
+              onClick={handlerSubmit}
+              type="submit"
+              className={styles.buttonBuscar}
+            >
               Buscar
             </button>
           </form>
@@ -120,28 +130,20 @@ export function Home() {
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>
 
-        <ContainerCategory />
+        <CardCategory products={products}/>
       </section>
 
       <section className={styles.containerRecomendacao}>
         <div className={styles.contentRecomendacao}>
           <h2>Recomendações</h2>
-
           <div className={styles.containerCard}>
-            {hotels.map((item) => {
-              return (
-                <CardInline
-                  key={item.id}
-                  id={item.id}
-                  img={item.img}
-                  star={item.star}
-                  numberAvaliation={item.numberAvaliation}
-                  textAvaliation={item.textAvaliation}
-                  title={item.title}
-                  description={item.description}
-                />
-              )
-            })}
+            {products.length ? (
+              products.map((product) => (
+                <CardProduct product={product} key={product.id} />
+              ))
+            ) : (
+              <h2>Não há produtos adicionados no Site!</h2>
+            )}
           </div>
         </div>
       </section>

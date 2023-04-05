@@ -1,6 +1,8 @@
 .containerBuscador {
-  background-color: var(--title);
-  padding: 2rem;
+  background: url("../../assets/bg-search-box.jpg") no-repeat center center;
+  background-size: cover;
+  opacity: 0.8;
+  padding: 4rem;
   text-align: center;
 }
 
@@ -91,7 +93,7 @@
   background-color: var(--white);
 }
 
-/* =============== */
+/* ======== CATEGORY ========== */
 .category {
   max-width: 1250px;
   margin-bottom: 2rem;
@@ -102,7 +104,7 @@
   margin: 1.5rem 0;
 }
 
-/* ============================ */
+/* ============= RECOMENDAÇOES =============== */
 .containerRecomendacao {
   margin-top: 4rem;
   margin-bottom: 6rem;
@@ -122,6 +124,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 
 /* REPONSIVIDADE DESKTOP */
 @media screen and (max-width: 1262PX) {
@@ -154,10 +157,6 @@
   .containerCard {
     display: block;
   }
-
-  .contentCard .contentDescription {
-    padding: 1rem;
-  }
 }
 
 @media screen and (max-width:750px) {
@@ -181,7 +180,6 @@
     width: 100%;
     margin-top: 0.5rem;
   }
-
 
 }
 
