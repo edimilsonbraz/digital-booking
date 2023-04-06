@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
+import { Search } from '../../components/Search'
 
 export function Home() {
   const [products, setProducts] = useState([])
@@ -67,6 +68,8 @@ export function Home() {
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+        <Search />
+        
         <div >
           <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>

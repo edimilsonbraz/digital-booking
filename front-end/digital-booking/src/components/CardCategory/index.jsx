@@ -8,7 +8,7 @@ export function CardCategory({products}) {
   const navigate = useNavigate()
 
   const [category, setCategory] = useState([])
-  const [productByCategory, setProductByCategory] = useState("")
+  // const [productByCategory, setProductByCategory] = useState("")
 
   useEffect(() => {
     getCategory()
@@ -24,20 +24,21 @@ export function CardCategory({products}) {
 
   }
 
-  function handleNavigate(categoria) {
+  async function handleNavigate(categoria) {
     navigate('/produtos-por-categoria/' + categoria)
-  }
 
+  }
+  
   //Filtra os Produtos por Categoria
-  async function handleFilterCategory(categoryClicked) {
-    const filterCategory = products.filter(product => {
-      return product.categoria.descricaoCategoria === categoryClicked
-    })
+  // async function handleFilterCategory(categoryClicked) {
+  //   const filterCategory = products.filter(product => {
+  //     return product.categoria.descricaoCategoria === categoryClicked
+  //   })
     
-    setProductByCategory(filterCategory)
+  //   setProductByCategory(filterCategory)
     
 
-  }
+  // }
 
   return (
     <div className={styles.containerCategory}>
