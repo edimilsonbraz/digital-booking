@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom'
 import style from './style.module.css'
 import { Link } from 'react-router-dom'
 
+import { useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { IsLoggedContext } from '../../context/IsLoggedContext';
+
 //Importes do slide
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
@@ -25,8 +30,33 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
+import axios from 'axios'
+
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export function Product() {
+
+  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
+  const navigateTo = useNavigate();
+
+
+  const reservarProduto = () => {
+    if (isLogged) {
+      //Se estiver logado
+      // Ir para a pagina de reserva do produto
+    const url = new URL(window.location.href);
+
+    navigateTo(url.pathname + '/reserva');
+
+    } else {
+      // Se usuario nao estiver logado 
+      //Ir pra pagina de login e exibir uma mensagem especifica
+    navigateTo('/login');
+    toast.error("Para fazer uma reserva você precisa estar logado!");
+    }
+  }
+
   const { id } = useParams()
 
   const [data, setData] = useState({
@@ -34,12 +64,12 @@ export function Product() {
     titulo: 'Hermitage Hotel',
     localizacao: 'Buenos Aires, Argentina - 900m da praia',
     fotos: [
-      'https://picsum.photos/id/12/3000',
-      'https://picsum.photos/id/13/3000',
-      'https://picsum.photos/id/37/3000',
-      'https://picsum.photos/id/49/3000',
-      'https://picsum.photos/id/57/3000',
-      'https://picsum.photos/id/58/3000'
+      'https://picsum.photos/id/12/600/338',
+      'https://picsum.photos/id/13/600/338',
+      'https://picsum.photos/id/37/600/338',
+      'https://picsum.photos/id/49/600/338',
+      'https://picsum.photos/id/57/600/338',
+      'https://picsum.photos/id/58/600/338'
     ]
   })
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -65,7 +95,9 @@ export function Product() {
     politicas: ''
   })
 
-  useEffect(() => {}, [id])
+  useEffect(() => {
+    getProduct()
+  }, [])
 
   const slide = () => setSlides(!slides)
 
@@ -73,13 +105,28 @@ export function Product() {
   const [titulo, setTitulo] = useState('')
   const [localizacao, setLocalizacao] = useState('')
 
+  const [newProduct, setNewProduct] = useState([])
+
+  async function getProduct() {
+    try {
+      const response = await axios.get(
+        `http://devdigitalbooking.ctdprojetos.com.br:8080/produtos/${id}`
+      )
+      setNewProduct(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar produto por id ' + error)
+    }
+  }
+
+  console.log(newProduct)
+
   return (
     <>
       <section className={style.ContainerProduct}>
         <div className={style.headerdetails}>
           <div className={style.title}>
-            <span>{data.categoria}</span>
-            <h1>{data.titulo}</h1>
+            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            <h1>{newProduct.nomeProduto}</h1>
           </div>
           <div className={style.backpage}>
             <Link to="/">
@@ -92,7 +139,8 @@ export function Product() {
 
         <div className={style.locationdetails}>
           <FontAwesomeIcon icon={faLocationDot} />
-          <p>{data.localizacao}</p>
+          {/* <p>{newProduct.cidades.nomeCidade}</p> */}
+          {/* <span>{newProduct.cidades.pais}</span>  */}
         </div>
 
         {/* Grid de 5 primeiras imagens*/}
@@ -170,9 +218,8 @@ export function Product() {
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
-                  className={`${style.dot} ${
-                    currentSlide === idx ? style.active : ''
-                  }`}
+                  className={`${style.dot} ${currentSlide === idx ? style.active : ''
+                    }`}
                 ></button>
               )
             })}
@@ -184,29 +231,7 @@ export function Product() {
         <div className={style.descricao}>
           <h2>Descrição</h2>
           <div className={style.separator}></div>
-          <p>
-            Este luxuoso hotel está localizado junto aos teleféricos Grandvalira
-            em Soldeu. Com quartos e apartamentos, o Sport Hotel Hermitage & Spa
-            dispõe de um spa no local. Os quartos do Sport Hotel Hermitage & Spa
-            apresentam mobiliário de alta qualidade e roupa de cama em algodão
-            egípcio. Cada um tem televisão LCD por satélite, cofre, máquina de
-            café e mini-bar. A casa de banho privativa inclui uma banheira de
-            hidromassagem e um secador de cabelo. Está disponível acesso Wi-Fi
-            gratuito. Os hóspedes adultos do Sport Hotel Hermitage & Spa têm
-            acesso diário gratuito ao impressionante Sport Wellness Mountain Spa
-            durante 2 horas consecutivas por dia. Inclui piscinas de
-            temperaturas variadas, uma grande piscina com jactos e 2 banhos de
-            hidroterapia exteriores com vista para as pistas.
-          </p>
-          <p>
-            O Restaurante Ibaya do hotel serve refeições gourmet, enquanto o
-            Restaurante Hermitage Tradició serve cozinha tradicional, apenas
-            durante os meses de Inverno. O hotel também abriga um restaurante
-            gastronômico japonês, o Koy Hermitage, aberto durante os meses de
-            verão e inverno. Localizado no último andar, o elegante Glassbar
-            oferece coquetéis, cozinha de fusão e vistas incríveis. O acesso
-            Wi-Fi gratuito está disponível em todo o hotel.
-          </p>
+          <p>{newProduct.descricaoProduto}</p>
         </div>
       </section>
 
@@ -242,7 +267,7 @@ export function Product() {
         </div>
       </section>
 
-      <section className={`containerGlobal`}>
+      <section className={`containerGlobal ${style.policyReserva}`}>
         <Policy />
       </section>
 
@@ -255,7 +280,7 @@ export function Product() {
 
             <div className={style.calenderText}>
               <p>Adicione as datas da sua viagem para obter preços exatos</p>
-              <button>Iniciar reserva</button>
+              <button onClick={reservarProduto}>Iniciar reserva</button>
             </div>
           </div>
         </div>
@@ -263,4 +288,3 @@ export function Product() {
     </>
   )
 }
-// useEffect(() => {}, [id])

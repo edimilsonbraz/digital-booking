@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import category from '../../../categories.json'
-// import products from '../../../products.json'
+import { useEffect, useState } from 'react'
+import api from '../../service/api'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { ContainerCategory } from '../../components/ContainerCategory'
-import { CardInline } from '../../components/CardInline'
+import { CardCategory } from '../../components/CardCategory'
+import { CardProduct } from '../../components/CardProduct'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -15,154 +14,136 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
-const products = [
-  {
-    id: 1,
-    nome: 'Alagoas',
-    produtos: [
-      {
-        nome: 'Maceió'
-      },
-      {
-        nome: 'Arapiraca'
-      },
-      {
-        nome: 'Palmeira dos Índios'
-      },
-      {
-        nome: 'Rio Largo'
-      },
-      {
-        nome: 'Penedo'
-      }
-    ]
-  },
-  { id: 2, nome: 'Bahia', produtos: [] },
-  { id: 3, nome: 'Sergipe', produtos: [] },
-  { id: 4, nome: 'Ceará', produtos: [] }
-]
+
 export function Home() {
-  const hotels = category.hotels
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filteredProducts, setFilteredProducts] = useState([])
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value)
-  }
-
-  function filterCity() {
-    const filterProducts = products.filter((product) =>
-      product.nome.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    setFilteredProducts(filterProducts)
-  }
-  // console.log(filteredProducts)
-
+  const [products, setProducts] = useState([])
+  const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
-  // function onChange(dates) {
-  //   event.preventDefault()
-  //   const [start, end] = dates
-  //   setStartDate(start)
-  //   setEndDate(end)
-  //   console.log(startDate + '==>' + endDate)
-  // }
+  useEffect(() => {
+    getCidades()
+    getProdutos()
+  }, [])
+
+  async function getCidades() {
+    try {
+      const response = await api.get('cidades')
+      setCities(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar cidades' + error)
+    }
+  }
+
+  async function buscarProdutoPorCidade(id) {
+    try {
+      const response = await api.get('produtoscidades/' + id)
+        .then(response => response.data)
+      console.log(response);
+    } catch (error) {
+      console.log('Erro ao buscar produto por cidade ' + error)
+    }
+  }
+  
+  // State que armazena valor de cidade escolhido no select da pesquisa por cidade
+  const [selectValue, setSelectValue] = useState('');
+
+  const handlerSubmit = (e) => {
+    e.preventDefault()
+    console.log(buscarProdutoPorCidade(selectValue));
+  }
+
+  async function getProdutos() {
+    try {
+      const response = await api.get('produtos')
+      setProducts(response.data)
+    } catch (error) {
+      console.log('Erro ao buscar produtos' + error)
+    }
+  }
+
 
   return (
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+        <div >
+          <form action="" className={`containerGlobal ${styles.contentInputs}`}>
+            <div className={styles.inputs}>
+              <label htmlFor="destino">
+                <FontAwesomeIcon icon={faLocationDot} />
+              </label>
+              <select
+                type="text"
+                id="destino"
+                defaultValue={"DEFAULT"} onChange={e => setSelectValue(e.target.value)}
+              >
+                <option value="DEFAULT" disabled>Onde vamos?</option>
 
-        <div className={`containerGlobal ${styles.contentInputs}`}>
-          {/* <form action=""> */}
-          <div className={styles.inputs}>
-            <label htmlFor="destino">
-              <FontAwesomeIcon icon={faLocationDot} />
-            </label>
-            <input
-              type="text"
-              id="destino"
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="Onde vamos?"
-              required
-            />
-          </div>
+                {cities.map((city) => (
+                  <option value={city.id} key={city.id}>
+                    {city.nomeCidade}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className={styles.inputs}>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-in"
-            />
+            <div className={styles.inputs}>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-in"
+              />
 
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              className={styles.inputDatePicker}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Check-out"
-            />
-            <label htmlFor="check-out">
-              <FontAwesomeIcon icon={faCalendarCheck} />
-            </label>
-          </div>
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                className={styles.inputDatePicker}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Check-out"
+              />
+              <label htmlFor="check-out">
+                <FontAwesomeIcon icon={faCalendarCheck} />
+              </label>
+            </div>
 
-          <button
-            type="submit"
-            className={styles.buttonBuscar}
-            onClick={filterCity}
-          >
-            Buscar
-          </button>
-          {/* </form> */}
+            <button
+              onClick={handlerSubmit}
+              type="submit"
+              className={styles.buttonBuscar}
+            >
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
 
-      {/* <div>
-        <h1>Produtos Filtrados</h1>
-        <ul>
-          {filteredProducts.map((product) => (
-            <li key={product.id}>{product.nome}</li>
-          ))}
-        </ul>
-      </div> */}
-
       <section className={`containerGlobal ${styles.category}`}>
-      {/* <section className={styles.category}> */}
         <h2>Buscar por tipo de acomodação</h2>
-        <ContainerCategory />
+
+        <CardCategory products={products}/>
       </section>
 
       <section className={styles.containerRecomendacao}>
         <div className={styles.contentRecomendacao}>
           <h2>Recomendações</h2>
-
           <div className={styles.containerCard}>
-            {hotels.map((item) => {
-              return (
-                <CardInline
-                  key={item.title}
-                  img={item.img}
-                  star={item.star}
-                  numberAvaliation={item.numberAvaliation}
-                  textAvaliation={item.textAvaliation}
-                  title={item.title}
-                  description={item.description}
-                />
-              )
-            })}
+            {products.length ? (
+              products.map((product) => (
+                <CardProduct product={product} key={product.id} />
+              ))
+            ) : (
+              <h2>Não há produtos adicionados no Site!</h2>
+            )}
           </div>
         </div>
       </section>

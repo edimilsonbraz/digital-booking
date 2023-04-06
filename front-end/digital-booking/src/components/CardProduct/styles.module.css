@@ -5,7 +5,6 @@
   margin-bottom: 1.5rem;
   margin-left: 0.2rem;
   background-color: var(--white);
-  padding-bottom: 10px;
 }
 
 .containerCardInline:nth-child(odd) {
@@ -23,12 +22,12 @@
 .contentCard .contentImage img {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   object-fit: cover;
 }
 
 .contentCard .contentDescription {
-  width: 50%;
+  width: 52%;
   padding: 1rem 1rem 0px;
   margin-bottom: 0.875rem;
 }
@@ -45,6 +44,7 @@
 
 .contentDescription .contentAvaliation {
   display: flex;
+  gap: 0.2rem;
   justify-content: space-between;
 }
 
@@ -73,6 +73,7 @@
 .contentAvaliation .avaliation p {
   color: var(--text);
   text-align: center;
+  font-size: 0.875rem;
 }
 
 .contentIcons {
@@ -95,18 +96,29 @@
   margin-right: 0.875rem;
 }
 
-.contentText p {
-  margin-bottom: 1rem;
+.contentText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
+
+/* .contentText .contentTextDescription {
+  margin-bottom: 1rem;
+} 
+*/
 
 button.button {
   width: 100%;
   height: 2.5rem;
   border-radius: 6px;
   color: var(--white);
+  font-size: 1rem;
   font-weight: bold;
   background-color: var(--primary);
   border: 1px solid transparent;
+  margin-top: 1rem;
   transition: all ease-in-out .2s;
 }
 
@@ -151,6 +163,10 @@ button.button:hover {
 }
 
 @media screen and (max-width: 799px) {
+  .contentCard .contentDescription {
+    padding: 1rem;
+  }
+
   .containerCardInline {
     max-width: 100%;
     margin: 1rem;

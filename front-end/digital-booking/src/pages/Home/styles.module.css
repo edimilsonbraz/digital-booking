@@ -1,6 +1,8 @@
 .containerBuscador {
-  background-color: var(--title);
-  padding: 2rem;
+  background: url("../../assets/bg-search-box.jpg") no-repeat center center;
+  background-size: cover;
+  opacity: 0.8;
+  padding: 4rem;
   text-align: center;
 }
 
@@ -38,12 +40,17 @@
   left: 12px;
 }
 
-.contentInputs .inputs input {
+.contentInputs .inputs select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  line-height: 1;
   width: 100%;
+
   height: 3rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding-left: 2.5rem;
-  border-radius: 6px;
+  
 }
 
 .contentInputs .inputs .inputDatePicker {
@@ -86,7 +93,7 @@
   background-color: var(--white);
 }
 
-/* =============== */
+/* ======== CATEGORY ========== */
 .category {
   max-width: 1250px;
   margin-bottom: 2rem;
@@ -97,7 +104,7 @@
   margin: 1.5rem 0;
 }
 
-/* ============================ */
+/* ============= RECOMENDAÇOES =============== */
 .containerRecomendacao {
   margin-top: 4rem;
   margin-bottom: 6rem;
@@ -117,6 +124,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 
 /* REPONSIVIDADE DESKTOP */
 @media screen and (max-width: 1262PX) {
@@ -149,10 +157,6 @@
   .containerCard {
     display: block;
   }
-
-  .contentCard .contentDescription {
-    padding: 1rem;
-  }
 }
 
 @media screen and (max-width:750px) {
@@ -177,7 +181,6 @@
     margin-top: 0.5rem;
   }
 
-
 }
 
 /* RESPONSIVIDADE MOBILE */
@@ -185,15 +188,4 @@
   .containerBuscador {
     padding: 1rem;
   }
-
-
-
-
-
-
-
-
-
-
-
 }

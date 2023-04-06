@@ -5,23 +5,15 @@ import br from 'date-fns/locale/pt-BR'
 registerLocale('br', br)
 
 import style from './style.module.css'
-import { useState } from 'react'
 
-export function Calender() {
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const onChange = (dates) => {
-    const [start, end] = dates
-    setStartDate(start)
-    setEndDate(end)
-  }
+export function Calender({onChangeDates, startDate, endDate}) {
+  
 
   return (
     <div className={style.contentCalender}>
       <DatePicker
-        className={style.reactDatepicker__monthContainer}
         selected={startDate}
-        onChange={onChange}
+        onChange={onChangeDates}
         startDate={startDate}
         endDate={endDate}
         selectsRange

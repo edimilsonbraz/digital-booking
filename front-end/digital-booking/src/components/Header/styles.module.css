@@ -46,6 +46,18 @@
 }
 
 
+.headerButtons span{
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 300;
+  letter-spacing: .2rem;
+  padding-right: 5rem;
+  padding-top: 0.5rem;
+  
+
+}
+
 /* RESPONSIVIDADE TABLET */
 @media screen and (max-width:850px) {
 

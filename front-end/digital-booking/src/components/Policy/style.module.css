@@ -5,6 +5,7 @@
   margin-bottom: 50px;  
 }
 
+
 .policy .separator {
   border-top: 2px solid #333;
   border-color: var(--light);
@@ -15,8 +16,8 @@
 .policy .politicas {
   padding: 1.56rem 0;  
   display: grid;
-  gap: 2rem;
-  grid-template-columns: 25% 37.5% 37.5% ; 
+  gap: 0.875rem;
+  grid-template-columns: 33% 33% 33%; 
   grid-template-rows: 5rem 5rem;
 }
 
@@ -32,34 +33,35 @@
 .policy .politicas ul {
   margin-top: 1.5rem;
   font-size: 1rem;
-  list-style: none;
+  list-style-position: inside;
 }
 
 .policy .politicas ul li {
   margin-bottom: 1rem;
 }
 
-/*Mobile*/
-@media screen and (max-width: 450px) {
-  .policy .politicas 
-  {
-  margin: 10px;  
-  display: grid;
-  grid-template-columns: 100%; 
-  grid-template-rows: 33%;
+/*TABLET*/
+@media screen and (max-width: 768px) {
+  .policy .politicas {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50%;
   }
-
-  .policy .politicas ul
-  {
-  margin-top: 1.8rem;
-  font-size: 1.8rem;
-  
-  }
-
-  .policy .politicas h3
-{
-  color: #333;
-  font-size: 2.1rem;
 }
+
+/*MOBILE*/
+@media screen and (max-width: 479px) {
+  .policy {
+    margin-bottom: 25px;
+  }
+  .policy .politicas {
+    margin: 10px;  
+    grid-template-columns: 100%; 
+    grid-template-rows: 33%;
+  }
+
+  .policy .politicas h3 {
+    color: #333;
+    font-size: 1.5rem;
+  }
 
 }
