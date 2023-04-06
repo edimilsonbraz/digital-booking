@@ -21,19 +21,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class ProdutosController {
 
     private ProdutosServiceImpl produtosService;
-    private CategoriaServiceImpl categoriaService;
-    private CidadesServiceImpl cidadesService;
 
     @Autowired
-    public ProdutosController(ProdutosServiceImpl produtosService, CategoriaServiceImpl categoriaService, CidadesServiceImpl cidadesService) {
+    public ProdutosController(ProdutosServiceImpl produtosService) {
         this.produtosService = produtosService;
-        this.categoriaService = categoriaService;
-        this.cidadesService = cidadesService;
     }
-
 
     /// POST
     @PostMapping("/produtos/salvar")

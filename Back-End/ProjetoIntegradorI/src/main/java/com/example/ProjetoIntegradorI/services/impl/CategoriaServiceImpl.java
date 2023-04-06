@@ -1,9 +1,7 @@
 package com.example.ProjetoIntegradorI.services.impl;
 
 import com.example.ProjetoIntegradorI.models.CategoriaModel;
-import com.example.ProjetoIntegradorI.models.UsuarioModel;
 import com.example.ProjetoIntegradorI. repositories.CategoriaRepository;
-import com.example.ProjetoIntegradorI.repositories.UsuarioRepository;
 import com.example.ProjetoIntegradorI.services.IBookingService;
 import org.springframework.stereotype.Service;
 

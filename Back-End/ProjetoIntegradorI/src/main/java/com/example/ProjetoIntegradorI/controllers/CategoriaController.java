@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CategoriaController {
 
     private CategoriaServiceImpl categoriaService;
@@ -67,25 +68,5 @@ public class CategoriaController {
         }
         throw new ResourceNotFoundException("Não foi encontrada a categoria com o id " + id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
