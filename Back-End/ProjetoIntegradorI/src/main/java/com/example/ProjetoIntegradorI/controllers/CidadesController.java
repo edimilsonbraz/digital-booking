@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin
+
 @RestController
 @CrossOrigin(origins = "*")
 public class CidadesController {

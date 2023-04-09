@@ -1,4 +1,4 @@
-package com.example.ProjetoIntegradorI;
+/* package com.example.ProjetoIntegradorI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class ProjetoIntegradorIApplicationTests {
 	void contextLoads() {
 	} */
 
-}
+/*} */
