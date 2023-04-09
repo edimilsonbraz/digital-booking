@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
+@CrossOrigin(origins = "*")
 public class CidadesController {
 
     private CidadesServiceImpl cidadesService;

@@ -1,9 +1,13 @@
 package com.example.ProjetoIntegradorI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,17 +22,13 @@ public class ImagensModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /// Relacionamento ManyToOne com Produtos
-    @ManyToOne
-    @JoinColumn(name="produtos_id", nullable = false)
-    private ProdutosModel produtos;
 
     private String tituloImagem;
     private String urlImagem;
 
-    public ImagensModel(String tituloImagem, String urlImagem) {
+    public ImagensModel(Long id, String tituloImagem, String urlImagem) {
+        this.id = id;
         this.tituloImagem = tituloImagem;
         this.urlImagem = urlImagem;
     }
-
 }

@@ -66,11 +66,6 @@ public class ProdutosServiceImpl implements IBookingService<ProdutosModel> {
         return false;
     }
 
-    //    public List<ProdutosModel> getProductsByCategory(Long categoriaId) {
-//        CategoriaModel categoriaModel = categoriaRepository.findById(categoriaId).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
-//        List<ProdutosModel> products = produtosRepository.findByCategory(category);
-//        return products;
-//    }
     public List<ProdutosModel> findByCategoria(Long id) throws ResourceNotFoundException {
         CategoriaModel categoriaModel = categoriaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category not found"));
         return produtosRepository.findByCategoria(categoriaModel);

@@ -51,7 +51,7 @@ export function Home() {
 
   const handlerSubmit = (e) => {
     e.preventDefault()
-    console.log(buscarProdutoPorCidade(1))
+    console.log(buscarProdutoPorCidade(selectValue));
   }
 
   async function getProdutos() {
