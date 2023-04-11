@@ -1,7 +1,11 @@
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import api from '../../service/api';
+
+import ptBR from 'date-fns/locale/pt-BR';
+import { format } from 'date-fns';
+
+import { ToastContainer, toast } from 'react-toastify';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
@@ -9,16 +13,25 @@ import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 import HeaderDetails from '../../components/HeaderDetails'
+import { Loading } from '../../components/Loading';
 
 import style from './style.module.css'
 
 export function Reserva() {
+  const navigate = useNavigate()
+
+
+  //TODO: Pega os dados do usuário
+  // const { usuario, userToken } = useContext(UsuarioContext)
+
+  // TODO: Pega os dados do produto de reserva
+  
+
   const [cidade, setCidade] = useState('')
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [hora, setHora] = useState('')
-
-  const navigate = useNavigate()
+  const [removeLoading, setRemoveLoading] = useState(false)
 
   // Evento que pega as datas de reserva
   const onChangeDates = (dates) => {
@@ -38,28 +51,50 @@ export function Reserva() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    if(cidade !== '') {
-      console.log("Cidade escolhida => " + cidade)
-    }else {
-      alert("Preencha o campo cidade")
+    reserve()
+  }
+  
+  async function reserve() {
+    // setRemoveLoading(false)
+    const data = {
+      dataCheckIn: startDate,
+      dataCheckOut: endDate,
+      horaInicioReserva: hora,
+      produtos: {
+        id: ""
+      },
+      usuario: {
+        id: "",
+        role: "ADMIN"
+      }
     }
+    console.log(data)
+    try {
+      if(cidade == '') {
+        // alert("Preencha o campo cidade")
+      }
+  
+      if(hora == '') {
+        // alert("Preencha o horario de chegada")
+      }
+  
+      if(startDate == null) {
+        // alert("Selecione as datas que deseja reservar")
+      }
 
-    if(hora !== '') {
-      console.log("Horário de chegada => " + hora)
-    }else {
-      alert("Preencha o horario de chegada")
+      // ===============//
+      await api.post('produto/:id/reserva', data, {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      })
+
+      toast('Reserva efetuadao!!! ', {type: "success", autoClose: 2000})
+      setRemoveLoading(true)
+      navigate("/sucesso")
+    } catch (error) {
+      toast('Infelizmente, a reserva não pôde ser completada.', {type: "error", autoClose: 2000})
     }
-
-    if(startDate !== null) {
-      
-      setTimeout(() => {
-        navigate("/sucesso")
-
-      }, 2000)
-    }else {
-      alert("Selecione as datas que deseja reservar")
-    }
-   
   }
   
   return (
@@ -211,6 +246,8 @@ export function Reserva() {
 
             <div className={style.buttonSubmit}>
               <button type="submit">Confirmar reserva</button>
+
+              {!removeLoading && <Loading />}
             </div>
           </div>
         </section>
@@ -221,6 +258,8 @@ export function Reserva() {
           <Policy />
         </div>
       </section>
+
+      <ToastContainer />
     </>
   )
 }

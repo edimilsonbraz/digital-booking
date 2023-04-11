@@ -2,7 +2,7 @@
   background: url("../../assets/bg-search-box.jpg") no-repeat center center;
   background-size: cover;
   opacity: 0.8;
-  padding: 4rem;
+  padding: 6rem;
   text-align: center;
 }
 
@@ -19,12 +19,13 @@
 }
 
 
-
 /*  */
 .contentInputs {
   display: flex;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
   align-items: center;
+
+  border: 2px solid var(--primary);
 }
 
 .contentInputs .inputs {
@@ -47,10 +48,21 @@
   line-height: 1;
   width: 100%;
 
-  height: 3rem;
+
+  /* border-radius: 6px; */
+  background: white;
+  height: 3.1rem;
   font-size: 1rem;
   padding-left: 2.5rem;
   
+}
+
+.contentInputs .inputs select:focus {
+  outline: 0;
+}
+
+.contentInputs .inputs select option {
+  background: white;
 }
 
 .contentInputs .inputs .inputDatePicker {
@@ -58,7 +70,14 @@
   height: 3rem;
   font-size: 0.875rem;
   padding-left: 2.5rem;
-  border-radius: 6px;
+  border: none;
+  /* border-radius: 6px; */
+
+  /* margin-right: 12px; */
+}
+
+.contentInputs .inputs .inputDatePicker:focus {
+  outline: none;
 }
 
 .contentInputs .inputs input::placeholder {
@@ -71,9 +90,9 @@
 
 .contentInputs button.buttonBuscar {
   width: 20%;
-  height: 3rem;
+  height: 3.1rem;
   border: 1px solid transparent;
-  border-radius: 6px;
+  /* border-radius: 6px; */
 
   font-size: 1rem;
   font-weight: bold;
@@ -176,11 +195,14 @@
     top: 30px;
   }
 
-  .contentInputs button {
-    width: 100%;
+  .contentInputs input {
     margin-top: 0.5rem;
   }
 
+  .contentInputs button.buttonBuscar {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }
 
 /* RESPONSIVIDADE MOBILE */
