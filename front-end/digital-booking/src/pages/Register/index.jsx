@@ -17,8 +17,8 @@ export function Register() {
   const [email, setEmail] = useState('');
 
   //Gerenciamento de erros do form com useState
-  const [nome, setNome] = useState(false);
-  const [sobrenome, setSobrenome] = useState(false);
+  const [firstname, setNome] = useState(false);
+  const [lastname, setSobrenome] = useState(false);
   const [password, setPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -26,24 +26,27 @@ export function Register() {
   const navigate = useNavigate()
 
   async function registerUser(userData) {
-    return await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario/salvar", userData);
+    return await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/api/v1/auth/register", userData);
   }
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
 
     const userData = {
-      nome: nomeRef.current.value,
-      sobrenome: sobrenomeRef.current.value,
+      firstname: nomeRef.current.value,
+      lastname: sobrenomeRef.current.value,
       email: email,
       password: passwRef.current.value
+
     };
 
-
-    navigate("/Login")
+    
+    console.log(userData)
   
     try {
       const response = await registerUser(userData);
+      navigate("/Login")
+      alert("Usuario cadastrado! Agora só logar.")
       console.log(response); // Tratar a resposta do servidor aqui
     } catch (error) {
       console.log(error); // Tratar o erro aqui
@@ -52,12 +55,12 @@ export function Register() {
 
 
 
-
+    checkName(nomeRef.current.value) ? setNome(false) : setNome(true);
+    checkName(sobrenomeRef.current.value) ? setSobrenome(false) : setSobrenome(true);
     checkEmail(email) ? setEmailError(false) : setEmailError(true);
     checkPassword(passwRef.current.value) ? setPassword(false) : setPassword(true);
     checkConfirmPassword(passwRef.current.value, confirmPasswRef.current.value) ? setConfirmPassword(false) : setConfirmPassword(true);
-    checkName(nomeRef.current.value) ? setNome(false) : setNome(true);
-    checkName(sobrenomeRef.current.value) ? setSobrenome(false) : setSobrenome(true);
+    
   };
 
   
@@ -81,11 +84,11 @@ export function Register() {
         <div>
           <div>
             <label htmlFor="name">Nome</label>
-            <input className={nome ? 'border-error' : ''} ref={nomeRef} type="text" name="" id="name" />
+            <input className={firstname ? 'border-error' : ''} ref={nomeRef} type="text" name="" id="name" />
           </div>
           <div>
             <label htmlFor="lastname">Sobrenome</label>
-            <input className={sobrenome ? 'border-error' : ''} ref={sobrenomeRef} type="text" name="" id="lastname" />
+            <input className={lastname ? 'border-error' : ''} ref={sobrenomeRef} type="text" name="" id="lastname" />
           </div>
         </div>
         <div>
@@ -110,10 +113,10 @@ export function Register() {
           <span>Já tem uma conta? <Link to="/login">Iniciar sessão</Link></span>
         </div>
       </form>
-      {nome || sobrenome || password || confirmPassword || emailError ? <div className={styles.containerError}>
+      {firstname || firstname || password || confirmPassword || emailError ? <div className={styles.containerError}>
         <ul>
-          {nome ? <li> * O nome digitado não é válido</li> : ''}
-          {sobrenome ? <li> * O sobrenome digitado não é válido</li> : ''}
+          {firstname ? <li> * O nome digitado não é válido</li> : ''}
+          {lastname ? <li> * O sobrenome digitado não é válido</li> : ''}
           {emailError ? <li> * E-mail digitado não é válido</li> : ''}
           {password ? <li> * A senha deve ter mais de seis caracteres.</li> : ''}
           {confirmPassword ? <li> * As senhas devem ser idênticas</li> : ''}
