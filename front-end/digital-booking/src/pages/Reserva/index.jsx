@@ -31,7 +31,7 @@ export function Reserva() {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [hora, setHora] = useState('')
-  const [removeLoading, setRemoveLoading] = useState(false)
+  // const [removeLoading, setRemoveLoading] = useState(false)
 
   // Evento que pega as datas de reserva
   const onChangeDates = (dates) => {
@@ -71,18 +71,18 @@ export function Reserva() {
     console.log(data)
     try {
       if(cidade == '') {
-        // alert("Preencha o campo cidade")
+        alert("Preencha o campo cidade")
       }
   
       if(hora == '') {
-        // alert("Preencha o horario de chegada")
+        alert("Preencha o horario de chegada")
       }
   
       if(startDate == null) {
-        // alert("Selecione as datas que deseja reservar")
+        alert("Selecione as datas que deseja reservar")
       }
 
-      // ===============//
+      // Implementação da Reserva //
       await api.post('produto/:id/reserva', data, {
         headers: {
           Authorization: `Bearer ${userToken}`
@@ -90,7 +90,7 @@ export function Reserva() {
       })
 
       toast('Reserva efetuadao!!! ', {type: "success", autoClose: 2000})
-      setRemoveLoading(true)
+      // setRemoveLoading(true)
       navigate("/sucesso")
     } catch (error) {
       toast('Infelizmente, a reserva não pôde ser completada.', {type: "error", autoClose: 2000})

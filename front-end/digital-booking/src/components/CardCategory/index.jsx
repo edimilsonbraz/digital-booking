@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import api from '../../service/api'
 
 import styles from './styles.module.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { Category } from '../../pages/Category'
+import { useNavigate } from 'react-router-dom'
 
 export function CardCategory({ filteredProductQnt }) {
   const navigate = useNavigate()
@@ -28,8 +27,7 @@ export function CardCategory({ filteredProductQnt }) {
     navigate('/produtos-por-categoria/' + categoria)
   }
 
-  console.log(category)
-
+  
   return (
     <div className={styles.containerCategory}>
       <div className={styles.containerCard}>

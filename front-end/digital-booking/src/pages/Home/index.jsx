@@ -67,7 +67,7 @@ export function Home() {
       const response = await api.get('produtos')
       .then(response => response.data)
       setProducts(response)
-
+      console.log(response)
       setFilteredProductQnt({
         apartamento: response.filter(
           (produto) => produto.categoria.descricaoCategoria === "Apartamento"
@@ -87,8 +87,6 @@ export function Home() {
       console.log('Erro ao buscar produtos' + error)
     }
   }
-
-  console.log(filteredProductQnt)
 
   return (
     <>
@@ -167,7 +165,7 @@ export function Home() {
           <h2>Recomendações</h2>
 
           <div className={styles.containerCard}>
-            {products.length ? (
+            {products.length > 0 ? (
               products.map((product) => (
                 <CardProduct product={product} key={product.id} />
               ))
