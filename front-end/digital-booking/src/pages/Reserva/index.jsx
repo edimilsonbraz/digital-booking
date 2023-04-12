@@ -31,7 +31,7 @@ export function Reserva() {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [hora, setHora] = useState('')
-  // const [removeLoading, setRemoveLoading] = useState(false)
+  const [removeLoading, setRemoveLoading] = useState(false)
 
   // Evento que pega as datas de reserva
   const onChangeDates = (dates) => {
