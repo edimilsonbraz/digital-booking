@@ -32,7 +32,7 @@ export function Header() {
   function handleLogout() {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-    setNome('');
+    navigate("/");
     window.location.reload();
   }
 
