@@ -42,7 +42,7 @@ export function Product() {
   const { isLogged, toggleIsLogged } = useContext(IsLoggedContext)
   const { newProduct, setNewProduct } = useContext(ProductContext)
   const [loading, setLoading] = useState(true)
-  
+
 
   const navigateTo = useNavigate()
 
@@ -101,14 +101,21 @@ export function Product() {
 
   useEffect(() => {
     getProduct()
+    // console.log('Renderizei')
   }, [])
 
   async function getProduct() {
-    const response = await api.get(`produtos/${id}`)
-      .then((response) => response.data)
-    console.log(response)
-    setNewProduct(response)
-    setLoading(false)
+    try {
+      const response = await api.get(`produtos/${id}`)
+        .then((response) => response.data)
+      // console.log(response)
+      setNewProduct(response)
+      setLoading(false)
+    } catch
+    {
+
+    }
+
   }
 
   const slide = () => setSlides(!slides)
@@ -193,9 +200,8 @@ export function Product() {
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
-                  className={`${style.dot} ${
-                    currentSlide === idx ? style.active : ''
-                  }`}
+                  className={`${style.dot} ${currentSlide === idx ? style.active : ''
+                    }`}
                 ></button>
               )
             })}

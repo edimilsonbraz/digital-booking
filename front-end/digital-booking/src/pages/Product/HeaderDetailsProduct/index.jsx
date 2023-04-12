@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import style from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { useEffect } from 'react'
 
 export function HeaderDetailsProduct({ newProduct }) {
-  console.log(newProduct)
+  // console.log(newProduct)
+
   return (
     <>
       <div className={style.headerdetails}>
@@ -25,8 +27,9 @@ export function HeaderDetailsProduct({ newProduct }) {
 
       <div className={style.locationdetails}>
         <FontAwesomeIcon icon={faLocationDot} />
-        {/* <p>{newProduct.cidades.nomeCidade}</p> */}
-        {/* <span>{newProduct.cidades.pais}</span>  */}
+        {newProduct.length != 0 ? (
+          <p>{newProduct.cidades.nomeCidade}, {newProduct.cidades.pais}</p>
+        ) : ''}
       </div>
     </>
   )
