@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useContext } from 'react'
 import { IsLoggedContext } from '../../context/IsLoggedContext'
-import { Loading } from '../../components/Loading';
+import { Loading } from '../../components/Loading'
 
 //Importes do slide
 import { useKeenSlider } from 'keen-slider/react'
@@ -36,11 +36,13 @@ import { Policy } from '../../components/Policy'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { HeaderDetailsProduct } from './HeaderDetailsProduct'
+import { ProductContext } from '../../context/ProductContext'
 
 export function Product() {
   const { isLogged, toggleIsLogged } = useContext(IsLoggedContext)
+  const { newProduct, setNewProduct } = useContext(ProductContext)
   const [loading, setLoading] = useState(true)
-  const [newProduct, setNewProduct] = useState([])
+  
 
   const navigateTo = useNavigate()
 
@@ -98,26 +100,24 @@ export function Product() {
   })
 
   useEffect(() => {
-    async function getProduct() {
-      const response = await api.get(`produtos/${id}`)
-        .then((response) => response.data)
-        console.log(response)
-      setNewProduct(response)
-      setLoading(false)
-    }
-
     getProduct()
   }, [])
+
+  async function getProduct() {
+    const response = await api.get(`produtos/${id}`)
+      .then((response) => response.data)
+    console.log(response)
+    setNewProduct(response)
+    setLoading(false)
+  }
 
   const slide = () => setSlides(!slides)
 
   return (
     <>
-    {loading && <Loading />}
+      {loading && <Loading />}
       <section className={style.ContainerProduct}>
-
-        <HeaderDetailsProduct newProduct={newProduct}/>
-
+        <HeaderDetailsProduct newProduct={newProduct} />
 
         {/* Grid de 5 primeiras imagens*/}
         <div className={`containerGlobal ${style.containerGridImages}`}>

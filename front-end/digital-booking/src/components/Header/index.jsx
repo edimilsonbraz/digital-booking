@@ -22,7 +22,7 @@ export function Header() {
   }, []);
 
   function obterNomeUsuario(token) {
-    // faça a lógica para obter o nome do usuário a partir do token
+    //TODO: faça a lógica para obter o nome do usuário a partir do token
     return 'João da Silva'; // apenas um exemplo
   };
 
