@@ -39,6 +39,10 @@
     margin: 0 auto;
 }
 
+.productRegister div:nth-child(n+1) {
+    width: 100%;
+}
+
 .row {
     display: flex;
 }
@@ -46,27 +50,40 @@
 input,
 select {
     width: 100%;
-    height: 35px;
+    height: 45px;
     border-radius: 5px;
     border: 1px solid #9c9c9c;
     padding: 5px;
+    font-size: 1rem;
 }
 
 textarea {
     width: 100%;
     border: 1px solid #9c9c9c;
     padding: 5px;
+    font-size: 1rem;
 }
 
-button {
+.buttonCriar {
     width: 90%;
-    height: 35px;
+    height: 45px;
     margin: 0 auto;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.buttonCriar:hover {
+    background-color: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .buttonAdd {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 5px;
     background-color: var(--primary);
     color: white;
@@ -74,4 +91,53 @@ button {
     font-size: 1.7rem;
     border: none;
     margin: 0 5px;
+}
+
+@media (min-width: 800px) {
+    /* .productRegister {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        'c1 c2'
+        'c3 c4'
+        'c5 c5'
+        'c6 c7';
+    }
+
+    #c1{
+        grid-area: c1;
+    }
+
+    #c2{
+        grid-area: c2;
+    }
+
+    #c3{
+        grid-area: c3;
+    }
+
+    #c4{
+        grid-area: c4;
+    }
+
+    #c5{
+        grid-area: c5;
+    }
+
+    #c6{
+        grid-area: c6;
+    }
+
+    #c7{
+        grid-area: c7;
+    }
+
+    #c8{
+        grid-area: c8;
+    }
+
+    #c9{
+        grid-area: c9;
+    } */
+
 }

@@ -43,6 +43,7 @@ export function CardCategory({products}) {
         {category.map((current) => {
           return (
             <div 
+            
               className={styles.card} 
               key={current.id} 
               value={current.descricaoCategoria}
