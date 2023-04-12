@@ -12,7 +12,9 @@ export function HeaderDetailsProduct({ newProduct }) {
       <div className={style.headerdetails}>
         <div className={style.title}>
           <div>
-            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            {newProduct.length != 0 ? (
+              <span>{newProduct.categoria.descricaoCategoria}</span>
+            ) : ''}
           </div>
           <h1>{newProduct.nomeProduto}</h1>
         </div>
