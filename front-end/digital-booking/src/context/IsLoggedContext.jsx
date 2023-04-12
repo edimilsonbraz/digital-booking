@@ -1,15 +1,29 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react'
+import { useEffect } from 'react'
 
-export const IsLoggedContext = createContext();
+export const IsLoggedContext = createContext()
 
-export const IsLoggedProvider = ({children}) =>
-{
-    const [isLogged, setIsLogged] = useState(false);
+export const IsLoggedProvider = ({ children }) => {
+  const [isLogged, setIsLogged] = useState(false)
+	const [token, setToken] = useState('')
 
-    const toggleIsLogged = () =>
-    {
-        setIsLogged(!isLogged);
+  useEffect(() => {
+    const getToken = localStorage.getItem('token')
+		setToken(getToken)
+    if (getToken) {
+      // o token existe, o usuário está autenticado
+      setIsLogged(true)
     }
+  }, [])
 
-    return <IsLoggedContext.Provider value={{isLogged, toggleIsLogged}}>{children}</IsLoggedContext.Provider>
+  const toggleIsLogged = () => {
+    setIsLogged(!isLogged)
+  }
+
+  return (
+    <IsLoggedContext.Provider 
+			value={{ isLogged, toggleIsLogged, token }}>
+      {children}
+    </IsLoggedContext.Provider>
+  )
 }
