@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import style from './style.module.css';
 import api from '../../service/api';
+import axios from 'axios';
 
 export function ResgisterProduct() {
 
@@ -38,7 +39,7 @@ export function ResgisterProduct() {
 
     }
 
-    
+
     useEffect(() => {
         getCidades();
         getCategorias();
@@ -46,38 +47,42 @@ export function ResgisterProduct() {
     }, []);
 
     const [dataForm, setDataForm] = useState(
-        { nomeProduto: '', categoria: '', endereco: '', cidade: '', descricao: '', nomeAtributoValue:'', nomeAtributo:[], iconeAtributo: [], iconeValue: '', politicaSaudeSeguranca: '', politicaCancelamento: '', politicaRegrasCasa: '', imagens: [], imagemValue:''}
+        {
+            nomeProduto: '', categoria: '', endereco: '', cidade: '', descricao: '', nomeAtributoValue: '', nomeAtributo: [], iconeAtributo: [], iconeValue: '',
+            politicaSaudeSeguranca: '', politicaCancelamento: '', politicaRegrasCasa: '', imagens: [], imagemValue: ''
+        }
     );
 
-    //Metodo de manipulação de envio de dados api
-    const handlerSubmit = (e) => {
-        e.preventDefault()
-        console.log(dataForm);
-    }
-
     // Metodo que adiciona uma imagem de cada vez
-    const addImage = (e) =>
-    {
+    const addImage = (e) => {
         e.preventDefault();
-        
-        setDataForm({...dataForm, imagens:[...dataForm.imagens, dataForm.imagemValue]});
+
+        setDataForm({ ...dataForm, imagens: [...dataForm.imagens, dataForm.imagemValue] });
         // setDataForm({...dataForm, imagemValue:''});
     }
 
     // Metodo que adiciona o nome do atributo e o icone
-    const addIcone = (e) =>
-    {
+    const addIcone = (e) => {
         e.preventDefault();
-        
-        setDataForm({...dataForm, iconeAtributo:[...dataForm.iconeAtributo, dataForm.iconeValue], nomeAtributo:[...dataForm.nomeAtributo, dataForm.nomeAtributoValue]});
+
+        setDataForm({ ...dataForm, iconeAtributo: [...dataForm.iconeAtributo, dataForm.iconeValue], nomeAtributo: [...dataForm.nomeAtributo, dataForm.nomeAtributoValue] });
     }
 
-    const addAtributo = (e) =>
-    {
-        e.preventDefault();
-    }
+    //Metodo que posta os dados do formulario na api
+    const dataPost = data => api.post("produtos/salvar", data)
+        .then(() => {
+            console.log('Deu tudo certo')
+        })
+        .catch(() => {
+            console.log('Deu errado')
+        })
 
-    // console.log(caracteristicas)
+    //Metodo de manipulação de envio de dados api
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+
+        dataPost(dataForm);
+    }
 
     return (
         <div className={style.container}>
@@ -129,20 +134,19 @@ export function ResgisterProduct() {
                         <h1>Adicionar atributos</h1>
                         <div>
                             <label htmlFor="">Nome:</label>
-                            <input type="text" value={dataForm.nomeAtributoValue} onChange={e => setDataForm({...dataForm, nomeAtributoValue: e.target.value})} />
+                            <input type="text" value={dataForm.nomeAtributoValue} onChange={e => setDataForm({ ...dataForm, nomeAtributoValue: e.target.value })} />
                         </div>
 
                         <div>
                             <label htmlFor="">Icone:</label>
                             <div className={style.row}>
-                                <select name="" id="" defaultValue={"DEFAULT"} onChange={e => setDataForm({...dataForm, iconeValue: e.target.value})}>
+                                <select name="" id="" defaultValue={"DEFAULT"} onChange={e => setDataForm({ ...dataForm, iconeValue: e.target.value })}>
                                     <option value="DEFAULT" disabled>Selecione um icone</option>
-                                    {caracteristicas.map(element =>
-                                        {
-                                            return(
-                                                <option key={element.id} value={element.iconeCaracteristica}>{element.nomeCaracteristica}</option>
-                                            );
-                                        })}
+                                    {caracteristicas.map(element => {
+                                        return (
+                                            <option key={element.id} value={element.iconeCaracteristica}>{element.nomeCaracteristica}</option>
+                                        );
+                                    })}
                                 </select>
                                 <button className={style.buttonAdd} onClick={addIcone}>+</button>
                                 <div>icones adicionados</div>
@@ -174,7 +178,7 @@ export function ResgisterProduct() {
                     <div className={style.productRegister}>
                         <h1>Carregar Imagens</h1>
                         <div className={style.row}>
-                            <input type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({...dataForm, imagemValue: e.target.value})}/>
+                            <input type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({ ...dataForm, imagemValue: e.target.value })} />
                             <button className={style.buttonAdd} onClick={addImage}>+</button>
                         </div>
                     </div>

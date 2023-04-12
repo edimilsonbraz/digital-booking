@@ -1,3 +1,4 @@
+import api from '../../service/api';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './style.module.css'
@@ -30,7 +31,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
-import axios from 'axios'
 
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -101,18 +101,15 @@ export function Product() {
 
   const slide = () => setSlides(!slides)
 
-  const [categoria, setCategoria] = useState('')
-  const [titulo, setTitulo] = useState('')
-  const [localizacao, setLocalizacao] = useState('')
-
   const [newProduct, setNewProduct] = useState([])
 
   async function getProduct() {
     try {
-      const response = await axios.get(
-        `http://devdigitalbooking.ctdprojetos.com.br:8080/produtos/${id}`
-      )
-      setNewProduct(response.data)
+      const response = await api.get(`produtos/${id}`)
+        .then(response => response.data)
+  // console.log(response)
+
+      setNewProduct(response)
     } catch (error) {
       console.log('Erro ao buscar produto por id ' + error)
     }
@@ -125,7 +122,9 @@ export function Product() {
       <section className={style.ContainerProduct}>
         <div className={style.headerdetails}>
           <div className={style.title}>
-            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            <div>
+              {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            </div>
             <h1>{newProduct.nomeProduto}</h1>
           </div>
           <div className={style.backpage}>

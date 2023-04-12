@@ -11,7 +11,7 @@ export function Login() {
 
   const [email, setEmail] = useState("");
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [username, setUsername] = useState("");
+  
 
   const navigate = useNavigate();
 
@@ -28,18 +28,27 @@ export function Login() {
     setEmailError(!isEmailValid);
     setPassword(!isPasswordValid);
 
+    function saveToken(token) {
+      localStorage.setItem("token", token);
+      setToken(token);
+    
+    }
+
+
     if (isEmailValid && isPasswordValid) {
       try {
         const response = await auth(email, passwRef.current.value);
+
         saveToken(response.data.token);
-        setUsername(response.data.nome);
-        alert("Bem-vindo, " + response.data.nome + "!");
+        alert("Bem-vindo, " + response.data.firstname + "!")
         navigate("/");
+        window.location.reload(false)
       } catch (error) {
         alert("Erro ao logar " + error);
       }
     }
-    
+
+
   };
 
   
@@ -47,7 +56,7 @@ export function Login() {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
+        .post("http://devdigitalbooking.ctdprojetos.com.br:8080/api/v1/auth/authenticate", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .catch(() => {
@@ -58,8 +67,11 @@ export function Login() {
     }
   }, [token]);
 
+
+
+
   async function auth(email, password) {
-    const response = await axios.get("http://devdigitalbooking.ctdprojetos.com.br:8080/usuario", {
+    const response = await axios.post("http://devdigitalbooking.ctdprojetos.com.br:8080/api/v1/auth/authenticate", {
       email,
       password,
     });
@@ -71,12 +83,7 @@ export function Login() {
     return response;
   }
 
-  function saveToken(token) {
-      localStorage.setItem("token", token);
-      setToken(token);
-    
-  }
-
+ 
   const showHide = () => {
     if (passwRef.current.type === "password") {
       passwRef.current.type = "text";

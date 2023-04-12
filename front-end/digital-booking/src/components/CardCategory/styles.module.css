@@ -1,13 +1,16 @@
 .containerCategory {
     width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
+    display: flex;   
+    gap: 1rem;
+    /* flex-flow: column nowrap; */
     margin: 0 auto;
 }
 
 .containerCard {
-    display: flex;
-    gap: 1rem
+    /* display: flex;
+    gap: 1rem */
+    flex: 1;
+    z-index: 0;
 }
 
 /*estilização do card*/
@@ -93,7 +96,10 @@
 }
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 798px) {
+  .containerCategory {
+    flex-flow: column nowrap;
+  }
     .card {
         flex: 0 0 100%;
         margin: 5px;

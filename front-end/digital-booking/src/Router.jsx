@@ -8,6 +8,7 @@ import { ReservaSucedida } from "./pages/ReservaSucedida";
 import { Category } from "./pages/Category";
 import { ProdutoCadastrado } from "./pages/ProdutoCadastrado";
 import { ResgisterProduct } from "./pages/RegisterProduct";
+import { Search } from "./components/Search";
 
 
 export function Router() {
