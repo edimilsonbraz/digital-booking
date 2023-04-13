@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import style from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from 'react'
 
 export function HeaderDetailsProduct({ newProduct }) {
   // console.log(newProduct)

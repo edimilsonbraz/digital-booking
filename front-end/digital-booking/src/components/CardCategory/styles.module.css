@@ -4,13 +4,14 @@
     gap: 1rem;
     /* flex-flow: column nowrap; */
     margin: 0 auto;
+   z-index: 0;
 }
 
 .containerCard {
     /* display: flex;
     gap: 1rem */
     flex: 1;
-    z-index: 0;
+    z-index: -1;
 }
 
 /*estilização do card*/
