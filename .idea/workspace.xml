@@ -4,54 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a345af2-cd8a-4122-98b5-bb772cdbb3d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/main/java/com/example/ProjetoIntegradorI/configs/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DB/db_projetointegrador.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/.gitlab-ci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/assets/bg-search-box.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardCategory/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardCategory/styles.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardProduct/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/ErrorBoundary/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/context/IsLoggedContext.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Category/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Category/style.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/ProdutoCadastrado/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/ProdutoCadastrado/style.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/digital-booking/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/main/java/com/example/ProjetoIntegradorI/controllers/CidadesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/main/java/com/example/ProjetoIntegradorI/controllers/CidadesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/test/java/com/example/ProjetoIntegradorI/ProjetoIntegradorIApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/ProjetoIntegradorI/src/test/java/com/example/ProjetoIntegradorI/ProjetoIntegradorIApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/categories.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/Router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/Router.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Calender/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Calender/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Card/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Card/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Card/styles.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardInline/index.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardInline/styles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/CardProduct/styles.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/ContainerCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/ContainerCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/ContainerCategory/styles.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Header/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Header/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Header/styles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Header/styles.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Policy/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Policy/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/components/Policy/style.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/components/Policy/style.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Home/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Home/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Home/styles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Home/styles.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Login/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Product/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Product/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Product/style.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Product/style.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Register/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Register/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/components/Sidebar/index.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/components/Sidebar/style.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/style.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/pages/Reserva/style.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/service/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/service/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/digital-booking/src/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/digital-booking/src/styles/global.css" afterDir="false" />
-    </list>
+    <list default="true" id="2a345af2-cd8a-4122-98b5-bb772cdbb3d4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
