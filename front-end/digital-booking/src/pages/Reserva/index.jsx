@@ -1,24 +1,39 @@
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
+import api from '../../service/api';
 
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 import HeaderDetails from '../../components/HeaderDetails'
+import { Loading } from '../../components/Loading';
+import { IsLoggedContext } from '../../context/IsLoggedContext';
+import { ProductContext } from '../../context/ProductContext';
+
+import ptBR from 'date-fns/locale/pt-BR';
+import { format } from 'date-fns';
+
+import { ToastContainer, toast } from 'react-toastify';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
 
 import style from './style.module.css'
 
 export function Reserva() {
+  const {token} = useContext(IsLoggedContext);
+  const { newProduct } = useContext(ProductContext)
+  console.log(newProduct)
+  const navigate = useNavigate()
+
+
+  //TODO: Pega os dados do usuário
+  // const { usuario, userToken } = useContext(UsuarioContext)
+
   const [cidade, setCidade] = useState('')
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [hora, setHora] = useState('')
-
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   // Evento que pega as datas de reserva
   const onChangeDates = (dates) => {
@@ -38,28 +53,56 @@ export function Reserva() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    if(cidade !== '') {
-      console.log("Cidade escolhida => " + cidade)
-    }else {
-      alert("Preencha o campo cidade")
-    }
+    // setLoading(true)
+    reserve()
 
-    if(hora !== '') {
-      console.log("Horário de chegada => " + hora)
-    }else {
-      alert("Preencha o horario de chegada")
+  }
+  
+  async function reserve() {
+    // setRemoveLoading(false)
+    const data = {
+      dataCheckIn: startDate,
+      dataCheckOut: endDate,
+      horaInicioReserva: hora,
+      produtos: {
+        id: newProduct.id
+      },
+      usuario: {
+        id: "",
+        role: "ADMIN"
+      }
     }
+    console.log(data)
+    try {
+      if(cidade == '') {
+        alert("Preencha o campo cidade")
+      }
+  
+      if(hora == '') {
+        alert("Preencha o horario de chegada")
+      }
+  
+      if(startDate == null) {
+        alert("Selecione as datas que deseja reservar")
+      }
 
-    if(startDate !== null) {
-      
-      setTimeout(() => {
-        navigate("/sucesso")
+      //TODO: Implementação da Reserva //
+      await api.post('produto/:id/reserva', {
+          Authorization: token,
 
-      }, 2000)
-    }else {
-      alert("Selecione as datas que deseja reservar")
+        body: data,
+      })
+      .then((result) => {
+        if (result.status == 200) {
+          console.log(result.status)
+          toast('Reserva efetuadao!!! ', {type: "success", autoClose: 2000})
+          // setRemoveLoading(true)
+          navigate("/sucesso")
+        }
+      })  
+    } catch (error) {
+      toast('Infelizmente, a reserva não pôde ser completada.', {type: "error", autoClose: 2000})
     }
-   
   }
   
   return (
@@ -211,6 +254,8 @@ export function Reserva() {
 
             <div className={style.buttonSubmit}>
               <button type="submit">Confirmar reserva</button>
+
+              {loading && <Loading />}
             </div>
           </div>
         </section>
@@ -221,6 +266,8 @@ export function Reserva() {
           <Policy />
         </div>
       </section>
+
+      <ToastContainer />
     </>
   )
 }

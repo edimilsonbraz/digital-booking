@@ -14,16 +14,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
+import { Search } from '../../components/Search'
 
 export function Home() {
   const [products, setProducts] = useState([])
   const [cities, setCities] = useState([])
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
+  const [filteredProductQnt, setFilteredProductQnt] = useState({
+    apartamento: 0,
+    resort: 0,
+    hotel: 0,
+    beiraMar: 0,
+  });
+
 
   useEffect(() => {
     getCidades()
-    getProdutos()
+    getProdutos()    
   }, [])
 
   async function getCidades() {
@@ -53,20 +61,39 @@ export function Home() {
     console.log(buscarProdutoPorCidade(selectValue));
   }
 
+  //Filtrando Quant de Produto por Categoria
   async function getProdutos() {
     try {
       const response = await api.get('produtos')
-      setProducts(response.data)
+      .then(response => response.data)
+      setProducts(response)
+      console.log(response)
+      setFilteredProductQnt({
+        apartamento: response.filter(
+          (produto) => produto.categoria.descricaoCategoria === "Apartamento"
+        ).length,
+        resort: response.filter(
+          (produto) => produto.categoria.descricaoCategoria === "Resorts"
+        ).length,
+        hotel: response.filter(
+          (produto) => produto.categoria.descricaoCategoria === "Hoteis"
+        ).length,
+        beiraMar: response.filter(
+          (produto) => produto.categoria.descricaoCategoria === "Beira Mar"
+        ).length,
+      });
+
     } catch (error) {
       console.log('Erro ao buscar produtos' + error)
     }
   }
 
-
   return (
     <>
       <div className={styles.containerBuscador}>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
+        {/* <Search /> */}
+        
         <div >
           <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>
@@ -99,7 +126,7 @@ export function Home() {
                 dateFormat="dd/MM/yyyy"
                 placeholderText="Check-in"
               />
-
+              <span></span>
               <DatePicker
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
@@ -130,19 +157,20 @@ export function Home() {
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>
 
-        <CardCategory products={products}/>
+        <CardCategory products={products} filteredProductQnt={filteredProductQnt}/>
       </section>
 
       <section className={styles.containerRecomendacao}>
         <div className={styles.contentRecomendacao}>
           <h2>Recomendações</h2>
+
           <div className={styles.containerCard}>
-            {products.length ? (
+            {products.length > 0 ? (
               products.map((product) => (
                 <CardProduct product={product} key={product.id} />
               ))
             ) : (
-              <h2>Não há produtos adicionados no Site!</h2>
+              <p>Não há produtos cadastrados</p>
             )}
           </div>
         </div>

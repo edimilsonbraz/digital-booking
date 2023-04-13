@@ -34,7 +34,7 @@ export function CardProduct({ product }) {
             </div>
             <div className={styles.avaliation}>
               <div>
-                <span>9</span>
+                <span>{product.categoria.qualificacaoCategoria}</span>
               </div>
               <p>Muito bom</p>
             </div>

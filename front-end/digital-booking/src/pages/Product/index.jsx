@@ -1,12 +1,14 @@
+import api from '../../service/api'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './style.module.css'
 import { Link } from 'react-router-dom'
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
-import { useContext } from 'react';
-import { IsLoggedContext } from '../../context/IsLoggedContext';
+import { useContext } from 'react'
+import { IsLoggedContext } from '../../context/IsLoggedContext'
+import { Loading } from '../../components/Loading'
 
 //Importes do slide
 import { useKeenSlider } from 'keen-slider/react'
@@ -30,30 +32,32 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
-import axios from 'axios'
 
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { HeaderDetailsProduct } from './HeaderDetailsProduct'
+import { ProductContext } from '../../context/ProductContext'
 
 export function Product() {
+  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext)
+  const { newProduct, setNewProduct } = useContext(ProductContext)
+  const [loading, setLoading] = useState(true)
 
-  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
-  const navigateTo = useNavigate();
 
+  const navigateTo = useNavigate()
 
   const reservarProduto = () => {
     if (isLogged) {
       //Se estiver logado
       // Ir para a pagina de reserva do produto
-    const url = new URL(window.location.href);
+      const url = new URL(window.location.href)
 
-    navigateTo(url.pathname + '/reserva');
-
+      navigateTo(url.pathname + '/reserva')
     } else {
-      // Se usuario nao estiver logado 
+      // Se usuario nao estiver logado
       //Ir pra pagina de login e exibir uma mensagem especifica
-    navigateTo('/login');
-    toast.error("Para fazer uma reserva você precisa estar logado!");
+      navigateTo('/login')
+      toast.error('Para fazer uma reserva você precisa estar logado!')
     }
   }
 
@@ -97,54 +101,32 @@ export function Product() {
 
   useEffect(() => {
     getProduct()
+    // console.log('Renderizei')
   }, [])
-
-  const slide = () => setSlides(!slides)
-
-  const [categoria, setCategoria] = useState('')
-  const [titulo, setTitulo] = useState('')
-  const [localizacao, setLocalizacao] = useState('')
-
-  const [newProduct, setNewProduct] = useState([])
 
   async function getProduct() {
     try {
-      const response = await axios.get(
-        `http://devdigitalbooking.ctdprojetos.com.br:8080/produtos/${id}`
-      )
-      setNewProduct(response.data)
-    } catch (error) {
-      console.log('Erro ao buscar produto por id ' + error)
+      const response = await api.get(`produtos/${id}`)
+        .then((response) => response.data)
+      // console.log(response)
+      setNewProduct(response)
+      setLoading(false)
+    } catch
+    {
+
     }
+
   }
 
-  console.log(newProduct)
+  const slide = () => setSlides(!slides)
 
   return (
     <>
+      {loading && <Loading />}
       <section className={style.ContainerProduct}>
-        <div className={style.headerdetails}>
-          <div className={style.title}>
-            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
-            <h1>{newProduct.nomeProduto}</h1>
-          </div>
-          <div className={style.backpage}>
-            <Link to="/">
-              <section>
-                <FontAwesomeIcon icon={faChevronLeft} size="3x" />
-              </section>
-            </Link>
-          </div>
-        </div>
-
-        <div className={style.locationdetails}>
-          <FontAwesomeIcon icon={faLocationDot} />
-          {/* <p>{newProduct.cidades.nomeCidade}</p> */}
-          {/* <span>{newProduct.cidades.pais}</span>  */}
-        </div>
+        <HeaderDetailsProduct newProduct={newProduct} />
 
         {/* Grid de 5 primeiras imagens*/}
-
         <div className={`containerGlobal ${style.containerGridImages}`}>
           {data.fotos.slice(0, 5).map((urlImg, index) => (
             <div
