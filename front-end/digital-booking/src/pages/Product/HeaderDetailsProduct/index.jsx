@@ -10,7 +10,9 @@ export function HeaderDetailsProduct({ newProduct }) {
       <div className={style.headerdetails}>
         <div className={style.title}>
           <div>
-            {/* <span>{newProduct.categoria.descricaoCategoria}</span> */}
+            {newProduct.length != 0 ? (
+              <span>{newProduct.categoria.descricaoCategoria}</span>
+            ) : ''}
           </div>
           <h1>{newProduct.nomeProduto}</h1>
         </div>
@@ -25,8 +27,9 @@ export function HeaderDetailsProduct({ newProduct }) {
 
       <div className={style.locationdetails}>
         <FontAwesomeIcon icon={faLocationDot} />
-        {/* <p>{newProduct.cidades.nomeCidade}</p> */}
-        {/* <span>{newProduct.cidades.pais}</span>  */}
+        {newProduct.length != 0 ? (
+          <p>{newProduct.cidades.nomeCidade}, {newProduct.cidades.pais}</p>
+        ) : ''}
       </div>
     </>
   )
