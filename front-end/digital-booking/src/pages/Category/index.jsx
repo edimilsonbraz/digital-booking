@@ -21,8 +21,8 @@ export function Category(name) {
   }, [])
 
   return (
-    <div className={style.container}>
-      <h1>Categoria {!produtos.length == 0 ? produtos[0].categoria.descricaoCategoria : ''}</h1>
+    <div className={`containerGlobal ${style.container}`}>
+      <h1 className={style.title}>Categoria {!produtos.length == 0 ? produtos[0].categoria.descricaoCategoria : ''}</h1>
       <div className={style.containerCard}>
         {!produtos.length == 0 ? (produtos.map(element => {
           return (

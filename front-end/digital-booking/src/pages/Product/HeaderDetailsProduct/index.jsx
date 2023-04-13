@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 export function HeaderDetailsProduct({ newProduct }) {
-  console.log(newProduct)
+  // console.log(newProduct)
   return (
     <>
       <div className={style.headerdetails}>

@@ -38,7 +38,7 @@ export function Login() {
 
         saveToken(response.data.token)
         //TODO: Salvar os dados do usuário no Context
-        
+        // setUserEmailLogged(email)
         alert('Bem-vindo, ' + response.data.firstname + '!')
         navigate('/')
         window.location.reload(false)

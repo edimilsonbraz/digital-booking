@@ -106,9 +106,9 @@ export function Product() {
   async function getProduct() {
     const response = await api.get(`produtos/${id}`)
       .then((response) => response.data)
+      setLoading(false)
     console.log(response)
     setNewProduct(response)
-    setLoading(false)
   }
 
   const slide = () => setSlides(!slides)
