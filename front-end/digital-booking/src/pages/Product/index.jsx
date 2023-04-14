@@ -75,16 +75,21 @@ export function Product() {
       'https://picsum.photos/id/58/600/338'
     ]
   })
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [slides, setSlides] = useState(false)
-  const [loaded, setLoaded] = useState(false)
-  
+
+  //Configuração Keen Slider
+
+  const [slides, setSlides] = useState(false);
+
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
-    loop: true,
-    dragSpeed: 2,
+    initial: 0,
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },
+    loop: true,
+    dragSpeed: 2,
     created() {
       setLoaded(true)
     }
@@ -175,17 +180,20 @@ export function Product() {
         )}
 
         {/* Slide vesão tablet e mobile */}
-        <div className={style.containerSlideMobile}>
-          <div ref={sliderRef} className="keen-slider">
-            {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
+        {newProduct.length != 0 ? (
+          <>
+            <div className={style.containerSlideMobile}>
+              <div ref={sliderRef} className="keen-slider">
+                {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
               <div
                 style={{ backgroundImage: `url(${element.urlImagem})` }}
                 className={`keen-slider__slide ${style.responsiveImages}`}
               ></div>
             ))) : ''}
-          </div>
-        </div>
-
+              </div>
+            </div>
+          </>
+        ) : ''}
         {loaded && instanceRef.current && instanceRef.current.slides != 0 && (
           <div className={style.dots}>
             {[
