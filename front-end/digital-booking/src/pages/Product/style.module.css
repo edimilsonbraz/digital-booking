@@ -140,16 +140,23 @@
     "first first second third"
     "first first fourth fifth";
   grid-template-rows: 200px 200px;
-  grid-template-columns: 25% 25% 25% 25%;
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   position: relative;
+  gap: 10px;
 }
 
 .containerGridImages div {
   width: 100%;
   min-height: 200px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 7px;
+  transition: 0.3s;
+}
+
+.containerGridImages div:hover {
+  /* border: 1px solid red; */
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 /*Ajusta as imagens do GRID, Slide desktop e Slide Mobile*/
@@ -189,14 +196,16 @@
 
 /*Estiliza o botão ver mais localizado no grid*/
 #buttonOpenSlideDesktop {
-  bottom: 10px;
-  right: 0;
   position: absolute;
-  padding: 10px;
-  border: 1px solid orangered;
-  background-color: orangered;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px;
+  background-color: var(--primary);
+  border: 1px solid transparent;
   color: white;
-  border-radius: 10px;
+  font-weight: 550;
+  font-size: .9rem;
+  border-radius: 5px;
   transition: .3s;
 }
 
@@ -210,13 +219,15 @@
 .containerSlideDesktop {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.979);
+  background-color: rgba(0, 0, 0, 0.932);
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
+  backdrop-filter: blur(3px);
   z-index: 1;
+  transition: 0.3s;
 }
 
 .imagesDesktop {

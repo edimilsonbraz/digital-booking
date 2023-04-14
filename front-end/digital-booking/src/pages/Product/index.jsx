@@ -45,7 +45,6 @@ export function Product() {
 
 
   const navigateTo = useNavigate()
-
   const reservarProduto = () => {
     if (isLogged) {
       //Se estiver logado
@@ -68,7 +67,7 @@ export function Product() {
     titulo: 'Hermitage Hotel',
     localizacao: 'Buenos Aires, Argentina - 900m da praia',
     fotos: [
-      'https://picsum.photos/id/12/600/338',
+      'https://picsum.photos/id/13/600/338',
       'https://picsum.photos/id/13/600/338',
       'https://picsum.photos/id/37/600/338',
       'https://picsum.photos/id/49/600/338',
@@ -79,6 +78,7 @@ export function Product() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
     dragSpeed: 2,
@@ -101,21 +101,18 @@ export function Product() {
 
   useEffect(() => {
     getProduct()
-    // console.log('Renderizei')
   }, [])
 
   async function getProduct() {
     try {
       const response = await api.get(`produtos/${id}`)
         .then((response) => response.data)
-      // console.log(response)
       setNewProduct(response)
       setLoading(false)
     } catch
     {
 
     }
-
   }
 
   const slide = () => setSlides(!slides)
@@ -128,14 +125,14 @@ export function Product() {
 
         {/* Grid de 5 primeiras imagens*/}
         <div className={`containerGlobal ${style.containerGridImages}`}>
-          {data.fotos.slice(0, 5).map((urlImg, index) => (
-            <div
+          {newProduct.length != 0 ? (newProduct.imagens.slice(0, 5).map((element, index) => (
+            <div onClick={slide}
               className={`${style.responsiveImages} ${style.gridAreas}`}
-              style={{ backgroundImage: `url(${urlImg})` }}
+              style={{ backgroundImage: `url(${element.urlImagem})` }}
             ></div>
-          ))}
+          ))) : ''}
           <button onClick={slide} id={style.buttonOpenSlideDesktop}>
-            Ver mais
+            Abrir galeria
           </button>
         </div>
 
@@ -146,12 +143,12 @@ export function Product() {
               ref={sliderRef}
               className={`keen-slider ${style.imagesDesktop}`}
             >
-              {data.fotos.map((urlImg) => (
+              {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
                 <div
-                  style={{ backgroundImage: `url(${urlImg})` }}
+                  style={{ backgroundImage: `url(${element.urlImagem})` }}
                   className={`keen-slider__slide ${style.responsiveImages}`}
                 ></div>
-              ))}
+              ))) : ''}
               <button
                 id={style.buttonNextSlide}
                 onClick={(e) =>
@@ -180,16 +177,16 @@ export function Product() {
         {/* Slide vesão tablet e mobile */}
         <div className={style.containerSlideMobile}>
           <div ref={sliderRef} className="keen-slider">
-            {data.fotos.map((urlImg) => (
+            {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
               <div
-                style={{ backgroundImage: `url(${urlImg})` }}
+                style={{ backgroundImage: `url(${element.urlImagem})` }}
                 className={`keen-slider__slide ${style.responsiveImages}`}
               ></div>
-            ))}
+            ))) : ''}
           </div>
         </div>
 
-        {loaded && instanceRef.current && (
+        {loaded && instanceRef.current && instanceRef.current.slides != 0 && (
           <div className={style.dots}>
             {[
               ...Array(instanceRef.current.track.details.slides.length).keys()
@@ -207,6 +204,7 @@ export function Product() {
             })}
           </div>
         )}
+
       </section>
 
       <section className={`containerGlobal ${style.details}`}>
