@@ -1,22 +1,33 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { checkEmail, checkPassword } from '../../Scripts/validateForm'
+import { UserContext } from '../../context/UserContext'
 
 import styles from './styles.module.css'
 import api from '../../service/api'
+import { ToastContainer, toast } from 'react-toastify'
 
 export function Login() {
+  const { setUser } = useContext(UserContext);
   const passwRef = useRef()
   const iconRef = useRef()
 
   const [email, setEmail] = useState('')
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState({
+    token: '',
+    name: ''
+  })
 
   const navigate = useNavigate()
 
   // Gerenciamento de erros do formulário com useState
   const [password, setPassword] = useState(false)
   const [emailError, setEmailError] = useState(false)
+
+  function saveToken(token) {
+    localStorage.setItem('token', JSON.stringify(token))
+    setToken(token)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -27,28 +38,36 @@ export function Login() {
     setEmailError(!isEmailValid)
     setPassword(!isPasswordValid)
 
-    function saveToken(token) {
-      localStorage.setItem('token', token)
-      setToken(token)
-    }
+
+   
 
     if (isEmailValid && isPasswordValid) {
       try {
         const response = await auth(email, passwRef.current.value)
 
-        saveToken(response.data.token)
+        saveToken({
+          token: response.data.token,
+          name: response.data.name
+        })
+
         //TODO: Salvar os dados do usuário no Context
-        
-        alert('Bem-vindo, ' + response.data.firstname + '!')
+        setUser({
+          id: response.data.id,
+          email: response.data.email,
+          name: response.data.name
+        })
+        console.log(response.data)
+        toast('Bem-vindo, ' + response.data.name , {type: "success", autoClose: 2000})
         navigate('/')
         window.location.reload(false)
       } catch (error) {
-        alert('Erro ao logar ' + error)
+        toast('Erro ao logar ' + error, {type: "error", autoClose: 2000})
       }
     }
   }
 
   useEffect(() => {
+    //Poderia validar se token !== '' 
     if (token) {
       api.post('api/v1/auth/authenticate', {
           headers: { Authorization: `Bearer ${token}` }
@@ -66,11 +85,12 @@ export function Login() {
       email,
       password
     })
-
+    setUser(response.data)
+        console.log(response.data)
     if (!response.data.token) {
       throw new Error('Token está indefinido.')
     }
-
+    
     return response
   }
 
@@ -137,6 +157,7 @@ export function Login() {
           ''
         )}
       </div>
+      <ToastContainer />
     </>
   )
 }

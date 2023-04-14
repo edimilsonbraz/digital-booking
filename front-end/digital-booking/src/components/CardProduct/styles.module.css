@@ -147,9 +147,16 @@ button.button:hover {
     max-width: 47%;
     margin-left: 1rem;
   }
-
-
 }
+
+@media screen and (max-width: 1110px) {
+  .contentDescription .contentAvaliation {
+    flex-direction: column;
+  }
+  /* .contentAvaliation .avaliation {
+    align-items: start;
+  } */
+} 
 
 /* RESPONSIVIDADE TABLET */
 @media screen and (max-width: 1117px) {

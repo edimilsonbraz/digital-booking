@@ -5,6 +5,7 @@ import com.example.ProjetoIntegradorI.models.Role;
 import com.example.ProjetoIntegradorI.models.UsuarioModel;
 import com.example.ProjetoIntegradorI.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -63,6 +64,10 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .id(user.getId())
+                .name(user.getNome())
+                .surname(user.getSobrenome())
+                .email(user.getEmail())
                 .build();
     }
 }

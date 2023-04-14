@@ -49,8 +49,9 @@ public class ProdutosModel {
 
     private String nomeProduto;
     private String descricaoProduto;
+    private String regrasDoProduto;
 
-    public ProdutosModel(Set<CaracteristicasModel> produtosCaracteristica, Set<ImagensModel> imagens, CategoriaModel categoria, CidadesModel cidades, Long id, String nomeProduto, String descricaoProduto) {
+    public ProdutosModel(Set<CaracteristicasModel> produtosCaracteristica, Set<ImagensModel> imagens, CategoriaModel categoria, CidadesModel cidades, Long id, String nomeProduto, String descricaoProduto, String regrasDoProduto) {
         this.produtosCaracteristica = produtosCaracteristica;
         this.imagens = imagens;
         this.categoria = categoria;
@@ -58,5 +59,6 @@ public class ProdutosModel {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.descricaoProduto = descricaoProduto;
+        this.regrasDoProduto = regrasDoProduto;
     }
 }

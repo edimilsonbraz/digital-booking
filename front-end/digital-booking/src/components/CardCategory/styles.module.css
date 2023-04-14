@@ -8,10 +8,9 @@
 }
 
 .containerCard {
-    /* display: flex;
-    gap: 1rem */
-    flex: 1;
-    z-index: -1;
+  display: flex;
+  gap: 1rem;
+  flex: 1;
 }
 
 /*estilização do card*/
@@ -26,7 +25,7 @@
 }
 
 .card h1 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .card span {

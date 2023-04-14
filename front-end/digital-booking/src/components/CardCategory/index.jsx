@@ -23,8 +23,8 @@ export function CardCategory({ filteredProductQnt }) {
     }
   }
 
-  async function handleNavigate(categoria) {
-    navigate('/produtos-por-categoria/' + categoria)
+  async function handleNavigate(id) {
+    navigate('/produtos-por-categoria/' + id)
   }
 
   
@@ -33,9 +33,7 @@ export function CardCategory({ filteredProductQnt }) {
       <div className={styles.containerCard}>
         <div
           className={styles.card}
-          onClick={() => {
-            handleNavigate(1)
-          }}
+          onClick={() => {handleNavigate(1)}}
         >
           <div style={{ backgroundImage: `url("https://pesweb.azureedge.net/spimg/hotelbannerimages/pestana-sao-paulo-hotel-banner-01.jpg?scale=downscaleonly&encoder=freeimage&progressive=true&quality=50&w=1440&h=780&mode=crop&anchor=bottomcenter")` }}
           ></div>
@@ -50,9 +48,7 @@ export function CardCategory({ filteredProductQnt }) {
             }
           </div>
         </div>
-      </div>
 
-      <div className={styles.containerCard}>
         <div
           className={styles.card}
           value={category.descricaoCategoria}
@@ -73,9 +69,7 @@ export function CardCategory({ filteredProductQnt }) {
             }
           </div>
         </div>
-      </div>
 
-      <div className={styles.containerCard}>
         <div
           className={styles.card}
           value={category.descricaoCategoria}
@@ -96,9 +90,7 @@ export function CardCategory({ filteredProductQnt }) {
             }
           </div>
         </div>
-      </div>
 
-      <div className={styles.containerCard}>
         <div
           className={styles.card}
           value={category.descricaoCategoria}
@@ -114,6 +106,8 @@ export function CardCategory({ filteredProductQnt }) {
             <span>beira mar</span>         
           </div>
         </div>
+
+
       </div>
     </div>
   )

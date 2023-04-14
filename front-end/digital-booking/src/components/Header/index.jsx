@@ -1,41 +1,26 @@
 import { NavLink } from 'react-router-dom'
 import { ToggleMenu } from '../ToggleMenu';
-import { useState } from 'react';
+import { useContext, useEffect} from 'react';
 import styles from './styles.module.css'
 import logo1 from '../../assets/logo1.svg'
-import { useEffect } from 'react';
-
+import { IsLoggedContext } from '../../context/IsLoggedContext'
 
 export function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [nome, setNome] = useState('');
 
-  // Função para lidar com o logout do usuário
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // o token existe, o usuário está autenticado
-      setIsLoggedIn(true);
-      const nomeUsuario = obterNomeUsuario(token);
-      setNome(nomeUsuario);
-    }
-  }, []);
-
-  function obterNomeUsuario(token) {
-    //TODO: faça a lógica para obter o nome do usuário a partir do token
-    return 'João da Silva'; // apenas um exemplo
-  };
-
+  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
   
+  //Pega os dados do LocalStorage
+  const json = localStorage.getItem('token')
+  //Converto para Objeto
+  const user = JSON.parse(json)
 
-  // Função para lidar com o logout do usuário
+  // Função para lidar com o logout do usuárioloca
   function handleLogout() {
     localStorage.removeItem('token');
-    setIsLoggedIn(false);
+    toggleIsLogged(); // Altera o estado de logado
     navigate("/");
     window.location.reload();
   }
-
 
   return (
     <>
@@ -48,21 +33,23 @@ export function Header() {
         </div>
         <ToggleMenu />
 
-        {isLoggedIn ? (
-          <div className={styles.headerButtons}>
-            <span>Olá, {nome}!</span>
+        {isLogged ? (
+        <div className={styles.headerButtons}>
+          {user &&
+            <span>Olá {user.name}!</span>
+          }
             <button onClick={handleLogout}>Sair</button>
-          </div>
-        ) : (
-          <div className={styles.headerButtons}>
-            <NavLink to="/register" end title="Criar conta">
-              <button>Criar conta</button>
-            </NavLink>
-            <NavLink to="/login" end title="Iniciar sessão">
-              <button>Iniciar sessão</button>
-            </NavLink>
-          </div>
-        )}
+        </div>
+            ) : (
+        <div className={styles.headerButtons}>
+          <NavLink to="/register" end title="Criar conta">
+            <button>Criar conta</button>
+          </NavLink>
+          <NavLink to="/login" end title="Iniciar sessão">
+            <button>Iniciar sessão</button>
+          </NavLink>
+        </div>
+      )}
       </div>
     </>
   )
