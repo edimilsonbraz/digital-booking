@@ -1,27 +1,26 @@
 import { NavLink } from 'react-router-dom'
 import { ToggleMenu } from '../ToggleMenu';
-import { useContext} from 'react';
+import { useContext, useEffect} from 'react';
 import styles from './styles.module.css'
 import logo1 from '../../assets/logo1.svg'
 import { IsLoggedContext } from '../../context/IsLoggedContext'
-import { useUserContext } from '../../context/UserContext';
-
-
 
 export function Header() {
 
   const { isLogged, toggleIsLogged } = useContext(IsLoggedContext);
-  const { user } = useUserContext();
- 
+  
+  //Pega os dados do LocalStorage
+  const json = localStorage.getItem('token')
+  //Converto para Objeto
+  const user = JSON.parse(json)
 
-  // Função para lidar com o logout do usuário
+  // Função para lidar com o logout do usuárioloca
   function handleLogout() {
     localStorage.removeItem('token');
     toggleIsLogged(); // Altera o estado de logado
     navigate("/");
     window.location.reload();
   }
-
 
   return (
     <>
@@ -36,7 +35,9 @@ export function Header() {
 
         {isLogged ? (
         <div className={styles.headerButtons}>
-          <span>Olá {user.name}!</span>
+          {user &&
+            <span>Olá {user.name}!</span>
+          }
             <button onClick={handleLogout}>Sair</button>
         </div>
             ) : (

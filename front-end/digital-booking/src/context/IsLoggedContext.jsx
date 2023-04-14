@@ -5,11 +5,10 @@ export const IsLoggedContext = createContext()
 
 export const IsLoggedProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false)
-	const [token, setToken] = useState('')
-  // const [userEmalLogged, setUserEmailLogged] = useState('')
-  // const [userData, setUserData] = useState({
-  //   user
-  // })
+	const [token, setToken] = useState({
+      token: '',
+      name: ''
+    })
 
   useEffect(() => {
     const getToken = localStorage.getItem('token')
@@ -27,7 +26,7 @@ export const IsLoggedProvider = ({ children }) => {
 
   return (
     <IsLoggedContext.Provider 
-			value={{ isLogged, toggleIsLogged, token}}>
+			value={{ isLogged, toggleIsLogged}}>
       {children}
     </IsLoggedContext.Provider>
   )

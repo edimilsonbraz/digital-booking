@@ -18,11 +18,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
 
 import style from './style.module.css'
+import { UserContext } from '../../context/UserContext';
 
 export function Reserva() {
   const {token} = useContext(IsLoggedContext);
   const { newProduct } = useContext(ProductContext)
-  console.log(newProduct)
+  const { user } = useContext(UserContext)
+  console.log(user)
   const navigate = useNavigate()
 
 
@@ -68,9 +70,10 @@ export function Reserva() {
         id: newProduct.id
       },
       usuario: {
-        id: "",
+        id: user.id,
         role: "ADMIN"
       }
+      
     }
     console.log(data)
     try {
@@ -87,12 +90,12 @@ export function Reserva() {
       }
 
       //TODO: Implementação da Reserva //
-      await api.post('produto/:id/reserva', {
+      const result = await api.post('produto/:id/reserva', {
           Authorization: token,
 
         body: data,
       })
-      .then((result) => {
+      .then(result => {
         if (result.status == 200) {
           console.log(result.status)
           toast('Reserva efetuadao!!! ', {type: "success", autoClose: 2000})
