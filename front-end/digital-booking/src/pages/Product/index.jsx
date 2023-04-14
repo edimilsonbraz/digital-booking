@@ -18,7 +18,6 @@ import 'keen-slider/keen-slider.min.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
-  faLocationDot,
   faChevronRight,
   faXmark,
   faWifi,
@@ -111,9 +110,8 @@ export function Product() {
       // console.log(response)
       setNewProduct(response)
       setLoading(false)
-    } catch
-    {
-
+    } catch (error){
+      console.log('Erro ao buscar o produto' + error)
     }
 
   }

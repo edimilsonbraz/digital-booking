@@ -8,4 +8,9 @@
 .containerCard
 {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 2rem 0;
 }

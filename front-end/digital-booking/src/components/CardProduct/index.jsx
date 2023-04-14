@@ -21,7 +21,7 @@ export function CardProduct({ product }) {
       <div className={styles.contentCard}>
         <div className={styles.contentImage}>
           <img
-            src="https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg"
+            src={product.imagens[0].urlImagem}
             alt=""
           />
         </div>

@@ -38,10 +38,11 @@ export function Login() {
 
         saveToken(response.data.token)
         //TODO: Salvar os dados do usuário no Context
-        
+       
         alert('Bem-vindo, ' + response.data.firstname + '!')
         navigate('/')
-        window.location.reload(false)
+        // window.location.reload(false)
+        console.log(response)
       } catch (error) {
         alert('Erro ao logar ' + error)
       }
@@ -49,6 +50,7 @@ export function Login() {
   }
 
   useEffect(() => {
+    //Poderia validar se token !== '' 
     if (token) {
       api.post('api/v1/auth/authenticate', {
           headers: { Authorization: `Bearer ${token}` }
@@ -70,7 +72,7 @@ export function Login() {
     if (!response.data.token) {
       throw new Error('Token está indefinido.')
     }
-
+    
     return response
   }
 
