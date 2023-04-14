@@ -1,16 +1,20 @@
 import { useRef, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { checkEmail, checkPassword } from '../../Scripts/validateForm'
+import { useUserContext } from '../../context/UserContext'
 
 import styles from './styles.module.css'
 import api from '../../service/api'
 
 export function Login() {
+  const { setUserContext } = useUserContext();
+
   const passwRef = useRef()
   const iconRef = useRef()
 
   const [email, setEmail] = useState('')
   const [token, setToken] = useState(localStorage.getItem('token'))
+
 
   const navigate = useNavigate()
 
@@ -32,16 +36,24 @@ export function Login() {
       setToken(token)
     }
 
+   
+
     if (isEmailValid && isPasswordValid) {
       try {
         const response = await auth(email, passwRef.current.value)
 
         saveToken(response.data.token)
+
         //TODO: Salvar os dados do usuário no Context
+        setUserContext({
+          id: response.data.id,
+          name: response.data.name,
+        })
+        
        
-        alert('Bem-vindo, ' + response.data.firstname + '!')
+        alert('Bem-vindo, ' + response.data.name + '!')
         navigate('/')
-        // window.location.reload(false)
+        window.location.reload(false)
         console.log(response)
       } catch (error) {
         alert('Erro ao logar ' + error)
