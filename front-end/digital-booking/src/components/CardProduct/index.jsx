@@ -19,11 +19,8 @@ export function CardProduct({ product }) {
   return (
     <div className={styles.containerCardInline} key={product.id}>
       <div className={styles.contentCard}>
-        <div className={styles.contentImage}>
-          <img
-            src="https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg"
-            alt=""
-          />
+        <div className={styles.contentImage}
+          style={{ backgroundImage: `url(${product.imagens[0].urlImagem})` }}>
         </div>
         <div className={styles.contentDescription}>
           <div className={styles.contentAvaliation}>
@@ -32,12 +29,12 @@ export function CardProduct({ product }) {
               <span>⭐⭐⭐⭐⭐</span>
               <h3>{product.nomeProduto}</h3>
             </div>
-            <div className={styles.avaliation}>
-              <div>
-                <span>{product.categoria.qualificacaoCategoria}</span>
-              </div>
-              <p>Muito bom</p>
-            </div>
+          <div className={styles.avaliation}>
+                <div>
+                  <span>{product.categoria.qualificacaoCategoria}</span>
+                </div>
+                <p>Muito bom</p>
+          </div>
           </div>
 
           <div className={styles.contentIcons}>
