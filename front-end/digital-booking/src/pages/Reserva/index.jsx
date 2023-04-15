@@ -25,6 +25,7 @@ export function Reserva() {
   const { newProduct } = useContext(ProductContext)
   const { user } = useContext(UserContext)
   console.log(user)
+  
   const navigate = useNavigate()
 
 
@@ -71,7 +72,7 @@ export function Reserva() {
       },
       usuario: {
         id: user.id,
-        role: "ADMIN"
+        role: "USER"
       }
       
     }

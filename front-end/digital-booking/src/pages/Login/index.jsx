@@ -36,10 +36,7 @@ export function Login() {
     const isPasswordValid = checkPassword(passwRef.current.value)
 
     setEmailError(!isEmailValid)
-    setPassword(!isPasswordValid)
-
-
-   
+    setPassword(!isPasswordValid)   
 
     if (isEmailValid && isPasswordValid) {
       try {
@@ -85,8 +82,7 @@ export function Login() {
       email,
       password
     })
-    setUser(response.data)
-        console.log(response.data)
+   
     if (!response.data.token) {
       throw new Error('Token está indefinido.')
     }
