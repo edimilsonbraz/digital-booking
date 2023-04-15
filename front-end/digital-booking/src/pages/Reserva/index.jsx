@@ -90,7 +90,7 @@ export function Reserva() {
       }
 
       //TODO: Implementação da Reserva //
-      const result = await api.post('produto/:id/reserva', {
+      const result = await api.post('/reservas/salvar', {
           Authorization: token,
 
         body: data,
