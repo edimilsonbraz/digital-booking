@@ -1,8 +1,10 @@
 .container {
+    width: 100%;
     padding-bottom: 120px;
 }
 
 .form form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -37,6 +39,9 @@
     flex-wrap: wrap;
     gap: 30px;
     margin: 0 auto;
+    background-color: #fcfcfc;
+    border: 1px solid #ebebeb;
+    padding: 30px 10px;
 }
 
 .productRegister div:nth-child(n+1) {
@@ -93,51 +98,58 @@ select {
     margin: 0 5px;
 }
 
-@media (min-width: 800px) {
-    /* .productRegister {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: 
-        'c1 c2'
-        'c3 c4'
-        'c5 c5'
-        'c6 c7';
+@media (min-width: 700px) {
+    .productRegister {
+        width: 90%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin: 0 auto;
+        justify-content: space-between;
     }
 
-    #c1{
-        grid-area: c1;
+    .productRegister div:nth-child(-n+4) {
+        width: 47%;
     }
 
-    #c2{
-        grid-area: c2;
+    #atributos, #imagens
+    {
+        display: flex;
+        flex-direction: column;
+        width: 47%;
+        height: 100px;
     }
 
-    #c3{
-        grid-area: c3;
+    #atributos input
+    {
+        width: 100%;
+        margin-top: 10px;
     }
 
-    #c4{
-        grid-area: c4;
+    #imagens div:nth-child(2)
+    {
+        width: 100%;
+        margin-top: 10px;
     }
 
-    #c5{
-        grid-area: c5;
+    #politicas
+    {
+        display: flex;
+        flex-direction: column;
     }
 
-    #c6{
-        grid-area: c6;
+    #politicas div
+    {
+        width: 100%;
     }
 
-    #c7{
-        grid-area: c7;
+    @media (min-width: 1000px) {
+        .container {
+            width: 990px;
+            margin: 0 auto;
+        }
+    
     }
-
-    #c8{
-        grid-area: c8;
-    }
-
-    #c9{
-        grid-area: c9;
-    } */
-
 }

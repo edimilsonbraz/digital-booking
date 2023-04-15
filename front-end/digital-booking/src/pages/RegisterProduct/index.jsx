@@ -124,37 +124,27 @@ export function ResgisterProduct() {
                             </select>
                         </div>
 
-                        <div>
+                        <div className={style.area}>
                             <label htmlFor="">Descrição:</label>
                             <textarea name="" id="" cols="30" rows="10" required placeholder='Escreva a descrição do produto' value={dataForm.descricao} onChange={(e) => setDataForm({ ...dataForm, descricao: e.target.value })}></textarea>
                         </div>
                     </div>
 
                     <div className={style.productRegister}>
-                        <h1>Adicionar atributos</h1>
-                        <div>
-                            <label htmlFor="">Nome:</label>
-                            <input type="text" value={dataForm.nomeAtributoValue} onChange={e => setDataForm({ ...dataForm, nomeAtributoValue: e.target.value })} />
+                        <div id={style.atributos}>
+                            <h1>Adicionar atributos</h1>
+                                <input type="text" value={dataForm.nomeAtributoValue} onChange={e => setDataForm({ ...dataForm, nomeAtributoValue: e.target.value })} />
                         </div>
-
-                        <div>
-                            <label htmlFor="">Icone:</label>
+                        <div  id={style.imagens}>
+                            <h1>Carregar Imagens</h1>
                             <div className={style.row}>
-                                <select name="" id="" defaultValue={"DEFAULT"} onChange={e => setDataForm({ ...dataForm, iconeValue: e.target.value })}>
-                                    <option value="DEFAULT" disabled>Selecione um icone</option>
-                                    {caracteristicas.map(element => {
-                                        return (
-                                            <option key={element.id} value={element.iconeCaracteristica}>{element.nomeCaracteristica}</option>
-                                        );
-                                    })}
-                                </select>
-                                <button className={style.buttonAdd} onClick={addIcone}>+</button>
-                                <div>icones adicionados</div>
+                                <input type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({ ...dataForm, imagemValue: e.target.value })} />
+                                <button className={style.buttonAdd} onClick={addImage}>+</button>
                             </div>
                         </div>
                     </div>
 
-                    <div className={style.productRegister}>
+                    <div id={style.politicas} className={style.productRegister}>
                         <h1>Políticas do produto</h1>
                         <div>
                             <h2>Regras da casa</h2>
@@ -174,15 +164,6 @@ export function ResgisterProduct() {
                             <textarea name="" id="" cols="30" rows="10" placeholder='Digite uma descrição' value={dataForm.politicaCancelamento} onChange={(e) => setDataForm({ ...dataForm, politicaCancelamento: e.target.value })}></textarea>
                         </div>
                     </div>
-
-                    <div className={style.productRegister}>
-                        <h1>Carregar Imagens</h1>
-                        <div className={style.row}>
-                            <input type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({ ...dataForm, imagemValue: e.target.value })} />
-                            <button className={style.buttonAdd} onClick={addImage}>+</button>
-                        </div>
-                    </div>
-
                     <button onClick={handlerSubmit} className={style.buttonCriar} type='submit'>Criar</button>
                 </form>
             </div>
