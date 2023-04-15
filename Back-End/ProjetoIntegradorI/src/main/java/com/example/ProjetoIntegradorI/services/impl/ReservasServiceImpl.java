@@ -1,13 +1,16 @@
 package com.example.ProjetoIntegradorI.services.impl;
 
+import com.example.ProjetoIntegradorI.models.ProdutosModel;
 import com.example.ProjetoIntegradorI.models.ReservasModel;
 import com.example.ProjetoIntegradorI.repositories.ReservasRepository;
 import com.example.ProjetoIntegradorI.services.IBookingService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 public class ReservasServiceImpl implements IBookingService<ReservasModel> {
@@ -55,4 +58,27 @@ public class ReservasServiceImpl implements IBookingService<ReservasModel> {
         return false;
     }
 
+//    public List<String> buscarDatasDisponiveis(LocalDate dataInicio, LocalDate dataFim) {
+//
+//        List<ReservasModel> reservas = reservasRepository.findAll();
+//        Set<LocalDate> datasReservadas = new HashSet<>();
+//        for (ReservasModel reservasModel : reservas) {
+//            LocalDate checkInDate = reservasModel.getDataCheckIn();
+//            LocalDate checkOutDate = reservasModel.getDataCheckOut();
+//            while (!checkInDate.isAfter(checkOutDate)) {
+//                datasReservadas.add(checkInDate);
+//                checkInDate = checkInDate.plusDays(1);
+//            }
+//        }
+//        List<String> datasDisponiveis = new ArrayList<>();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        LocalDate dataAtual = dataInicio;
+//        while (!dataAtual.isAfter(dataFim)) {
+//            if (!datasReservadas.contains(dataAtual)) {
+//                datasDisponiveis.add(dataAtual.format(formatter));
+//            }
+//            dataAtual = dataAtual.plusDays(1);
+//        }
+//        return datasDisponiveis;
+//    }
 }
