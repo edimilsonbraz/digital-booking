@@ -49,9 +49,12 @@ public class ProdutosModel {
 
     private String nomeProduto;
     private String descricaoProduto;
-    private String regrasDoProduto;
+    private String regrasDaCasa;
+    private String saudeSeguranca;
+    private String politicaDeCancelamento;
+    private String endereco;
 
-    public ProdutosModel(Set<CaracteristicasModel> produtosCaracteristica, Set<ImagensModel> imagens, CategoriaModel categoria, CidadesModel cidades, Long id, String nomeProduto, String descricaoProduto, String regrasDoProduto) {
+    public ProdutosModel(Set<CaracteristicasModel> produtosCaracteristica, Set<ImagensModel> imagens, CategoriaModel categoria, CidadesModel cidades, Long id, String nomeProduto, String descricaoProduto, String regrasDaCasa, String saudeSeguranca, String politicaDeCancelamento, String endereco) {
         this.produtosCaracteristica = produtosCaracteristica;
         this.imagens = imagens;
         this.categoria = categoria;
@@ -59,6 +62,9 @@ public class ProdutosModel {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.descricaoProduto = descricaoProduto;
-        this.regrasDoProduto = regrasDoProduto;
+        this.regrasDaCasa = regrasDaCasa;
+        this.saudeSeguranca = saudeSeguranca;
+        this.politicaDeCancelamento = politicaDeCancelamento;
+        this.endereco = endereco;
     }
 }
