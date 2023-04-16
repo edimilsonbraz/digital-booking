@@ -4,19 +4,15 @@ package com.example.ProjetoIntegradorI.controllers;
 import com.example.ProjetoIntegradorI.exceptions.BadRequestException;
 import com.example.ProjetoIntegradorI.exceptions.ResourceNotFoundException;
 import com.example.ProjetoIntegradorI.models.*;
-import com.example.ProjetoIntegradorI.repositories.CategoriaRepository;
-import com.example.ProjetoIntegradorI.repositories.CidadesRepository;
-import com.example.ProjetoIntegradorI.services.IBookingService;
-import com.example.ProjetoIntegradorI.services.impl.CategoriaServiceImpl;
-import com.example.ProjetoIntegradorI.services.impl.CidadesServiceImpl;
 import com.example.ProjetoIntegradorI.services.impl.ProdutosServiceImpl;
-import com.example.ProjetoIntegradorI.services.impl.UsuarioServiceImpl;
+import com.example.ProjetoIntegradorI.services.impl.ReservasServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +21,12 @@ import java.util.Optional;
 public class ProdutosController {
 
     private ProdutosServiceImpl produtosService;
+    private ReservasServiceImpl reservasService;
 
     @Autowired
-    public ProdutosController(ProdutosServiceImpl produtosService) {
+    public ProdutosController(ProdutosServiceImpl produtosService, ReservasServiceImpl reservasService) {
         this.produtosService = produtosService;
+        this.reservasService = reservasService;
     }
 
     /// POST
@@ -90,4 +88,14 @@ public class ProdutosController {
         }
         throw new ResourceNotFoundException("Não foi encontrada o produto com o id " + id);
     }
+
+//    // GET BY DATAS DISPONIVEIS
+//
+//    @GetMapping("/produtos/{id}/datas-disponiveis")
+//    public List<LocalDate> buscarDatasDisponiveis(@PathVariable Long id,
+//                                                                  @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
+//                                                                  @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim) {
+//        return reservasService.buscarDatasDisponiveis(dataInicio, dataFim);
+//    }
+
 }

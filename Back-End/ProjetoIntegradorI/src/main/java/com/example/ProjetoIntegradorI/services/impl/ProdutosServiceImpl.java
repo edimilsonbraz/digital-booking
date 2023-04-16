@@ -4,17 +4,18 @@ import com.example.ProjetoIntegradorI.exceptions.ResourceNotFoundException;
 import com.example.ProjetoIntegradorI.models.CategoriaModel;
 import com.example.ProjetoIntegradorI.models.CidadesModel;
 import com.example.ProjetoIntegradorI.models.ProdutosModel;
+import com.example.ProjetoIntegradorI.models.ReservasModel;
 import com.example.ProjetoIntegradorI.repositories.CategoriaRepository;
 import com.example.ProjetoIntegradorI.repositories.CidadesRepository;
 import com.example.ProjetoIntegradorI.repositories.ProdutosRepository;
+import com.example.ProjetoIntegradorI.repositories.ReservasRepository;
 import com.example.ProjetoIntegradorI.services.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProdutosServiceImpl implements IBookingService<ProdutosModel> {

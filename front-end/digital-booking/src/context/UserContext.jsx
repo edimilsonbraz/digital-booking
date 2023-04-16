@@ -3,11 +3,11 @@ import { createContext, useState } from 'react'
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   return (
     <UserContext.Provider 
-      value={{ user, setUser }}>
+      value={{ userData, setUserData }}>
       {children}
     </UserContext.Provider>
   );

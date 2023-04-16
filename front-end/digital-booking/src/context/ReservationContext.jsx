@@ -13,13 +13,13 @@ export const ReservationProvider = ({children}) => {
     setEndDate(end)
   }  
 
-  const [formData, setFormData] = useState({});
+  const [dataReserva, setDataReserva] = useState([]);
 
   return (
     <ReservationContext.Provider 
       value={{
-        formData, 
-        setFormData, 
+        dataReserva, 
+        setDataReserva, 
         onChangeDates,
         startDate, 
         setStartDate,

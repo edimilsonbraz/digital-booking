@@ -8,7 +8,7 @@ import api from '../../service/api'
 import { ToastContainer, toast } from 'react-toastify'
 
 export function Login() {
-  const { setUser } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
   const passwRef = useRef()
   const iconRef = useRef()
 
@@ -53,11 +53,12 @@ export function Login() {
         })
 
         //TODO: Salvar os dados do usuário no Context
-        // setUser({
-        //   id: response.data.id,
-        //   email: response.data.email,
-        //   name: response.data.name
-        // })
+        setUserData({
+          id: response.data.id,
+          email: response.data.email,
+          name: response.data.name
+        })
+
         console.log(response.data)
         toast('Bem-vindo, ' + response.data.name , {type: "success", autoClose: 2000})
         navigate('/')

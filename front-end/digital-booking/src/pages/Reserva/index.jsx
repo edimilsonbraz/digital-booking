@@ -1,31 +1,34 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import api from '../../service/api';
+import api from '../../service/api'
 
 import { Calender } from '../../components/Calender'
 import { Policy } from '../../components/Policy'
 import HeaderDetails from '../../components/HeaderDetails'
-import { Loading } from '../../components/Loading';
-import { IsLoggedContext } from '../../context/IsLoggedContext';
-import { ProductContext } from '../../context/ProductContext';
+import { Loading } from '../../components/Loading'
 
-import ptBR from 'date-fns/locale/pt-BR';
-import { format } from 'date-fns';
+import { UserContext } from '../../context/UserContext'
+import { IsLoggedContext } from '../../context/IsLoggedContext'
+import { ProductContext } from '../../context/ProductContext'
+import { ReservationContext } from '../../context/ReservationContext'
 
-import { ToastContainer, toast } from 'react-toastify';
+import ptBR from 'date-fns/locale/pt-BR'
+import { format } from 'date-fns'
+
+import { ToastContainer, toast } from 'react-toastify'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 import style from './style.module.css'
-import { ReservationContext } from '../../context/ReservationContext';
-
 
 export function Reserva() {
-  const {token} = useContext(IsLoggedContext);
-  const {startDate, endDate, onChangeDates, setFormData} = useContext(ReservationContext)
+  const { userData } = useContext(UserContext)
+  const { token } = useContext(IsLoggedContext)
+  const { startDate, endDate, onChangeDates, setDataReserva } =
+    useContext(ReservationContext)
   const { newProduct } = useContext(ProductContext)
-  
+
   const navigate = useNavigate()
 
   //TODO: Pega os dados do usuário
@@ -39,82 +42,89 @@ export function Reserva() {
   const json = localStorage.getItem('token')
   //Converto para Objeto
   const user = JSON.parse(json)
-  
-  
 
   //Formata datas
   function datesFormatted(date) {
     const newDateFormatted = format(new Date(date), `dd'-'MM'-'yyyy`, {
-      locale: ptBR,
+      locale: ptBR
     })
 
     return newDateFormatted
   }
-  
+
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     // setLoading(true)
     reserve()
-
   }
-  
+
   async function reserve() {
     // setRemoveLoading(false)
     const data = {
-      dataCheckIn: datesFormatted(startDate),
-      dataCheckOut: datesFormatted(endDate),
-      horaInicioReserva: hora,
+      dataCheckIn: '16-04-2023',
+      dataCheckOut: '30-04-2023',
+      horaInicioReserva: '16-04-2023 09:30:01',
       produtos: {
-        id: newProduct.id
+        id: 1
       },
       usuario: {
-        id: user.id,
-        role: "USER"
+        id: 10,
+        role: 'USER'
       }
-      
     }
     console.log(data)
-    try {
-      if(cidade == '') {
-        alert("Preencha o campo cidade")
-        return
-      }
-  
-      if(hora == '') {
-        alert("Preencha o horario de chegada")
-        return
-      }
-  
-      if(startDate == null) {
-        alert("Selecione as datas que deseja reservar")
-        return
-      }
 
+    if (cidade == '') {
+      alert('Preencha o campo cidade')
+      return
+    }
+
+    if (hora == '') {
+      alert('Preencha o horario de chegada')
+      return
+    }
+
+    if (startDate == null) {
+      alert('Selecione as datas que deseja reservar')
+      return
+    }
+
+    try {
       //TODO: Implementação da Reserva //
-      const result = await api.post('/reservas/salvar', {
-          Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
-          body: data,
-      })
-      .then(result => {
-        if (result.status == 200) {
-          console.log(result.data)
-          toast('Reserva efetuada!!! ', {type: "success", autoClose: 2000})
-          // setRemoveLoading(true)
-          navigate("/sucesso")
-        }
-      })  
+      await api
+        .post('/reservas/salvar', data, {
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        })
+        .then((result) => {
+          if (result.status == 200) {
+            console.log(result.data)
+
+            //Salvando dados da reserva
+            setDataReserva(result.data)
+            toast('Reserva efetuada!!! ', { type: 'success', autoClose: 2000 })
+            // setRemoveLoading(true)
+            navigate('/sucesso')
+          }
+        })
     } catch (error) {
-      toast('Infelizmente, a reserva não pôde ser completada.', {type: "error", autoClose: 2000})
+      toast('Infelizmente, a reserva não pôde ser completada.', {
+        type: 'error',
+        autoClose: 2000
+      })
     }
   }
 
-  
   return (
     <>
       <HeaderDetails />
 
-      <form action="" className={style.reservaContainer} onSubmit={handleSubmit}>
+      <form
+        action=""
+        className={style.reservaContainer}
+        onSubmit={handleSubmit}
+      >
         <section className={style.mainContainer}>
           <div className={style.formReserva}>
             <h2>Complete seus dados</h2>
@@ -137,10 +147,10 @@ export function Reserva() {
                   />
 
                   <label htmlFor="">Cidade</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={cidade}
-                    className={style.lastInput} 
+                    className={style.lastInput}
                     onChange={(e) => setCidade(e.target.value)}
                   />
                 </div>
@@ -149,8 +159,8 @@ export function Reserva() {
               <div className={style.dataReserva}>
                 <h2>Selecione sua data de reserva</h2>
 
-                <Calender  
-                  onChangeDates={onChangeDates} 
+                <Calender
+                  onChangeDates={onChangeDates}
                   startDate={startDate}
                   endDate={endDate}
                 />
@@ -172,8 +182,8 @@ export function Reserva() {
                   <div className={style.inputTime}>
                     <p>Indique a sua hora prevista de chegada</p>
                     <div className={style.iconSelect}>
-                      <select 
-                        defaultValue={'DEFAULT'} 
+                      <select
+                        defaultValue={'DEFAULT'}
                         onChange={(e) => setHora(e.target.value)}
                       >
                         <option value="DEFAULT" disabled>
@@ -236,24 +246,19 @@ export function Reserva() {
             <div className={style.checkInOut}>
               <div>
                 <p>Check-in</p>
-                {
-                  startDate !== null 
-                  ? 
-                    <span>{datesFormatted(startDate)}</span>
-                  : 
-                    <span>___ /___ /______</span>
-                }
-                
+                {startDate !== null ? (
+                  <span>{datesFormatted(startDate)}</span>
+                ) : (
+                  <span>___ /___ /______</span>
+                )}
               </div>
               <div>
                 <p>Check-out</p>
-                {
-                  endDate !== null 
-                  ? 
-                    <span>{datesFormatted(endDate)}</span>
-                  : 
-                    <span>___ /___ /______</span>
-                }
+                {endDate !== null ? (
+                  <span>{datesFormatted(endDate)}</span>
+                ) : (
+                  <span>___ /___ /______</span>
+                )}
               </div>
             </div>
 

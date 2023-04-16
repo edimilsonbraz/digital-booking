@@ -19,7 +19,7 @@ public class DeserializadorDataModel {
 
     public static class Serializer extends JsonSerializer<Date> {
 
-        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ss.SSSZ");
 
         @Override
         public void serialize(Date value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
@@ -30,7 +30,7 @@ public class DeserializadorDataModel {
 
     public static class Deserializer extends JsonDeserializer<Date> {
 
-        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ss.SSSZ");
 
         @Override
         public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {

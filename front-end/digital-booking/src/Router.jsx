@@ -22,6 +22,7 @@ export function Router() {
       <Route path="/sucesso" element={<ReservaSucedida/>} />
       <Route path="/produto-cadastrado" element={<ProdutoCadastrado/>} />
       <Route path="/cadastrar-produto" element={<ResgisterProduct/>} />
+      <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
     </Routes>
   )
 }

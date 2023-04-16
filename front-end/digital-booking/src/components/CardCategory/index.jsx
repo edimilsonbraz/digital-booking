@@ -40,7 +40,7 @@ export function CardCategory({ filteredProductQnt }) {
           <div className={styles.quantityItens}>
             <h1>Apartamento</h1>
             <span>{filteredProductQnt.apartamento}</span>
-            {filteredProductQnt.apartamento > 0 
+            {filteredProductQnt.apartamento > 1 
               ?
                 <span>apartamentos</span>         
               :
