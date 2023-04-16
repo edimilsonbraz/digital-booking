@@ -36,14 +36,16 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { HeaderDetailsProduct } from './HeaderDetailsProduct'
 import { ProductContext } from '../../context/ProductContext'
+import { ReservationContext } from '../../context/ReservationContext'
 
 export function Product() {
-  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext)
+  const { isLogged } = useContext(IsLoggedContext)
   const { newProduct, setNewProduct } = useContext(ProductContext)
+  const {startDate, endDate, onChangeDates} = useContext(ReservationContext)
   const [loading, setLoading] = useState(true)
 
-
   const navigateTo = useNavigate()
+
   const reservarProduto = () => {
     if (isLogged) {
       //Se estiver logado
@@ -262,7 +264,11 @@ export function Product() {
           <h2>Datas disponíveis</h2>
 
           <div className={style.contentCalender}>
-            <Calender />
+            <Calender 
+              onChangeDates={onChangeDates} 
+              startDate={startDate}
+              endDate={endDate}
+          />
 
             <div className={style.calenderText}>
               <p>Adicione as datas da sua viagem para obter preços exatos</p>

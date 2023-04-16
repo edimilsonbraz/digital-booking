@@ -15,6 +15,7 @@ export function Login() {
   const [email, setEmail] = useState('')
   const [token, setToken] = useState({
     token: '',
+    id: null,
     name: ''
   })
 
@@ -31,7 +32,10 @@ export function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    login()
+  }
 
+  async function login() {
     const isEmailValid = checkEmail(email)
     const isPasswordValid = checkPassword(passwRef.current.value)
 
@@ -44,19 +48,20 @@ export function Login() {
 
         saveToken({
           token: response.data.token,
+          id: response.data.id,
           name: response.data.name
         })
 
         //TODO: Salvar os dados do usuário no Context
-        setUser({
-          id: response.data.id,
-          email: response.data.email,
-          name: response.data.name
-        })
+        // setUser({
+        //   id: response.data.id,
+        //   email: response.data.email,
+        //   name: response.data.name
+        // })
         console.log(response.data)
         toast('Bem-vindo, ' + response.data.name , {type: "success", autoClose: 2000})
         navigate('/')
-        window.location.reload(false)
+        // window.location.reload(false)
       } catch (error) {
         toast('Erro ao logar ' + error, {type: "error", autoClose: 2000})
       }

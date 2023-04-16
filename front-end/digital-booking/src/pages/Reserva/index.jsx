@@ -18,36 +18,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck,faLocationDot  } from '@fortawesome/free-solid-svg-icons'
 
 import style from './style.module.css'
-import { UserContext } from '../../context/UserContext';
+import { ReservationContext } from '../../context/ReservationContext';
+
 
 export function Reserva() {
   const {token} = useContext(IsLoggedContext);
+  const {startDate, endDate, onChangeDates, setFormData} = useContext(ReservationContext)
   const { newProduct } = useContext(ProductContext)
-  const { user } = useContext(UserContext)
-  console.log(user)
   
   const navigate = useNavigate()
-
 
   //TODO: Pega os dados do usuário
   // const { usuario, userToken } = useContext(UsuarioContext)
 
   const [cidade, setCidade] = useState('')
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
   const [hora, setHora] = useState('')
   const [loading, setLoading] = useState(false)
 
-  // Evento que pega as datas de reserva
-  const onChangeDates = (dates) => {
-    const [start, end] = dates
-    setStartDate(start)
-    setEndDate(end)
-  }
+  //Pega os dados do LocalStorage
+  const json = localStorage.getItem('token')
+  //Converto para Objeto
+  const user = JSON.parse(json)
+  
+  
 
   //Formata datas
   function datesFormatted(date) {
-    const newDateFormatted = format(new Date(date), `dd '/' MM '/' yyyy`, {
+    const newDateFormatted = format(new Date(date), `dd'-'MM'-'yyyy`, {
       locale: ptBR,
     })
 
@@ -64,8 +61,8 @@ export function Reserva() {
   async function reserve() {
     // setRemoveLoading(false)
     const data = {
-      dataCheckIn: startDate,
-      dataCheckOut: endDate,
+      dataCheckIn: datesFormatted(startDate),
+      dataCheckOut: datesFormatted(endDate),
       horaInicioReserva: hora,
       produtos: {
         id: newProduct.id
@@ -80,26 +77,29 @@ export function Reserva() {
     try {
       if(cidade == '') {
         alert("Preencha o campo cidade")
+        return
       }
   
       if(hora == '') {
         alert("Preencha o horario de chegada")
+        return
       }
   
       if(startDate == null) {
         alert("Selecione as datas que deseja reservar")
+        return
       }
 
       //TODO: Implementação da Reserva //
-      const result = await api.post('produto/:id/reserva', {
-          Authorization: token,
-
-        body: data,
+      const result = await api.post('/reservas/salvar', {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+          body: data,
       })
       .then(result => {
         if (result.status == 200) {
-          console.log(result.status)
-          toast('Reserva efetuadao!!! ', {type: "success", autoClose: 2000})
+          console.log(result.data)
+          toast('Reserva efetuada!!! ', {type: "success", autoClose: 2000})
           // setRemoveLoading(true)
           navigate("/sucesso")
         }
@@ -108,6 +108,7 @@ export function Reserva() {
       toast('Infelizmente, a reserva não pôde ser completada.', {type: "error", autoClose: 2000})
     }
   }
+
   
   return (
     <>
@@ -178,7 +179,7 @@ export function Reserva() {
                         <option value="DEFAULT" disabled>
                           Selecione sua hora de chegada
                         </option>
-                        <option value="00:00 AM">00:00 AM</option>
+                        <option value="10-04-2023 09:30:01">00:00 AM</option>
                         <option value="01:00 AM">01:00 AM</option>
                         <option value="02:00 AM">02:00 AM</option>
                         <option value="03:00 AM">03:00 AM</option>

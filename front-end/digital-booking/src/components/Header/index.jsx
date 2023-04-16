@@ -13,7 +13,7 @@ export function Header() {
   const json = localStorage.getItem('token')
   //Converto para Objeto
   const user = JSON.parse(json)
-
+ 
   // Função para lidar com o logout do usuárioloca
   function handleLogout() {
     localStorage.removeItem('token');
@@ -21,6 +21,18 @@ export function Header() {
     navigate("/");
     window.location.reload();
   }
+
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     if (localStorage.getItem("token")) {
+  //       getUserByToken();
+  //       getTokenLocalStorage();
+  //     }
+  //   }
+  //   fetchUser();
+  // }, [isLogged]);
+
+
 
   return (
     <>
