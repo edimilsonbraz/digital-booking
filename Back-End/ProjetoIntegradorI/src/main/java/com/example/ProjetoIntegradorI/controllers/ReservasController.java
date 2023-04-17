@@ -9,10 +9,12 @@ import com.example.ProjetoIntegradorI.repositories.ReservasRepository;
 import com.example.ProjetoIntegradorI.services.impl.ReservasServiceImpl;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -48,6 +50,34 @@ public class ReservasController {
             throw new ResourceNotFoundException("Não foi encontrada a reserva " + id);
         } catch (SQLException e) {
             throw new ResourceNotFoundException("Erro ao buscar a reserva " + id);
+        }
+    }
+
+    // BUSCAR RESERVA POR DATA
+    @GetMapping("/reservas/buscarReservaPorData")
+    public ResponseEntity<List<ProdutosModel>> buscarReservaPorData(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio, @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) throws ResourceNotFoundException{
+        try{
+            List<ProdutosModel> list = reservasService.buscarReservaPorData(dataInicio, dataFinal);
+            if(list.size() == 0) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e){
+            throw new ResourceNotFoundException("Não foi possível localizar a reserva solicitada.");
+        }
+    }
+
+    // BUSCAR RESERVA POR DATA E CIDADE
+    @GetMapping("/reservas/buscarReservaPorDataCidade")
+    public ResponseEntity<List<ProdutosModel>> buscarReservaPorDataCidade(@RequestParam String cidade, @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio, @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFinal) throws ResourceNotFoundException{
+        try{
+            List<ProdutosModel> list = reservasService.buscarReservaPorDataCidade(cidade, dataInicio, dataFinal);
+            if(list.size() == 0) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e){
+            throw new ResourceNotFoundException("Não foi possível localizar a reserva solicitada.");
         }
     }
 
