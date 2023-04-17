@@ -1,23 +1,28 @@
-import { BrowserRouter } from 'react-router-dom'
-import ErrorBoundary from './components/ErrorBoundary'
-import { ToastContainer } from 'react-toastify'
-import { Footer } from './components/Footer'
+import { Outlet } from 'react-router-dom'
 import { Header } from './components/Header'
-import { Router } from './Router'
+import { Footer } from './components/Footer'
+import { ToastContainer } from 'react-toastify'
 
-import './styles/global.css'
+
 
 export function App() {
   return (
-    <BrowserRouter>
+    <div>
       <Header />
-      <ErrorBoundary>
-        <Router />
-      </ErrorBoundary>
+      <main>
+        <Outlet />
+      </main>
       <Footer />
-      <ToastContainer/>
-    </BrowserRouter>
+      <ToastContainer />
+    </div>
   )
 }
 
-
+{
+  /* <Header />
+<ErrorBoundary>
+  <AppRoutes />
+</ErrorBoundary>
+<Footer />
+<ToastContainer /> */
+}

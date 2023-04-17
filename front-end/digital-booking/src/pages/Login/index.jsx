@@ -75,6 +75,7 @@ export function Login() {
       api.post('api/v1/auth/authenticate', {
           headers: { Authorization: `Bearer ${token}` }
         })
+        
         .catch(() => {
           // Token inválido, remover do localStorage
           localStorage.removeItem('token')
