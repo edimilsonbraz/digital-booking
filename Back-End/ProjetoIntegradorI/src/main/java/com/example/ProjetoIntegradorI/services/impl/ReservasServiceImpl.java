@@ -58,27 +58,11 @@ public class ReservasServiceImpl implements IBookingService<ReservasModel> {
         return false;
     }
 
-//    public List<String> buscarDatasDisponiveis(LocalDate dataInicio, LocalDate dataFim) {
-//
-//        List<ReservasModel> reservas = reservasRepository.findAll();
-//        Set<LocalDate> datasReservadas = new HashSet<>();
-//        for (ReservasModel reservasModel : reservas) {
-//            LocalDate checkInDate = reservasModel.getDataCheckIn();
-//            LocalDate checkOutDate = reservasModel.getDataCheckOut();
-//            while (!checkInDate.isAfter(checkOutDate)) {
-//                datasReservadas.add(checkInDate);
-//                checkInDate = checkInDate.plusDays(1);
-//            }
-//        }
-//        List<String> datasDisponiveis = new ArrayList<>();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        LocalDate dataAtual = dataInicio;
-//        while (!dataAtual.isAfter(dataFim)) {
-//            if (!datasReservadas.contains(dataAtual)) {
-//                datasDisponiveis.add(dataAtual.format(formatter));
-//            }
-//            dataAtual = dataAtual.plusDays(1);
-//        }
-//        return datasDisponiveis;
-//    }
+    public List<ProdutosModel> buscarReservaPorData(LocalDate dataInicio, LocalDate dataFinal) {
+        return reservasRepository.buscarReservaPorData(dataInicio, dataFinal);
+    }
+
+    public List<ProdutosModel> buscarReservaPorDataCidade(String cidade, LocalDate dataInicio, LocalDate dataFinal) {
+        return reservasRepository.buscarReservaPorDataCidade("%" + cidade + "%", dataInicio, dataFinal);
+    }
 }

@@ -88,14 +88,4 @@ public class ProdutosController {
         }
         throw new ResourceNotFoundException("Não foi encontrada o produto com o id " + id);
     }
-
-//    // GET BY DATAS DISPONIVEIS
-//
-//    @GetMapping("/produtos/{id}/datas-disponiveis")
-//    public List<LocalDate> buscarDatasDisponiveis(@PathVariable Long id,
-//                                                                  @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
-//                                                                  @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim) {
-//        return reservasService.buscarDatasDisponiveis(dataInicio, dataFim);
-//    }
-
 }
