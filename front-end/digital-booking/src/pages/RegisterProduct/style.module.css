@@ -50,6 +50,7 @@
 
 .row {
     display: flex;
+    position: relative;
 }
 
 .productRegister input,
@@ -86,6 +87,29 @@ select {
     border: 1px solid var(--primary);
 }
 
+.buttonCriarLoading {
+    width: 90%;
+    height: 45px;
+    margin: 0 auto;
+    background-color: #727272;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.buttonCriarLoading:hover {
+    background-color: #727272;
+    color: white;
+}
+
+.spinner
+{
+    width: 40px;
+    margin: 0 auto;
+}
+
+
 .buttonAdd {
     width: 45px;
     height: 45px;
@@ -96,6 +120,28 @@ select {
     font-size: 1.7rem;
     border: none;
     margin: 0 5px;
+}
+
+#imagens .excluirDiv
+{
+    display: flex;
+    margin: 5px 0;
+}
+
+#imagens .excluirDiv span
+{
+    width: 25px;
+    background-position: center;
+    background-size: cover;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABP0lEQVR4nO2Yy07DMBBF8yksiHiIHbXdXYUd+P8/YAGitN30xkEsQZaChAKJnHTsTKq5Uraec2QnnkxRSCQSiUQSmdrqW1SmLBLluFlfhhpJFq+f7q+91W/e6W1dmRvq9VGZ0jv12li184+ruyTwjdNf4aGWwA98uz6pRBeeWgJdeGqJz4258E49/ylAIIE+eOpdTiGRDT6FRHZ4SonZ4CkkZoc/RYIN/BQJdvBjJNjCx0g0Tu8bp97ZwkdK8IYfK8ES/rdE3XPeW/gDW/iQ8MJ+WL0d2AG+Ahj42rA/QoiEZymBIXir9wGWrQQiLqnwn+udemEngRE3LDsJTGgP2EjghN5mdgkQNGatRP7mDoRdZfYOFQkKZpNAwkLIIYGH1dWiB1v/SSxqtNiVWORwN9d4HZUpk43XJRKJRHKW+QaUqwzfL9sYYwAAAABJRU5ErkJggg==");
+}
+
+#imagens div:nth-child(2) {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 @media (min-width: 700px) {
@@ -114,34 +160,60 @@ select {
         width: 47%;
     }
 
-    #atributos, #imagens
-    {
+    #atributos,
+    #imagens {
         display: flex;
         flex-direction: column;
-        width: 47%;
-        height: 100px;
+        width: 100%;
+        height: auto;
     }
 
-    #atributos input
-    {
+    #atributos select {
         width: 100%;
         margin-top: 10px;
     }
 
-    #imagens div:nth-child(2)
-    {
+    #atributos .iconesAdd {
         width: 100%;
         margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
-    #politicas
+    #atributos .iconesAdd div {
+        width: auto;
+        padding: 5px;
+    }
+
+    #atributos .iconesAdd .close
     {
+        height: 15px;
+        width: 15px;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABP0lEQVR4nO2Yy07DMBBF8yksiHiIHbXdXYUd+P8/YAGitN30xkEsQZaChAKJnHTsTKq5Uraec2QnnkxRSCQSiUQSmdrqW1SmLBLluFlfhhpJFq+f7q+91W/e6W1dmRvq9VGZ0jv12li184+ruyTwjdNf4aGWwA98uz6pRBeeWgJdeGqJz4258E49/ylAIIE+eOpdTiGRDT6FRHZ4SonZ4CkkZoc/RYIN/BQJdvBjJNjCx0g0Tu8bp97ZwkdK8IYfK8ES/rdE3XPeW/gDW/iQ8MJ+WL0d2AG+Ahj42rA/QoiEZymBIXir9wGWrQQiLqnwn+udemEngRE3LDsJTGgP2EjghN5mdgkQNGatRP7mDoRdZfYOFQkKZpNAwkLIIYGH1dWiB1v/SSxqtNiVWORwN9d4HZUpk43XJRKJRHKW+QaUqwzfL9sYYwAAAABJRU5ErkJggg==");
+        background-position: center;
+        background-size: cover;
+    }
+
+    .containerAddIcone{
+        display: flex;
+        align-items: center;
+    }
+
+
+    #imagens div:nth-child(2) {
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #politicas {
         display: flex;
         flex-direction: column;
     }
 
-    #politicas div
-    {
+    #politicas div {
         width: 100%;
     }
 
@@ -150,6 +222,6 @@ select {
             width: 990px;
             margin: 0 auto;
         }
-    
+
     }
 }
