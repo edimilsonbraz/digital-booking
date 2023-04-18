@@ -1,6 +1,6 @@
 import style from './style.module.css'
 
-export function Policy() {
+export function Policy({ newProduct }) {
   return (
     <section className={style.policy}>
       <h2>O que você precisa saber</h2>
@@ -9,30 +9,22 @@ export function Policy() {
         <div className={style.regras}>
           <ul>
             <h3>Regras da casa</h3>
-            <li>Check-out 10:00</li>
-            <li>Não é permitido festas</li>
-            <li>Não fumar</li>
+            {newProduct && <li>{newProduct.regrasDaCasa}</li>}
           </ul>
         </div>
         <div className={style.saude}>
           <ul>
             <h3>Saúde e segurança</h3>
-            <li>
-              Diretrizes de distanciamento social e outras regulamentações
-              relacionadas ao coronavírus se aplicam
-            </li>
-            <li>Detector de fumaça</li>
-            <li>Depósito de segurança</li>
+            {newProduct && <li>{newProduct.saudeSeguranca}</li>}
           </ul>
         </div>
         <div className={style.cancelamento}>
           <ul>
             <h3>Politica de cancelamento</h3>
-            <li>
-              Adicione as datas da viagem para obter detalhes de cancelamento
-              para esta estadia
-            </li>
-            <li>Outras</li>
+            {newProduct &&
+            
+            <li>{newProduct.politicaDeCancelamento}</li>
+            }
           </ul>
         </div>
       </div>
