@@ -2,12 +2,10 @@ import api from '../../service/api'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './style.module.css'
-import { Link } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 
 import { useContext } from 'react'
-import { IsLoggedContext } from '../../context/IsLoggedContext'
 import { Loading } from '../../components/Loading'
 
 //Importes do slide
@@ -37,9 +35,10 @@ import 'react-toastify/dist/ReactToastify.css'
 import { HeaderDetailsProduct } from './HeaderDetailsProduct'
 import { ProductContext } from '../../context/ProductContext'
 import { ReservationContext } from '../../context/ReservationContext'
+import { AuthContext } from '../../context/AuthContext'
 
 export function Product() {
-  const { isLogged } = useContext(IsLoggedContext)
+  const { isLogged } = useContext(AuthContext)
   const { newProduct, setNewProduct } = useContext(ProductContext)
   const {startDate, endDate, onChangeDates} = useContext(ReservationContext)
   const [loading, setLoading] = useState(true)

@@ -1,30 +1,30 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { ToggleMenu } from '../ToggleMenu'
 import { useContext, useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import logo1 from '../../assets/logo1.svg'
-import { IsLoggedContext } from '../../context/IsLoggedContext'
+import { AuthContext } from '../../context/AuthContext'
 
 export function Header() {
-  const { isLogged, toggleIsLogged } = useContext(IsLoggedContext)
-  const [user, setUser] = useState({})
+  const { 
+    user, 
+    getUserLocalStorage, 
+    logout, 
+    isLogged, 
+    toggleIsLogged 
+  } = useContext(AuthContext)
 
   // Função para lidar com o logout do usuárioloca
   function handleLogout() {
-    localStorage.removeItem('token')
+    logout()
     toggleIsLogged() // Altera o estado de logado
     navigate('/')
     window.location.reload()
   }
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      //Pega os dados do LocalStorage
-      const json = localStorage.getItem('token')
-      //Converto para Objeto
-      setUser(JSON.parse(json))
-    }
-  }, [isLogged])
+    getUserLocalStorage()
+  }, [])
 
   return (
     <>
@@ -40,6 +40,9 @@ export function Header() {
         {isLogged ? (
           <div className={styles.headerButtons}>
             {user && <span>Olá {user.name}!</span>}
+            <NavLink to="/cadastrar-produto">
+              <button>Gerenciar</button>
+            </NavLink>
             <button onClick={handleLogout}>Sair</button>
           </div>
         ) : (

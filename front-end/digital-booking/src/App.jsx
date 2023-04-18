@@ -18,11 +18,4 @@ export function App() {
   )
 }
 
-{
-  /* <Header />
-<ErrorBoundary>
-  <AppRoutes />
-</ErrorBoundary>
-<Footer />
-<ToastContainer /> */
-}
+

@@ -1,18 +1,22 @@
-import { createContext, useEffect, useState } from "react";
-import api from "../service/api";
-
+import { createContext, useEffect, useState } from 'react'
+import api from '../service/api'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState([]);
-  // const [token, setToken] = useState('')
+  const [isLogged, setIsLogged] = useState(false)
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    token: ''
+  })
 
   useEffect(() => {
     const user = getUserLocalStorage()
 
-    if(user) {
+    if (user) {
       setUser(user)
+      setIsLogged(true)
     }
   }, [])
 
@@ -20,27 +24,32 @@ export const AuthProvider = ({ children }) => {
     const response = await LoginRequest(email, password)
 
     const payload = {
-      token: response.data.token,
-      id: response.data.id,
-      name: response.data.name
+      id: response.id,
+      name: response.name,
+      token: response.token
     }
-
-    setUser(payload)
+    setUser({
+      id: payload.id,
+      name: payload.name,
+      token: payload.token
+    })
+    setIsLogged(true)
     setUserLocalStorage(payload)
   }
 
   async function LoginRequest(email, password) {
     try {
       const request = await api.post('api/v1/auth/authenticate', {
-        email, 
+        email,
         password
       })
+
+      console.log(request.data)
       return request.data
     } catch (error) {
       return null
     }
   }
-
 
   function logout() {
     setUser(null)
@@ -48,24 +57,37 @@ export const AuthProvider = ({ children }) => {
   }
 
   function setUserLocalStorage(user) {
-    localStorage.setItem("DB-BOOKING", JSON.stringify(user))
+    localStorage.setItem('DB-BOOKING', JSON.stringify(user))
   }
 
   function getUserLocalStorage() {
-    const json = localStorage.getItem("DB-BOOKING")
+    const json = localStorage.getItem('DB-BOOKING')
 
-    if(!json) {
-      return null;
+    if (!json) {
+      return null
     }
-
+    // o token existe, faz a conversão o usuário está autenticado
     const user = JSON.parse(json)
 
-    return user ?? null
+     return user 
+  }
 
+  const toggleIsLogged = () => {
+    setIsLogged(!isLogged)
   }
 
   return (
-    <AuthContext.Provider value={{...user, authenticate, logout}}>
+    <AuthContext.Provider
+      value={{
+        user, 
+        setUser,
+        authenticate,
+        logout,
+        getUserLocalStorage,
+        isLogged,
+        toggleIsLogged
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

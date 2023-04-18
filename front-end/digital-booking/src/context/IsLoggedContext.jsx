@@ -5,14 +5,10 @@ export const IsLoggedContext = createContext()
 
 export const IsLoggedProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false)
-	const [token, setToken] = useState({
-      token: '',
-      name: ''
-    })
 
   useEffect(() => {
     const getToken = localStorage.getItem('token')
-		setToken(getToken)
+		
     if (getToken) {
       // o token existe, o usuário está autenticado
       setIsLogged(true)

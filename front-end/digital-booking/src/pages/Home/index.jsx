@@ -67,7 +67,7 @@ export function Home() {
       const response = await api.get('produtos')
       .then(response => response.data)
       setProducts(response)
-      console.log(response)
+      
       setFilteredProductQnt({
         apartamento: response.filter(
           (produto) => produto.categoria.descricaoCategoria === "Apartamento"
