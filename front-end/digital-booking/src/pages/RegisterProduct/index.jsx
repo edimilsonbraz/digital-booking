@@ -73,7 +73,6 @@ export function ResgisterProduct() {
         incrementarId();
 
         setDataForm({ ...dataForm, imagemValue:"" ,imagens: [...dataForm.imagens, { id: id, url: dataForm.imagemValue }] });
-        // setDataForm({...dataForm, imagemValue:''});
     }
 
     // Metodo que adiciona o nome do atributo e o icone
@@ -95,7 +94,6 @@ export function ResgisterProduct() {
                     "tituloImagem": dataForm.nomeProduto,
                     "urlImagem": element.url
                 }).then(data => {
-                    console.log("Gravando dados")
                     return imagem.push(data.data)
                 })
             })
@@ -108,19 +106,23 @@ export function ResgisterProduct() {
     }
 
     function registrarProduto() {
+        //Traz imagens cadastradas no banco de dados
         const imagens = postImagens();
 
+        //Acionando spinner de espera
         setLoadingButton(prev => !prev);
-        let timer = setTimeout(function () {
-            // console.log("Entou na função time")
-            postProduto(imagens)
+
+        let timer = setTimeout(async function () {
+            //Se nenhuma imagem for cadastrada não deve chamar a função
+            const response = imagens.length != 0 ? await postProduto(imagens): '';
+            //Desabilitar spinner
             setLoadingButton(prev => !prev);
+            response.status == 200 ? navigate("/produto-cadastrado") : navigate("/erro-a-cadastrar");
         }, 5000)
 
-        let timer2 = setTimeout(function()
-        {
-            return navigate("/produto-cadastrado");
-        }, 6000)
+        // let timer2 = setTimeout(function()
+        // {
+        // }, 6000);
     }
 
     //Metodo que registra um produto na api
@@ -138,8 +140,6 @@ export function ResgisterProduct() {
                 "endereco": dataForm.endereco,
                 "cidades": dataForm.cidades
             })
-
-            console.log("O produto foi cadastrado com sucesso")
             return response
         } catch (error) {
             console.log('Erro ao cadastrar produto' + error)
@@ -158,7 +158,6 @@ export function ResgisterProduct() {
         if (!dataForm.nomeProduto.length < 1 && !Object.keys(dataForm.categoria).length < 1 && !dataForm.endereco.length < 1 && !Object.keys(dataForm.cidades).length < 1
             && !dataForm.descricaoProduto.length < 1 && !dataForm.iconeAtributo.length == 0 && !dataForm.imagens.length < 5 && !dataForm.politicaRegrasCasa.length < 1 &&
             !dataForm.politicaSaudeSeguranca.length < 1 && !dataForm.politicaCancelamento.length < 1) {
-            // console.log("entramos")
             registrarProduto();
         }
         else {
@@ -186,7 +185,7 @@ export function ResgisterProduct() {
                     <div className={style.productRegister}>
                         <div>
                             <label htmlFor="">Nome do produto:</label>
-                            <input value={dataForm.nomeProduto} onChange={(e) => setDataForm({ ...dataForm, nomeProduto: e.target.value })} type="text" required />
+                            <input value={dataForm.nomeProduto} maxLength={254} onChange={(e) => setDataForm({ ...dataForm, nomeProduto: e.target.value })} type="text" required />
                             {error.nomeError ? <ErrorForm text="O campo não pode ser vazio" /> : ''}
                         </div>
 
@@ -205,7 +204,7 @@ export function ResgisterProduct() {
 
                         <div>
                             <label htmlFor="">Endereço:</label>
-                            <input type="text" value={dataForm.endereco} onChange={(e) => setDataForm({ ...dataForm, endereco: e.target.value })} />
+                            <input maxLength={254} type="text" value={dataForm.endereco} onChange={(e) => setDataForm({ ...dataForm, endereco: e.target.value })} />
                             {error.enderecoError ? <ErrorForm text="Por favor digite um endereço" /> : ''}
                         </div>
 
@@ -259,7 +258,7 @@ export function ResgisterProduct() {
                         <div id={style.imagens}>
                             <h1>Carregar Imagens</h1>
                             <div>
-                                <input type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({ ...dataForm, imagemValue: e.target.value })} />
+                                <input maxLength={998} type="text" placeholder='Insira https://' value={dataForm.imagemValue} onChange={e => setDataForm({ ...dataForm, imagemValue: e.target.value })} />
                                 <button className={style.buttonAdd} onClick={addImage}>+</button>
                             </div>
                             {dataForm.imagens.length != 0 ?

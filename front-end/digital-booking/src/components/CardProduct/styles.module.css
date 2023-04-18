@@ -1,7 +1,7 @@
 .containerCardInline {
   box-shadow: 1px 1px 5px #00000059;
   border-radius: 10px;
-  max-width: 49%;
+  width: 49%;
   max-height: auto;
   margin-bottom: 1.5rem;
   margin-left: 0.2rem;
@@ -19,7 +19,7 @@
 
 .contentImage {
   width: 50%;
-  height: auto;
+  max-height: auto;
   background-position: center;
   background-size: cover;
   border-radius: 10px 0 0 10px;
@@ -28,6 +28,7 @@
 
 .contentDescription {
   width: 52%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -175,6 +176,7 @@ button.button:hover {
   .contentCard .contentImage {
     width: 100%;
     height: 220px;
+    border-radius: 10px 10px 0 0;
   }
 
   .contentCard .contentDescription {
@@ -189,6 +191,11 @@ button.button:hover {
 }
 
 @media screen and (max-width: 799px) {
+
+  .containerCardInline{
+    width: 45%
+  }
+
   .contentCard .contentDescription {
     padding: 1rem;
   }
@@ -209,4 +216,8 @@ button.button:hover {
 }
 
 /* RESPONSIVIDADE MOBILE */
-@media screen and (max-width:414px) {}
+@media screen and (max-width:650px) {
+  .containerCardInline{
+    width: 95%
+  }
+}
