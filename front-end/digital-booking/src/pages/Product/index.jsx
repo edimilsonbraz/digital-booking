@@ -62,22 +62,7 @@ export function Product() {
 
   const { id } = useParams()
 
-  // const [data, setData] = useState({
-  //   categoria: 'Hotel',
-  //   titulo: 'Hermitage Hotel',
-  //   localizacao: 'Buenos Aires, Argentina - 900m da praia',
-  //   fotos: [
-  //     'https://picsum.photos/id/13/600/338',
-  //     'https://picsum.photos/id/13/600/338',
-  //     'https://picsum.photos/id/37/600/338',
-  //     'https://picsum.photos/id/49/600/338',
-  //     'https://picsum.photos/id/57/600/338',
-  //     'https://picsum.photos/id/58/600/338'
-  //   ]
-  // })
-
   //Configuração Keen Slider
-
   const [slides, setSlides] = useState(false)
 
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -92,15 +77,6 @@ export function Product() {
     created() {
       setLoaded(true)
     }
-  })
-
-  const [product, setProduct] = useState({
-    categoria: '',
-    titulo: '',
-    localizacao: '',
-    descricao: '',
-    caracteristica: '',
-    politicas: ''
   })
 
   useEffect(() => {
@@ -134,6 +110,7 @@ export function Product() {
                 .slice(0, 5)
                 .map((element, index) => (
                   <div
+                    key={element.id}
                     onClick={slide}
                     className={`${style.responsiveImages} ${style.gridAreas}`}
                     style={{ backgroundImage: `url(${element.urlImagem})` }}
@@ -155,6 +132,7 @@ export function Product() {
               {newProduct.length != 0
                 ? newProduct.imagens.map((element) => (
                     <div
+                      key={element.id}
                       style={{ backgroundImage: `url(${element.urlImagem})` }}
                       className={`keen-slider__slide ${style.responsiveImages}`}
                     ></div>
@@ -193,6 +171,7 @@ export function Product() {
                 {newProduct.length != 0
                   ? newProduct.imagens.map((element) => (
                       <div
+                        key={element.id}
                         style={{ backgroundImage: `url(${element.urlImagem})` }}
                         className={`keen-slider__slide ${style.responsiveImages}`}
                       ></div>

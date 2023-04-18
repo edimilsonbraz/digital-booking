@@ -1,6 +1,6 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ToggleMenu } from '../ToggleMenu'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import styles from './styles.module.css'
 import logo1 from '../../assets/logo1.svg'
 import { AuthContext } from '../../context/AuthContext'
@@ -13,6 +13,8 @@ export function Header() {
     isLogged, 
     toggleIsLogged 
   } = useContext(AuthContext)
+
+  const navigate = useNavigate()
 
   // Função para lidar com o logout do usuárioloca
   function handleLogout() {

@@ -7,8 +7,7 @@ import { Policy } from '../../components/Policy'
 import HeaderDetails from '../../components/HeaderDetails'
 import { Loading } from '../../components/Loading'
 
-import { UserContext } from '../../context/UserContext'
-import { IsLoggedContext } from '../../context/IsLoggedContext'
+import { AuthContext } from '../../context/AuthContext'
 import { ProductContext } from '../../context/ProductContext'
 import { ReservationContext } from '../../context/ReservationContext'
 
@@ -23,25 +22,20 @@ import { faCircleCheck, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import style from './style.module.css'
 
 export function Reserva() {
-  const { userData } = useContext(UserContext)
-  const { token } = useContext(IsLoggedContext)
-  const { startDate, endDate, onChangeDates, setDataReserva } =
-    useContext(ReservationContext)
+  const { 
+    startDate, 
+    endDate, 
+    onChangeDates, 
+    setDataReserva } = useContext(ReservationContext)
+
   const { newProduct } = useContext(ProductContext)
-
+  const {user} = useContext(AuthContext)
+    console.log(user)
   const navigate = useNavigate()
-
-  //TODO: Pega os dados do usuário
-  // const { usuario, userToken } = useContext(UsuarioContext)
 
   const [cidade, setCidade] = useState('')
   const [hora, setHora] = useState('')
   const [loading, setLoading] = useState(false)
-
-  //Pega os dados do LocalStorage
-  const json = localStorage.getItem('token')
-  //Converto para Objeto
-  const user = JSON.parse(json)
 
   //Formata datas
   function datesFormatted(date) {
@@ -61,14 +55,14 @@ export function Reserva() {
   async function reserve() {
     // setRemoveLoading(false)
     const data = {
-      dataCheckIn: '17-04-2023',
-      dataCheckOut: '30-04-2023',
-      horaInicioReserva: '17-04-2023 20:30:01',
+      dataCheckIn: datesFormatted(startDate),
+      dataCheckOut: datesFormatted(endDate),
+      horaInicioReserva: hora,
       produtos: {
-        id: 32
+        id: newProduct.id
       },
       usuario: {
-        id: 2,
+        id: user.id,
         role: 'USER'
       }
     }
@@ -92,7 +86,7 @@ export function Reserva() {
     try {
       //TODO: Implementação da Reserva //
       await api
-        .post('/reservas/salvar', data, {
+        .post('reservas/salvar', data, {
           headers: {
             Authorization: `Bearer ${user.token}`
           }
@@ -132,17 +126,17 @@ export function Reserva() {
               <div className={style.formBox}>
                 <div className={style.groupInput}>
                   <label htmlFor="">Nome</label>
-                  <input type="text" value="Marcio" disabled />
+                  <input type="text" value={user.name} disabled />
 
                   <label htmlFor="">Sobrenome</label>
-                  <input type="text" value="Rodrigues" disabled />
+                  <input type="text" value={user.name} disabled />
                 </div>
 
                 <div className={style.groupInput}>
                   <label htmlFor="">E-mail</label>
                   <input
                     type="email"
-                    value="marcio@digitalhouse.com"
+                    value="email@digitalhouse.com"
                     disabled
                   />
 
@@ -189,31 +183,30 @@ export function Reserva() {
                         <option value="DEFAULT" disabled>
                           Selecione sua hora de chegada
                         </option>
-                        <option value="10-04-2023 09:30:01">00:00 AM</option>
-                        <option value="01:00 AM">01:00 AM</option>
-                        <option value="02:00 AM">02:00 AM</option>
-                        <option value="03:00 AM">03:00 AM</option>
-                        <option value="04:00 AM">04:00 AM</option>
-                        <option value="05:00 AM">05:00 AM</option>
-                        <option value="06:00 AM">06:00 AM</option>
-                        <option value="07:00 AM">07:00 AM</option>
-                        <option value="08:00 AM">08:00 AM</option>
-                        <option value="09:00 AM">09:00 AM</option>
-                        <option value="10:00 AM">10:00 AM</option>
-                        <option value="11:00 AM">11:00 AM</option>
-                        <option value="12:00 AM">12:00 AM</option>
-                        <option value="01:00 PM">01:00 PM</option>
-                        <option value="02:00 PM">02:00 PM</option>
-                        <option value="03:00 PM">03:00 PM</option>
-                        <option value="04:00 PM">04:00 PM</option>
-                        <option value="05:00 PM">05:00 PM</option>
-                        <option value="06:00 PM">06:00 PM</option>
-                        <option value="07:00 PM">07:00 PM</option>
-                        <option value="08:00 PM">08:00 PM</option>
-                        <option value="09:00 PM">09:00 PM</option>
-                        <option value="10:00 PM">10:00 PM</option>
-                        <option value="11:00 PM">11:00 PM</option>
-                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="18-04-2023 00:00:00">00:00 AM</option>
+                        <option value="18-04-2023 01:00:00">01:00 AM</option>
+                        <option value="18-04-2023 02:00:00">02:00 AM</option>
+                        <option value="18-04-2023 03:00:00">03:00 AM</option>
+                        <option value="18-04-2023 04:00:00">04:00 AM</option>
+                        <option value="18-04-2023 05:00:00">05:00 AM</option>
+                        <option value="18-04-2023 06:00:00">06:00 AM</option>
+                        <option value="18-04-2023 07:00:00">07:00 AM</option>
+                        <option value="18-04-2023 08:00:00">08:00 AM</option>
+                        <option value="18-04-2023 09:00:00">09:00 AM</option>
+                        <option value="18-04-2023 10:00:00">10:00 AM</option>
+                        <option value="18-04-2023 11:00:00">11:00 AM</option>
+                        <option value="18-04-2023 12:00:00">12:00 AM</option>
+                        <option value="18-04-2023 13:00:00">13:00 PM</option>
+                        <option value="18-04-2023 14:00:00">14:00 PM</option>
+                        <option value="18-04-2023 15:00:00">15:00 PM</option>
+                        <option value="18-04-2023 16:00:00">16:00 PM</option>
+                        <option value="18-04-2023 17:00:00">17:00 PM</option>
+                        <option value="18-04-2023 18:00:00">18:00 PM</option>
+                        <option value="18-04-2023 19:00:00">19:00 PM</option>
+                        <option value="18-04-2023 20:00:00">20:00 PM</option>
+                        <option value="18-04-2023 21:00:00">21:00 PM</option>
+                        <option value="18-04-2023 22:00:00">22:00 PM</option>
+                        <option value="18-04-2023 23:00:00">23:00 PM</option>
                       </select>
                     </div>
                   </div>
