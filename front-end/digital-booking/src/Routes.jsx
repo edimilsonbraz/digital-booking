@@ -8,6 +8,7 @@ import { ReservaSucedida } from './pages/ReservaSucedida'
 import { Category } from './pages/Category'
 import { ProdutoCadastrado } from './pages/ProdutoCadastrado'
 import { ResgisterProduct } from './pages/RegisterProduct'
+import { ErroCadastrar } from './pages/ErroCadastrar'
 
 export function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ export function AppRoutes() {
       <Route path="/sucesso" element={<ReservaSucedida />} />
       <Route path="/produto-cadastrado" element={<ProdutoCadastrado />} />
       <Route path="/cadastrar-produto" element={<ResgisterProduct />} />
+      <Route path="//erro-a-cadastrar" element={<ErroCadastrar />} />
       <Route path="*" element={<h1>PAGE NOT FOUND</h1>} />
     </Routes>
   )

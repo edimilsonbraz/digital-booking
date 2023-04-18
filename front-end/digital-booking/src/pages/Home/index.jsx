@@ -156,7 +156,6 @@ export function Home() {
 
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>
-
         <CardCategory products={products} filteredProductQnt={filteredProductQnt}/>
       </section>
 

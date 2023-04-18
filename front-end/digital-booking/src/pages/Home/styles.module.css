@@ -22,9 +22,8 @@
 /*  */
 .contentInputs {
   display: flex;
-  /* gap: 0.5rem; */
   align-items: center;
-
+  position: relative;
   border: 2px solid var(--primary);
 }
 
@@ -171,7 +170,8 @@
 
 @media screen and (max-width: 799px) {
   .containerCard {
-    display: block;
+    display: flex;
+    flex-wrap: wrap
   }
 }
 
