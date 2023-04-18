@@ -40,9 +40,9 @@ import { AuthContext } from '../../context/AuthContext'
 export function Product() {
   const { isLogged } = useContext(AuthContext)
   const { newProduct, setNewProduct } = useContext(ProductContext)
-  const {startDate, endDate, onChangeDates} = useContext(ReservationContext)
+  const { startDate, endDate, onChangeDates } = useContext(ReservationContext)
   const [loading, setLoading] = useState(true)
-
+  console.log(newProduct)
   const navigateTo = useNavigate()
 
   const reservarProduto = () => {
@@ -62,27 +62,26 @@ export function Product() {
 
   const { id } = useParams()
 
-  const [data, setData] = useState({
-    categoria: 'Hotel',
-    titulo: 'Hermitage Hotel',
-    localizacao: 'Buenos Aires, Argentina - 900m da praia',
-    fotos: [
-      'https://picsum.photos/id/13/600/338',
-      'https://picsum.photos/id/13/600/338',
-      'https://picsum.photos/id/37/600/338',
-      'https://picsum.photos/id/49/600/338',
-      'https://picsum.photos/id/57/600/338',
-      'https://picsum.photos/id/58/600/338'
-    ]
-  })
+  // const [data, setData] = useState({
+  //   categoria: 'Hotel',
+  //   titulo: 'Hermitage Hotel',
+  //   localizacao: 'Buenos Aires, Argentina - 900m da praia',
+  //   fotos: [
+  //     'https://picsum.photos/id/13/600/338',
+  //     'https://picsum.photos/id/13/600/338',
+  //     'https://picsum.photos/id/37/600/338',
+  //     'https://picsum.photos/id/49/600/338',
+  //     'https://picsum.photos/id/57/600/338',
+  //     'https://picsum.photos/id/58/600/338'
+  //   ]
+  // })
 
   //Configuração Keen Slider
 
-  const [slides, setSlides] = useState(false);
+  const [slides, setSlides] = useState(false)
 
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
     slideChanged(slider) {
@@ -110,11 +109,12 @@ export function Product() {
 
   async function getProduct() {
     try {
-      const response = await api.get(`produtos/${id}`)
+      const response = await api
+        .get(`produtos/${id}`)
         .then((response) => response.data)
       setNewProduct(response)
       setLoading(false)
-    } catch (error){
+    } catch (error) {
       console.log('Erro ao buscar o produto' + error)
     }
   }
@@ -129,12 +129,17 @@ export function Product() {
 
         {/* Grid de 5 primeiras imagens*/}
         <div className={`containerGlobal ${style.containerGridImages}`}>
-          {newProduct.length != 0 ? (newProduct.imagens.slice(0, 5).map((element, index) => (
-            <div onClick={slide}
-              className={`${style.responsiveImages} ${style.gridAreas}`}
-              style={{ backgroundImage: `url(${element.urlImagem})` }}
-            ></div>
-          ))) : ''}
+          {newProduct.length != 0
+            ? newProduct.imagens
+                .slice(0, 5)
+                .map((element, index) => (
+                  <div
+                    onClick={slide}
+                    className={`${style.responsiveImages} ${style.gridAreas}`}
+                    style={{ backgroundImage: `url(${element.urlImagem})` }}
+                  ></div>
+                ))
+            : ''}
           <button onClick={slide} id={style.buttonOpenSlideDesktop}>
             Abrir galeria
           </button>
@@ -147,12 +152,14 @@ export function Product() {
               ref={sliderRef}
               className={`keen-slider ${style.imagesDesktop}`}
             >
-              {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
-                <div
-                  style={{ backgroundImage: `url(${element.urlImagem})` }}
-                  className={`keen-slider__slide ${style.responsiveImages}`}
-                ></div>
-              ))) : ''}
+              {newProduct.length != 0
+                ? newProduct.imagens.map((element) => (
+                    <div
+                      style={{ backgroundImage: `url(${element.urlImagem})` }}
+                      className={`keen-slider__slide ${style.responsiveImages}`}
+                    ></div>
+                  ))
+                : ''}
               <button
                 id={style.buttonNextSlide}
                 onClick={(e) =>
@@ -183,16 +190,20 @@ export function Product() {
           <>
             <div className={style.containerSlideMobile}>
               <div ref={sliderRef} className="keen-slider">
-                {newProduct.length != 0 ? (newProduct.imagens.map((element) => (
-              <div
-                style={{ backgroundImage: `url(${element.urlImagem})` }}
-                className={`keen-slider__slide ${style.responsiveImages}`}
-              ></div>
-            ))) : ''}
+                {newProduct.length != 0
+                  ? newProduct.imagens.map((element) => (
+                      <div
+                        style={{ backgroundImage: `url(${element.urlImagem})` }}
+                        className={`keen-slider__slide ${style.responsiveImages}`}
+                      ></div>
+                    ))
+                  : ''}
               </div>
             </div>
           </>
-        ) : ''}
+        ) : (
+          ''
+        )}
         {loaded && instanceRef.current && instanceRef.current.slides != 0 && (
           <div className={style.dots}>
             {[
@@ -204,14 +215,14 @@ export function Product() {
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
-                  className={`${style.dot} ${currentSlide === idx ? style.active : ''
-                    }`}
+                  className={`${style.dot} ${
+                    currentSlide === idx ? style.active : ''
+                  }`}
                 ></button>
               )
             })}
           </div>
         )}
-
       </section>
 
       <section className={`containerGlobal ${style.details}`}>
@@ -223,39 +234,23 @@ export function Product() {
       </section>
 
       <section className={`containerGlobal ${style.features}`}>
-        <span>{product.caracteristica}</span>
+        {/* <span>{product.caracteristica}</span> */}
         <h2>O que esse lugar oferece?</h2>
         <div className={style.separator}></div>
         <div className={style.featuresIcons}>
-          <p>
-            <FontAwesomeIcon icon={faWifi} /> - Wifi
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faHome} /> - Cozinha
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faTelevision} /> - Televisão
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faSnowflake} /> - Ar Condicionado
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faPaw} /> - Aceita Pets
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faCar} /> - Estacionamento
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faSwimmer} /> - Piscina
-          </p>
-          <p>
-            <FontAwesomeIcon icon={faPeopleRoof} /> - Quartos para famílias
-          </p>
+          {newProduct.length != 0 &&
+            newProduct.produtosCaracteristica.map((item) => (
+            <div key={item.id}>
+              <p>
+                <FontAwesomeIcon icon={faSnowflake} /> - {item.nomeCaracteristica}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className={`containerGlobal ${style.policyReserva}`}>
-        <Policy />
+        <Policy newProduct={newProduct}/>
       </section>
 
       <section className={style.containerReservation}>
@@ -263,11 +258,11 @@ export function Product() {
           <h2>Datas disponíveis</h2>
 
           <div className={style.contentCalender}>
-            <Calender 
-              onChangeDates={onChangeDates} 
+            <Calender
+              onChangeDates={onChangeDates}
               startDate={startDate}
               endDate={endDate}
-          />
+            />
 
             <div className={style.calenderText}>
               <p>Adicione as datas da sua viagem para obter preços exatos</p>
