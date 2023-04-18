@@ -21,7 +21,7 @@
   border-radius: 10px;
   box-shadow: 1px 1px 5px #00000059;
   cursor: pointer;
-  position: relative;
+  /* position: relative;  AQUI ESTAVA DANDO O BUG NO CALENDARIO */
 }
 
 .card h1 {
