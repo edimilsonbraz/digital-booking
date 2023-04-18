@@ -33,7 +33,7 @@ export function CardCategory({ filteredProductQnt }) {
       <div className={styles.containerCard}>
         <div
           className={styles.card}
-          onClick={() => {handleNavigate(3)}}
+          onClick={() => {handleNavigate(2)}}
         >
           <div style={{ backgroundImage: `url("https://pesweb.azureedge.net/spimg/hotelbannerimages/pestana-sao-paulo-hotel-banner-01.jpg?scale=downscaleonly&encoder=freeimage&progressive=true&quality=50&w=1440&h=780&mode=crop&anchor=bottomcenter")` }}
           ></div>
@@ -53,7 +53,7 @@ export function CardCategory({ filteredProductQnt }) {
           className={styles.card}
           value={category.descricaoCategoria}
           onClick={() => {
-            handleNavigate(4)
+            handleNavigate(1)
           }}
         >
           <div style={{ backgroundImage: `url("https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg")` }}
@@ -74,7 +74,7 @@ export function CardCategory({ filteredProductQnt }) {
           className={styles.card}
           value={category.descricaoCategoria}
           onClick={() => {
-            handleNavigate(1)
+            handleNavigate(3)
           }}
         >
           <div style={{ backgroundImage: `url("https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768")` }}
@@ -95,7 +95,7 @@ export function CardCategory({ filteredProductQnt }) {
           className={styles.card}
           value={category.descricaoCategoria}
           onClick={() => {
-            handleNavigate(2)
+            handleNavigate(4)
           }}
         >
           <div style={{ backgroundImage: `url("https://viagemeturismo.abril.com.br/wp-content/uploads/2020/11/gettyimages-964872010.jpg?quality=70&strip=info&w=1024&resize=1200,800")` }}
