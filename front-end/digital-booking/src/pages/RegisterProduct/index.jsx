@@ -301,7 +301,7 @@ export function ResgisterProduct() {
                         </div>
                     </div>
                     {loadingButton ? <>
-                        <img className={style.spinner} src="src\pages\RegisterProduct\spinner.gif" alt="spinner" />
+                        <img className={style.spinner} src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="spinner" />
                         <button onClick={handlerSubmit} className={style.buttonCriarLoading} type='submit' disabled>
                             Carregando</button></> :
                         <button onClick={handlerSubmit} className={style.buttonCriar} type='submit'>Criar</button>}
