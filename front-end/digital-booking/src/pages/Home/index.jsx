@@ -70,7 +70,7 @@ export function Home() {
       
       setFilteredProductQnt({
         apartamento: response.filter(
-          (produto) => produto.categoria.descricaoCategoria === "Apartamento"
+          (produto) => produto.categoria.descricaoCategoria === "Apartamentos"
         ).length,
         resort: response.filter(
           (produto) => produto.categoria.descricaoCategoria === "Resorts"

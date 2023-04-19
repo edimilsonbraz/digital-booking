@@ -22,15 +22,12 @@ import { faCircleCheck, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import style from './style.module.css'
 
 export function Reserva() {
-  const { 
-    startDate, 
-    endDate, 
-    onChangeDates, 
-    setDataReserva } = useContext(ReservationContext)
+  const { startDate, endDate, onChangeDates, setDataReserva } =
+    useContext(ReservationContext)
 
   const { newProduct } = useContext(ProductContext)
-  const {user} = useContext(AuthContext)
-    console.log(user)
+  const { user } = useContext(AuthContext)
+  console.log(user)
   const navigate = useNavigate()
 
   const [cidade, setCidade] = useState('')
@@ -134,11 +131,7 @@ export function Reserva() {
 
                 <div className={style.groupInput}>
                   <label htmlFor="">E-mail</label>
-                  <input
-                    type="email"
-                    value="email@digitalhouse.com"
-                    disabled
-                  />
+                  <input type="email" value="email@digitalhouse.com" disabled />
 
                   <label htmlFor="">Cidade</label>
                   <input
@@ -220,20 +213,25 @@ export function Reserva() {
           <div className={style.sidebarContent}>
             <h1>Detalhe da reserva</h1>
 
-            <img
-              src="https://images.trvl-media.com/lodging/4000000/3860000/3854700/3854700/5012a133.jpg?impolicy=fcrop&w=600&h=400&p=1&q=medium"
-              alt=""
-            />
+            {newProduct.length != 0 &&
+              <img src={newProduct.imagens[0].urlImagem} alt="" />
+            }
 
             <div className={style.sidebarText}>
-              <h3>HOTEL</h3>
-              <h2>San Raphael Hotel</h2>
-              <span>⭐⭐⭐⭐⭐</span>
+              {newProduct.length != 0 && (
+                <>
+                  <h3>{newProduct.categoria.descricaoCategoria}</h3>
 
-              <div className={style.addressHotel}>
-                <FontAwesomeIcon icon={faLocationDot} />
-                <p>Largo do Arouche, 150 - Centro Histórico de São Paulo</p>
-              </div>
+                  <h2>{newProduct.nomeProduto}</h2>
+
+                  <span>⭐⭐⭐⭐⭐</span>
+
+                  <div className={style.addressHotel}>
+                    <FontAwesomeIcon icon={faLocationDot} />
+                    <p>{newProduct.endereco}</p>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className={style.checkInOut}>
