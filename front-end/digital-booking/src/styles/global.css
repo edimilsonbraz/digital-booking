@@ -7,8 +7,8 @@
 
 :root {
 	--white: #fff;
-	--primary: #F0572D;
 	--light: #EFEFEF;
+	--primary: #F0572D;
 	--title: #31363F;
 	--text: #191B1D;
 
@@ -20,6 +20,7 @@ textarea,
 button {
 	font-family: 'Roboto';
 	font-weight: 400;
+	font-size: 1rem;
 }
 
 input:focus {

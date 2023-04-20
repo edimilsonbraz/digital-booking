@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './styles.module.css'
-import { Search } from '../../components/Search'
+import {ContainerBuscador, ContainerForm} from './style'
 
 export function Home() {
   const [products, setProducts] = useState([])
@@ -89,12 +89,11 @@ export function Home() {
   }
 
   return (
-    <>
-      <div className={styles.containerBuscador}>
+    <> 
+      <ContainerBuscador>
         <h1>Buscar ofertas em hotéis, casas e muito mais</h1>
-        {/* <Search /> */}
         
-        <div >
+        <ContainerForm>
           <form action="" className={`containerGlobal ${styles.contentInputs}`}>
             <div className={styles.inputs}>
               <label htmlFor="destino">
@@ -151,8 +150,8 @@ export function Home() {
               Buscar
             </button>
           </form>
-        </div>
-      </div>
+        </ContainerForm>
+      </ContainerBuscador>
 
       <section className={`containerGlobal ${styles.category}`}>
         <h2>Buscar por tipo de acomodação</h2>

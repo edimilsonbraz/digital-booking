@@ -3,8 +3,6 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ToastContainer } from 'react-toastify'
 
-
-
 export function App() {
   return (
     <div>

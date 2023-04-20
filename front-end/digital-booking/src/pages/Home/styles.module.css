@@ -1,4 +1,4 @@
-.containerBuscador {
+/* .containerBuscador {
   background: url("../../assets/bg-search-box.jpg") no-repeat center center;
   background-size: cover;
   opacity: 0.8;
@@ -9,14 +9,14 @@
 .containerBuscador h1 {
   color: var(--white);
   margin-bottom: 1.5rem;
-}
+} */
 /*  */
-.listBusca {
+/* .listBusca {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-left: 2rem;
-}
+} */
 
 
 /*  */
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  border: 2px solid var(--primary);
+  /* border: 2px solid var(--primary); */
 }
 
 .contentInputs .inputs {
