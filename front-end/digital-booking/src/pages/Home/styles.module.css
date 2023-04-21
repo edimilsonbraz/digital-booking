@@ -107,40 +107,40 @@
 } */
 
 /* ======== CATEGORY ========== */
-.category {
+/* .category {
   max-width: 1250px;
   margin-bottom: 2rem;
   margin: 0 auto;
-}
+} */
 
-.category h2 {
+/* .category h2 {
   margin: 1.5rem 0;
-}
+} */
 
 /* ============= RECOMENDAÇOES =============== */
-.containerRecomendacao {
+/* .containerRecomendacao {
   margin-top: 4rem;
   margin-bottom: 6rem;
-}
+} */
 
-.contentRecomendacao {
+/* .contentRecomendacao {
   max-width: 1250px;
   margin: 0 auto;
-}
+} */
 
-.contentRecomendacao h2 {
+/* .contentRecomendacao h2 {
   padding-top: 2rem;
   margin-bottom: 1.2rem;
-}
+} */
 
-.containerCard {
+/* .containerCard {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 
 /* REPONSIVIDADE DESKTOP */
-@media screen and (max-width: 1262PX) {
+/* @media screen and (max-width: 1262PX) {
   .category {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -149,22 +149,22 @@
   .contentRecomendacao h2 {
     margin: 1rem;
   }
-}
+} */
 
 /* REPONSIVIDADE TABLET */
-@media screen and (max-width: 850px) {
-  .containerBuscador {
+/* @media screen and (max-width: 850px) { */
+  /* .containerBuscador {
     width: 100%;
-  }
+  } */
 
-  .category h2 {
+  /* .category h2 {
     margin: 1rem;
-  }
+  } */
 
-  .contentRecomendacao h2 {
+  /* .contentRecomendacao h2 {
     margin: 1rem;
-  }
-}
+  } */
+/* } */
 
 @media screen and (max-width: 799px) {
   .containerCard {
@@ -173,36 +173,36 @@
   }
 }
 
-@media screen and (max-width:750px) {
-  .containerBuscador h1 {
+/* @media screen and (max-width:750px) { */
+  /* .containerBuscador h1 {
     font-size: 1.75rem;
-  }
+  } */
 
-  .contentInputs {
+  /* .contentInputs {
     display: block;
-  }
+  } */
 
-  .contentInputs .input {
+  /* .contentInputs .input {
     margin-top: 0.5rem;
-  }
+  } */
 
-  .contentInputs .inputs label {
+  /* .contentInputs .inputs label {
     top: 30px;
-  }
+  } */
 
-  .contentInputs input {
+  /* .contentInputs input {
     margin-top: 0.5rem;
-  }
+  } */
 
-  .contentInputs button.buttonBuscar {
+  /* .contentInputs button.buttonBuscar {
     width: 100%;
     margin-top: 0.5rem;
-  }
-}
+  } */
+/* } */
 
 /* RESPONSIVIDADE MOBILE */
-@media screen and (max-width:450px) {
+/* @media screen and (max-width:450px) {
   .containerBuscador {
     padding: 1rem;
   }
-}
+} */

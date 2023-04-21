@@ -5,6 +5,11 @@ export const SearchFormContainer = styled.form`
   align-items: center;
   position: relative;
   border: 2px solid ${(props) => props.theme.colors.primary};
+
+  /* REPONSIVIDADE TABLET */
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+  }
 `
 
 export const Inputs = styled.div`
@@ -26,6 +31,12 @@ export const Inputs = styled.div`
     &:focus {
       outline: none;
     }
+  }
+
+  /* REPONSIVIDADE TABLET */
+  @media screen and (max-width: 850px) {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 `
 
@@ -75,4 +86,9 @@ export const Button = styled.button`
     border: 1px solid var(--primary);
     background-color: var(--white);
   }
-`
+
+  /* REPONSIVIDADE TABLET */
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
+`;

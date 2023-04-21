@@ -32,10 +32,7 @@ export function SearchForm({cities}) {
 
   return (
     <SearchFormContainer className='containerGlobal'>
-      <Inputs>
-        <Label htmlFor="destino">
-          <FontAwesomeIcon icon={faLocationDot} />
-        </Label>
+      <Inputs>       
         <Select
           type="text"
           id="destino"
@@ -52,6 +49,9 @@ export function SearchForm({cities}) {
             </Options>
           ))}
         </Select>
+        <Label htmlFor="destino">
+          <FontAwesomeIcon icon={faLocationDot} />
+        </Label>
       </Inputs>
 
       <Inputs>
