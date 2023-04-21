@@ -13,14 +13,3 @@ export const ContainerBuscador = styled.section`
     margin-bottom: 1.5rem;
   }
 `;
-
-export const ContainerForm = styled.div`
-  .contentInputs {
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 2px solid ${(props) => props.theme.colors.primary};
-  }
-
-  
-`;
