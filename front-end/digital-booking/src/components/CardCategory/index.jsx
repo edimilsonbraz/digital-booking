@@ -1,43 +1,42 @@
 import { useEffect, useState } from 'react'
 import api from '../../service/api'
 
-import styles from './styles.module.css'
 import { useNavigate } from 'react-router-dom'
+import { Card, CardImage, CardText, CardsCategory, ContainerCards } from './style'
+import bg_apartamento from '../../assets/hotel-banner-01.jpg'
+import bg_resort from '../../assets/hotel-banner-02.jpg'
+import bg_hotel from '../../assets/hotel-banner-03.jpg'
+import bg_beira_Mar from '../../assets/hotel-banner-04.jpg'
 
 export function CardCategory({ filteredProductQnt }) {
   const navigate = useNavigate()
 
-  const [category, setCategory] = useState([])
+  // const [category, setCategory] = useState([])
 
-  useEffect(() => {
-    getCategory()
-  }, [])
+  // useEffect(() => {
+  //   getCategory()
+  // }, [])
 
-  async function getCategory() {
-    try {
-      const response = await api.get('categoria')
-      setCategory(response.data)
+  // async function getCategory() {
+  //   try {
+  //     const response = await api.get('categoria')
+  //     setCategory(response.data)
      
-    } catch (error) {
-      console.log('Erro ao buscar categorias' + error)
-    }
-  }
+  //   } catch (error) {
+  //     console.log('Erro ao buscar categorias' + error)
+  //   }
+  // }
 
   async function handleNavigate(id) {
     navigate('/produtos-por-categoria/' + id)
   }
-
   
   return (
-    <div className={styles.containerCategory}>
-      <div className={styles.containerCard}>
-        <div
-          className={styles.card}
-          onClick={() => {handleNavigate(2)}}
-        >
-          <div style={{ backgroundImage: `url("https://pesweb.azureedge.net/spimg/hotelbannerimages/pestana-sao-paulo-hotel-banner-01.jpg?scale=downscaleonly&encoder=freeimage&progressive=true&quality=50&w=1440&h=780&mode=crop&anchor=bottomcenter")` }}
-          ></div>
-          <div className={styles.quantityItens}>
+    <CardsCategory>
+      <ContainerCards>
+        <Card onClick={() => {handleNavigate(2)}}>
+          <CardImage src={bg_apartamento}/>
+          <CardText>
             <h1>Apartamento</h1>
             <span>{filteredProductQnt.apartamento}</span>
             {filteredProductQnt.apartamento > 1 
@@ -46,19 +45,12 @@ export function CardCategory({ filteredProductQnt }) {
               :
                 <span>apartamento</span> 
             }
-          </div>
-        </div>
+          </CardText>
+        </Card>
 
-        <div
-          className={styles.card}
-          value={category.descricaoCategoria}
-          onClick={() => {
-            handleNavigate(1)
-          }}
-        >
-          <div style={{ backgroundImage: `url("https://www.qualviagem.com.br/wp-content/uploads/2015/06/infinity-blue-beneficios.jpg")` }}
-          ></div>
-          <div className={styles.quantityItens}>
+        <Card onClick={() => {handleNavigate(1)}}>
+          <CardImage src={bg_resort} />
+          <CardText>
             <h1>Resorts</h1>
             <span>{filteredProductQnt.resort}</span>
             {filteredProductQnt.resort > 1 
@@ -67,19 +59,12 @@ export function CardCategory({ filteredProductQnt }) {
               :
                 <span>resort</span> 
             }
-          </div>
-        </div>
+          </CardText>
+        </Card>
 
-        <div
-          className={styles.card}
-          value={category.descricaoCategoria}
-          onClick={() => {
-            handleNavigate(3)
-          }}
-        >
-          <div style={{ backgroundImage: `url("https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768")` }}
-          ></div>
-          <div className={styles.quantityItens}>
+        <Card onClick={() => {handleNavigate(3)}}>
+          <CardImage src={bg_hotel} />
+          <CardText>
             <h1>Hoteis</h1>
             <span>{filteredProductQnt.hotel}</span>
             {filteredProductQnt.hotel > 1 
@@ -88,27 +73,19 @@ export function CardCategory({ filteredProductQnt }) {
               :
                 <span>hotel</span> 
             }
-          </div>
-        </div>
+          </CardText>
+        </Card>
 
-        <div
-          className={styles.card}
-          value={category.descricaoCategoria}
-          onClick={() => {
-            handleNavigate(4)
-          }}
-        >
-          <div style={{ backgroundImage: `url("https://viagemeturismo.abril.com.br/wp-content/uploads/2020/11/gettyimages-964872010.jpg?quality=70&strip=info&w=1024&resize=1200,800")` }}
-          ></div>
-          <div className={styles.quantityItens}>
+        <Card onClick={() => {handleNavigate(4)}}>
+          <CardImage src={bg_beira_Mar} />
+          <CardText>
             <h1>Beira mar</h1>
             <span>{filteredProductQnt.beiraMar}</span>
             <span>beira mar</span>         
-          </div>
-        </div>
+          </CardText>
+        </Card>
 
-
-      </div>
-    </div>
+      </ContainerCards>
+    </CardsCategory>
   )
 }

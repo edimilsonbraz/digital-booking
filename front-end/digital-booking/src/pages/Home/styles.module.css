@@ -166,12 +166,12 @@
   } */
 /* } */
 
-@media screen and (max-width: 799px) {
+/* @media screen and (max-width: 799px) {
   .containerCard {
     display: flex;
     flex-wrap: wrap
   }
-}
+} */
 
 /* @media screen and (max-width:750px) { */
   /* .containerBuscador h1 {

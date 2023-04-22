@@ -5,7 +5,6 @@ import { CardCategory } from '../../components/CardCategory'
 import { CardProduct } from '../../components/CardProduct'
 import { SearchForm } from './SearchForm'
 
-import styles from './styles.module.css'
 import {
   ContainerBuscador,
   ContainerCard,
@@ -77,7 +76,6 @@ export function Home() {
       <ContainerCategory className="containerGlobal">
         <h2>Buscar por tipo de acomodação</h2>
         <CardCategory
-          products={products}
           filteredProductQnt={filteredProductQnt}
         />
       </ContainerCategory>
